@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Tarot:  Fichier source de shared/protocole.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Tarot
+   </div>
+   <div id="projectbrief">PE 46 à l&#39;ECL</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.1.2 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="namespaces.html"><span>Espaces&#160;de&#160;nommage</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
+      <li><a href="globals.html"><span>Membres&#160;de&#160;fichier</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Espaces de nommage</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Énumérations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Valeurs énumérées</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_9982052f7ce695d12571567315b2fafa.html">shared</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">protocole.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="protocole_8hpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#ifndef PROTOCOLE_DEFINI</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="code" href="protocole_8hpp.html#a7a17dc2fdbbe937c40147701edb4b570">   17</a></span>&#160;<span class="preprocessor">#define PROTOCOLE_DEFINI</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;QDataStream&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="code" href="namespaceProtocole.html">   29</a></span>&#160;<span class="keyword">namespace </span>Protocole</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keyword">enum</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    {    </div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca436218e255391d8a63d78e5e1c53c0cb">   47</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca436218e255391d8a63d78e5e1c53c0cb">ERREUR_PROTOCOLE</a>,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4cadcd26b4f1d07aca01f1e246042654858">   57</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4cadcd26b4f1d07aca01f1e246042654858">REFUSE</a>,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca5bc2d8a341081ea7f678f4fce8fcca0d">   64</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca5bc2d8a341081ea7f678f4fce8fcca0d">NUMERO</a>,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca3b2b41996b636ebffe2b267ae7e25d57">   71</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca3b2b41996b636ebffe2b267ae7e25d57">DISTRIBUTION</a>,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca8cf5255db3e5763d6c0489f7ce71669b">   77</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca8cf5255db3e5763d6c0489f7ce71669b">PRISE</a>,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca2fa2066054dd5a506a045deb007959eb">   84</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca2fa2066054dd5a506a045deb007959eb">CONTRAT</a>,</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4caf2f23920f406d8a2f852ecbd86e69f53">   93</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4caf2f23920f406d8a2f852ecbd86e69f53">APPEL</a>,</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca423aea01726e878272a9e23bd6cfc7b5">  100</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca423aea01726e878272a9e23bd6cfc7b5">APPELER</a>,</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca29ef5afd2cf06910f9752605efff5f7e">  107</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca29ef5afd2cf06910f9752605efff5f7e">CONTRAT_FINAL</a>,</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca607c3f28eddbed5026e974571c97589b">  115</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca607c3f28eddbed5026e974571c97589b">CHIEN</a>,</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca1a725fe6250f569a4dd5358c6277ced5">  123</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca1a725fe6250f569a4dd5358c6277ced5">ECART</a>,</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca7bd285c6f188b6b6518dd60767d4fbff">  130</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca7bd285c6f188b6b6518dd60767d4fbff">ATOUT</a>,</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
+<div class="line"><a name="l00139"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4cafe376d59557158eedc053f32988067e6">  139</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4cafe376d59557158eedc053f32988067e6">CHELEM</a>,</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;</div>
+<div class="line"><a name="l00146"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca56f011688ce1204e43b9e9e4cff3ec5a">  146</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca56f011688ce1204e43b9e9e4cff3ec5a">JEU</a>,</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
+<div class="line"><a name="l00153"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4cab91095a9ce7929af1640e0a1e2025af4">  153</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4cab91095a9ce7929af1640e0a1e2025af4">MONTRER_POIGNEE</a>,</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;</div>
+<div class="line"><a name="l00161"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca9286519f7eeabb58318402943023ecc8">  161</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca9286519f7eeabb58318402943023ecc8">POIGNEE</a>,</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
+<div class="line"><a name="l00168"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca490fa4d4cd75afffcccbfa242eb297d4">  168</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4ca490fa4d4cd75afffcccbfa242eb297d4">REQUETE</a>,</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;</div>
+<div class="line"><a name="l00175"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4cad2da5e2c50a122c4c83f41d6d944ffca">  175</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4cad2da5e2c50a122c4c83f41d6d944ffca">CARTE</a>,</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;</div>
+<div class="line"><a name="l00183"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4caf208f9d344fc6621e976baa61054ffa6">  183</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4caf208f9d344fc6621e976baa61054ffa6">PLI</a>,</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;</div>
+<div class="line"><a name="l00190"></a><span class="lineno"><a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4caa06de31e1af8b1595889bc889f87bf94">  190</a></span>&#160;      <a class="code" href="namespaceProtocole.html#a0aedd8434bf6fd4173e483eb39f72a4caa06de31e1af8b1595889bc889f87bf94">RESULTAT</a></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    };</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;</div>
+<div class="line"><a name="l00209"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__erreur__protocole.html">  209</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__erreur__protocole.html" title="Contenu d&#39;un Message d&#39;erreur de protocole.">Msg_erreur_protocole</a></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  {</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  };</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;</div>
+<div class="line"><a name="l00229"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__refuse.html">  229</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__refuse.html" title="Contenu d&#39;un Message de refus.">Msg_refuse</a></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;  {</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  };</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;</div>
+<div class="line"><a name="l00239"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__numero.html">  239</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__numero.html" title="Contenu d&#39;un Message de transmission de numéro.">Msg_numero</a></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  {</div>
+<div class="line"><a name="l00246"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__numero.html#ab20cc7aae58910846e7dbd02c06e3b62">  246</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__numero.html#ab20cc7aae58910846e7dbd02c06e3b62" title="Numéro du joueur.">n</a>;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  };</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;</div>
+<div class="line"><a name="l00257"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__distribution.html">  257</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__distribution.html" title="Contenu d&#39;un Message de distribution des cartes.">Msg_distribution</a></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;  {</div>
+<div class="line"><a name="l00264"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__distribution.html#ac339552adcfc7067a89e7041c89a2eb2">  264</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__distribution.html#ac339552adcfc7067a89e7041c89a2eb2" title="Les cartes distribuées.">cartes</a>[15];</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;  };</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;</div>
+<div class="line"><a name="l00274"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__prise.html">  274</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__prise.html" title="Contenu d&#39;un Message de prise.">Msg_prise</a></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;  {</div>
+<div class="line"><a name="l00282"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__prise.html#a6713628a983328a35e7fa178eddfc098">  282</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__prise.html#a6713628a983328a35e7fa178eddfc098" title="Enchère.">niveau</a>;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;  };</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;</div>
+<div class="line"><a name="l00292"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__contrat.html">  292</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__contrat.html" title="Contenu d&#39;un Message de contrat.">Msg_contrat</a></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;  {</div>
+<div class="line"><a name="l00300"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__contrat.html#ad97ada921472e215b034cca880951a57">  300</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__contrat.html#ad97ada921472e215b034cca880951a57" title="Enchère.">niveau</a>;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;  };</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;</div>
+<div class="line"><a name="l00313"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__appel.html">  313</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__appel.html" title="Contenu d&#39;un Message d&#39;appel de carte.">Msg_appel</a></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;  {</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;  };</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;</div>
+<div class="line"><a name="l00323"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__appeler.html">  323</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__appeler.html" title="Contenu d&#39;une requête pour appeler une Carte.">Msg_appeler</a></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;  {</div>
+<div class="line"><a name="l00328"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__appeler.html#a7b52616bb6f09d422c305454d1ad6d97">  328</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__appeler.html#a7b52616bb6f09d422c305454d1ad6d97" title="Le numéro de la Carte.">carte</a>;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;  };</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;</div>
+<div class="line"><a name="l00338"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__contrat__final.html">  338</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__contrat__final.html" title="Contenu d&#39;un Message d&#39;information du contrat final.">Msg_contrat_final</a></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;  {</div>
+<div class="line"><a name="l00343"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__contrat__final.html#ab24ecbf633521ff036eed99af483e083">  343</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__contrat__final.html#ab24ecbf633521ff036eed99af483e083" title="Numéro du preneur.">preneur</a>;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;</div>
+<div class="line"><a name="l00348"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__contrat__final.html#a8ffc92e36f2ada7c7162f7b1811da329">  348</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__contrat__final.html#a8ffc92e36f2ada7c7162f7b1811da329" title="Prise.">niveau</a>;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;</div>
+<div class="line"><a name="l00353"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__contrat__final.html#aa87a4f0be548b7e631aa80f000fe7e64">  353</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__contrat__final.html#aa87a4f0be548b7e631aa80f000fe7e64" title="Carte appelée.">appel</a>;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;  };</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;</div>
+<div class="line"><a name="l00363"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__chien.html">  363</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__chien.html" title="Contenu d&#39;un Message d&#39;information du Chien.">Msg_chien</a></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;  {</div>
+<div class="line"><a name="l00368"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__chien.html#a59780dfe8dfda4f24929d58797739452">  368</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__chien.html#a59780dfe8dfda4f24929d58797739452" title="Les trois cartes du chien.">chien</a>[3];</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;  };</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;</div>
+<div class="line"><a name="l00378"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__ecart.html">  378</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__ecart.html" title="Contenu d&#39;un Message de requête d&#39;écart.">Msg_ecart</a></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;  {</div>
+<div class="line"><a name="l00383"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__ecart.html#a4760447ad54cd83c02ac09a0a0bf9b3d">  383</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__ecart.html#a4760447ad54cd83c02ac09a0a0bf9b3d" title="Les trois cartes du chien.">ecart</a>[3];</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;  };</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;</div>
+<div class="line"><a name="l00393"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__atout.html">  393</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__atout.html" title="Contenu d&#39;un Message d&#39;information de l&#39;écart.">Msg_atout</a></div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;  {</div>
+<div class="line"><a name="l00398"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__atout.html#a6aa60caa1e70e949766fd6b7c1c300b1">  398</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__atout.html#a6aa60caa1e70e949766fd6b7c1c300b1" title="Le nombre d&#39;atouts écartés.">nombre</a>;</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;  </div>
+<div class="line"><a name="l00403"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__atout.html#af5d001eb0c0c65bc8f8391d449e043d4">  403</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__atout.html#af5d001eb0c0c65bc8f8391d449e043d4" title="Les atouts de l&#39;écart.">cartes</a>[3];</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;  };</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;</div>
+<div class="line"><a name="l00412"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__chelem.html">  412</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__chelem.html" title="Contenu d&#39;un Message de demande de chelem.">Msg_chelem</a></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;  {</div>
+<div class="line"><a name="l00417"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__chelem.html#a215cd6647edcdd1b25b82b4bd08e77d5">  417</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="structProtocole_1_1Msg__chelem.html#a215cd6647edcdd1b25b82b4bd08e77d5" title="Chelem, oui ou non ?">demande</a>;</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;  };</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;</div>
+<div class="line"><a name="l00426"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__jeu.html">  426</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__jeu.html" title="Contenu d&#39;un Message d&#39;annonce de jeu.">Msg_jeu</a></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;  {</div>
+<div class="line"><a name="l00434"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__jeu.html#a1e77b5f1b0b4cf68649955991f0d605a">  434</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__jeu.html#a1e77b5f1b0b4cf68649955991f0d605a" title="Un chelem a-t-il été annoncé ?">chelem</a>;</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;  };</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;</div>
+<div class="line"><a name="l00444"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__montrer__poignee.html">  444</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__montrer__poignee.html" title="Contenu d&#39;un Message de requête de poignée.">Msg_montrer_poignee</a></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;  {</div>
+<div class="line"><a name="l00451"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__montrer__poignee.html#a2a4645b1af4de97d49595e6733c20571">  451</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__montrer__poignee.html#a2a4645b1af4de97d49595e6733c20571" title="Nombre d&#39;atouts.">taille</a>;</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;</div>
+<div class="line"><a name="l00458"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__montrer__poignee.html#a97b3110c8c8c96de3a9ac9414c87e9be">  458</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__montrer__poignee.html#a97b3110c8c8c96de3a9ac9414c87e9be" title="Atouts à annoncer.">atouts</a>[13]; </div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;  };</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;</div>
+<div class="line"><a name="l00468"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__poignee.html">  468</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__poignee.html" title="Contenu d&#39;un Message d&#39;annonce de poignée.">Msg_poignee</a></div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;  {</div>
+<div class="line"><a name="l00473"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__poignee.html#a73100c7c2f94fcdc1952f8e7b47ba18c">  473</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__poignee.html#a73100c7c2f94fcdc1952f8e7b47ba18c" title="Taille de la poignée.">taille</a>;</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;  </div>
+<div class="line"><a name="l00478"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__poignee.html#af3e764274aa632ffbdfeb20009995389">  478</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__poignee.html#af3e764274aa632ffbdfeb20009995389" title="Atouts à annoncer.">atouts</a>[13];</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;  };</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;</div>
+<div class="line"><a name="l00487"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__requete.html">  487</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__requete.html" title="Contenu d&#39;un Message de requête de jeu.">Msg_requete</a></div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;  {</div>
+<div class="line"><a name="l00492"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__requete.html#ad3f8bf97a3ce0954960461464dde9e65">  492</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__requete.html#ad3f8bf97a3ce0954960461464dde9e65" title="La carte à jouer.">carte</a>;</div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;  };</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;</div>
+<div class="line"><a name="l00502"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__carte.html">  502</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__carte.html" title="Contenu d&#39;un Message d&#39;information de carte jouée.">Msg_carte</a></div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;  {</div>
+<div class="line"><a name="l00507"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__carte.html#a97cc4c3f7792c52480d437eee30614b9">  507</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__carte.html#a97cc4c3f7792c52480d437eee30614b9" title="La carte jouée.">carte</a>;</div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;  };</div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;</div>
+<div class="line"><a name="l00517"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__pli.html">  517</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__pli.html" title="Contenu d&#39;un Message d&#39;information de pli.">Msg_pli</a></div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;  {</div>
+<div class="line"><a name="l00522"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__pli.html#ae2f4e64115f036083cd507fa11dd0a1a">  522</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__pli.html#ae2f4e64115f036083cd507fa11dd0a1a">joueur</a>;</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;  };</div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;</div>
+<div class="line"><a name="l00531"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__resultat.html">  531</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__resultat.html" title="Contenu d&#39;un Message d&#39;information de fin de partie.">Msg_resultat</a></div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;  {</div>
+<div class="line"><a name="l00536"></a><span class="lineno"><a class="code" href="structProtocole_1_1Msg__resultat.html#aa6e4238bf8a2feec8bcd63b50abac302">  536</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Msg__resultat.html#aa6e4238bf8a2feec8bcd63b50abac302" title="Les résultats.">resultats</a>[5];</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;  };</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;</div>
+<div class="line"><a name="l00544"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html">  544</a></span>&#160;  <span class="keyword">union </span><a class="code" href="unionProtocole_1_1Msg.html" title="Somme de tous les messages possibles.">Msg</a></div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;  {</div>
+<div class="line"><a name="l00549"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#af8bb170963c831423fb315a6ad08f25d">  549</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__erreur__protocole.html" title="Contenu d&#39;un Message d&#39;erreur de protocole.">Msg_erreur_protocole</a> <a class="code" href="unionProtocole_1_1Msg.html#af8bb170963c831423fb315a6ad08f25d" title="Champ de ERREUR_PROTOCOLE.">erreur_protocole</a>;</div>
+<div class="line"><a name="l00553"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#aee723101bf19d05b57405c6647dbbbae">  553</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__refuse.html" title="Contenu d&#39;un Message de refus.">Msg_refuse</a> <a class="code" href="unionProtocole_1_1Msg.html#aee723101bf19d05b57405c6647dbbbae" title="Champ de REFUSE.">refuse</a>;</div>
+<div class="line"><a name="l00557"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#acf78c6cadf74117f689310b366796c1e">  557</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__numero.html" title="Contenu d&#39;un Message de transmission de numéro.">Msg_numero</a> <a class="code" href="unionProtocole_1_1Msg.html#acf78c6cadf74117f689310b366796c1e" title="Champ de NUMERO.">numero</a>;</div>
+<div class="line"><a name="l00561"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#ab3f5582c45cf4b1b8a7bc22a8a2f0d67">  561</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__distribution.html" title="Contenu d&#39;un Message de distribution des cartes.">Msg_distribution</a> <a class="code" href="unionProtocole_1_1Msg.html#ab3f5582c45cf4b1b8a7bc22a8a2f0d67" title="Champ de DISTRIBUTION.">distribution</a>;</div>
+<div class="line"><a name="l00565"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#a369ee791d31cd26b77653a3afcf3f8a5">  565</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__prise.html" title="Contenu d&#39;un Message de prise.">Msg_prise</a> <a class="code" href="unionProtocole_1_1Msg.html#a369ee791d31cd26b77653a3afcf3f8a5" title="Champ de PRISE.">prise</a>;</div>
+<div class="line"><a name="l00569"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#aacaf17da53e7d8e5d4ba7b76f003dd4a">  569</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__contrat.html" title="Contenu d&#39;un Message de contrat.">Msg_contrat</a> <a class="code" href="unionProtocole_1_1Msg.html#aacaf17da53e7d8e5d4ba7b76f003dd4a" title="Champ de CONTRAT.">contrat</a>;</div>
+<div class="line"><a name="l00573"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#a266a75111a870eb354b5e6065762ed1b">  573</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__appel.html" title="Contenu d&#39;un Message d&#39;appel de carte.">Msg_appel</a> <a class="code" href="unionProtocole_1_1Msg.html#a266a75111a870eb354b5e6065762ed1b" title="Champ de APPEL.">appel</a>;</div>
+<div class="line"><a name="l00577"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#a1fe0e219ef87883a5e67da91b25f0d99">  577</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__appeler.html" title="Contenu d&#39;une requête pour appeler une Carte.">Msg_appeler</a> <a class="code" href="unionProtocole_1_1Msg.html#a1fe0e219ef87883a5e67da91b25f0d99" title="Champ de APPELER.">appeler</a>;</div>
+<div class="line"><a name="l00581"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#a53febe42daa3148c77a91f01971621d9">  581</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__contrat__final.html" title="Contenu d&#39;un Message d&#39;information du contrat final.">Msg_contrat_final</a> <a class="code" href="unionProtocole_1_1Msg.html#a53febe42daa3148c77a91f01971621d9" title="Champ de CONTRAT_FINAL.">contrat_final</a>;</div>
+<div class="line"><a name="l00585"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#a0f2c371594bdc1499e283d993f524367">  585</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__chien.html" title="Contenu d&#39;un Message d&#39;information du Chien.">Msg_chien</a> <a class="code" href="unionProtocole_1_1Msg.html#a0f2c371594bdc1499e283d993f524367" title="Champ de CHIEN.">chien</a>;</div>
+<div class="line"><a name="l00589"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#a0c0250057ac03dbbdcb4f5d4be22328d">  589</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__ecart.html" title="Contenu d&#39;un Message de requête d&#39;écart.">Msg_ecart</a> <a class="code" href="unionProtocole_1_1Msg.html#a0c0250057ac03dbbdcb4f5d4be22328d" title="Champ de ECART.">ecart</a>;</div>
+<div class="line"><a name="l00593"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#a04b5798cf587c5953a1a86c800d1cb85">  593</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__atout.html" title="Contenu d&#39;un Message d&#39;information de l&#39;écart.">Msg_atout</a> <a class="code" href="unionProtocole_1_1Msg.html#a04b5798cf587c5953a1a86c800d1cb85" title="Champ de ATOUT.">atout</a>;</div>
+<div class="line"><a name="l00597"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#a042459b2896c97b2f65947c3e9dda4e2">  597</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__chelem.html" title="Contenu d&#39;un Message de demande de chelem.">Msg_chelem</a> <a class="code" href="unionProtocole_1_1Msg.html#a042459b2896c97b2f65947c3e9dda4e2" title="Champ de CHELEM.">chelem</a>;</div>
+<div class="line"><a name="l00601"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#a201835afaebd7d23e9d1de3366ecbb25">  601</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__jeu.html" title="Contenu d&#39;un Message d&#39;annonce de jeu.">Msg_jeu</a> <a class="code" href="unionProtocole_1_1Msg.html#a201835afaebd7d23e9d1de3366ecbb25" title="Champ de JEU.">jeu</a>;</div>
+<div class="line"><a name="l00605"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#a9cfd5024b27968f768bf76d4092f0efb">  605</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__montrer__poignee.html" title="Contenu d&#39;un Message de requête de poignée.">Msg_montrer_poignee</a> <a class="code" href="unionProtocole_1_1Msg.html#a9cfd5024b27968f768bf76d4092f0efb" title="Champ de MONTRER_POIGNEE.">montrer_poignee</a>;</div>
+<div class="line"><a name="l00609"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#ad7b679438764f9256d2276465db07412">  609</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__poignee.html" title="Contenu d&#39;un Message d&#39;annonce de poignée.">Msg_poignee</a> <a class="code" href="unionProtocole_1_1Msg.html#ad7b679438764f9256d2276465db07412" title="Champ de POIGNEE.">poignee</a>;</div>
+<div class="line"><a name="l00613"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#ade1c333d7dc142f8a4afa7cc86987782">  613</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__requete.html" title="Contenu d&#39;un Message de requête de jeu.">Msg_requete</a> <a class="code" href="unionProtocole_1_1Msg.html#ade1c333d7dc142f8a4afa7cc86987782" title="Champ de REQUETE.">requete</a>;</div>
+<div class="line"><a name="l00617"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#a1ebc699e0b7d33e33891b0928c36ed9c">  617</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__carte.html" title="Contenu d&#39;un Message d&#39;information de carte jouée.">Msg_carte</a> <a class="code" href="unionProtocole_1_1Msg.html#a1ebc699e0b7d33e33891b0928c36ed9c" title="Champ de CARTE.">carte</a>;</div>
+<div class="line"><a name="l00621"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#a52702c84a9a93e0ec13c36574bae5d73">  621</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__pli.html" title="Contenu d&#39;un Message d&#39;information de pli.">Msg_pli</a> <a class="code" href="unionProtocole_1_1Msg.html#a52702c84a9a93e0ec13c36574bae5d73" title="Champ de PLI.">pli</a>;</div>
+<div class="line"><a name="l00625"></a><span class="lineno"><a class="code" href="unionProtocole_1_1Msg.html#a64ad00ab34d4ca67c36357fda1de466d">  625</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Msg__resultat.html" title="Contenu d&#39;un Message d&#39;information de fin de partie.">Msg_resultat</a> <a class="code" href="unionProtocole_1_1Msg.html#a64ad00ab34d4ca67c36357fda1de466d" title="Champ de RESULTAT.">resultat</a>;</div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;  };</div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;</div>
+<div class="line"><a name="l00646"></a><span class="lineno"><a class="code" href="structProtocole_1_1Message.html">  646</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structProtocole_1_1Message.html" title="Structure de Message universel.">Message</a></div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;  {</div>
+<div class="line"><a name="l00653"></a><span class="lineno"><a class="code" href="structProtocole_1_1Message.html#a370f8009bd840b29e1d1522623555bca">  653</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structProtocole_1_1Message.html#a370f8009bd840b29e1d1522623555bca" title="Type du Message.">type</a>;</div>
+<div class="line"><a name="l00657"></a><span class="lineno"><a class="code" href="structProtocole_1_1Message.html#ac7dd18300272ad00474c1d491b4545db">  657</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="structProtocole_1_1Message.html#ac7dd18300272ad00474c1d491b4545db" title="Sait si le Message a pu être déchiffré.">compris</a>;</div>
+<div class="line"><a name="l00661"></a><span class="lineno"><a class="code" href="structProtocole_1_1Message.html#a9d5dd049cf6b9561a374798091c4fa8c">  661</a></span>&#160;    <span class="keyword">union </span><a class="code" href="unionProtocole_1_1Msg.html" title="Somme de tous les messages possibles.">Msg</a> <a class="code" href="structProtocole_1_1Message.html#a9d5dd049cf6b9561a374798091c4fa8c" title="Contenu du Message.">m</a>;</div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;  };</div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;</div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="namespaceProtocole.html#ab8fa186e1e1ed40607ab6b1e3660e487" title="Lit un Message.">lire</a>(QDataStream &amp; in, <span class="keyword">struct</span> <a class="code" href="structProtocole_1_1Message.html" title="Structure de Message universel.">Message</a> &amp; m);</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;</div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="namespaceProtocole.html#a77a1491149caf0b716f25ddb51faf613" title="Écrit un Message.">ecrire</a>(<span class="keyword">struct</span> <a class="code" href="structProtocole_1_1Message.html" title="Structure de Message universel.">Message</a> <span class="keyword">const</span> &amp; m, QDataStream &amp; out);</div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;}</div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;<span class="preprocessor">#endif</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré le Dimanche Novembre 9 2014 12:34:40 pour Tarot par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.1.2
+</small></address>
+</body>
+</html>

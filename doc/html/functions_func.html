@@ -1,0 +1,549 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Tarot: Membres de classe - Fonctions</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Tarot
+   </div>
+   <div id="projectbrief">PE 46 à l&#39;ECL</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.1.2 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="namespaces.html"><span>Espaces&#160;de&#160;nommage</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Liste&#160;des&#160;classes</span></a></li>
+      <li><a href="classes.html"><span>Index&#160;des&#160;classes</span></a></li>
+      <li><a href="hierarchy.html"><span>Hiérarchie&#160;des&#160;classes</span></a></li>
+      <li class="current"><a href="functions.html"><span>Membres&#160;de&#160;classe</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow3" class="tabs2">
+    <ul class="tablist">
+      <li><a href="functions.html"><span>Tout</span></a></li>
+      <li class="current"><a href="functions_func.html"><span>Fonctions</span></a></li>
+      <li><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_enum.html"><span>Énumérations</span></a></li>
+      <li><a href="functions_eval.html"><span>Valeurs&#160;énumérées</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow4" class="tabs3">
+    <ul class="tablist">
+      <li><a href="#index_a"><span>a</span></a></li>
+      <li><a href="#index_b"><span>b</span></a></li>
+      <li><a href="#index_c"><span>c</span></a></li>
+      <li><a href="#index_d"><span>d</span></a></li>
+      <li><a href="#index_e"><span>e</span></a></li>
+      <li><a href="#index_f"><span>f</span></a></li>
+      <li><a href="#index_i"><span>i</span></a></li>
+      <li><a href="#index_j"><span>j</span></a></li>
+      <li><a href="#index_l"><span>l</span></a></li>
+      <li><a href="#index_m"><span>m</span></a></li>
+      <li><a href="#index_n"><span>n</span></a></li>
+      <li><a href="#index_o"><span>o</span></a></li>
+      <li><a href="#index_p"><span>p</span></a></li>
+      <li><a href="#index_r"><span>r</span></a></li>
+      <li><a href="#index_s"><span>s</span></a></li>
+      <li><a href="#index_t"><span>t</span></a></li>
+      <li><a href="#index_v"><span>v</span></a></li>
+      <li><a href="#index_0x7e"><span>~</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Espaces de nommage</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Énumérations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Valeurs énumérées</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="contents">
+&#160;
+
+<h3><a class="anchor" id="index_a"></a>- a -</h3><ul>
+<li>accepter()
+: <a class="el" href="classServeur.html#a08aab282f6c58714523c1d8943ef61d1">Serveur</a>
+</li>
+<li>action_refusee()
+: <a class="el" href="classPartieClient.html#af026ee1b7dd327da63570c1ea2739175">PartieClient</a>
+</li>
+<li>ajouter()
+: <a class="el" href="classMain.html#a399bda9b7ca5c04e37c62944d3d4010e">Main</a>
+, <a class="el" href="classTapis.html#ab805d8355dce81bb288da77c4f0c4b26">Tapis</a>
+, <a class="el" href="classTable.html#a571c73f739c9faed830e8c07b6554852">Table</a>
+</li>
+<li>appeler()
+: <a class="el" href="classEnchere.html#a6466b15d32523a3f19270ceb3ba08421">Enchere</a>
+, <a class="el" href="classPartieClient.html#ae37c34664850ef27f4c1b5aaa183bf4b">PartieClient</a>
+</li>
+<li>assimiler()
+: <a class="el" href="classPartieServeur.html#a4b5f9bf1bc24db303a31e8a77bf683ed">PartieServeur</a>
+, <a class="el" href="classPartie.html#ae4420e42e81aa5b5697dc69e55ca4ab8">Partie</a>
+, <a class="el" href="classPartieClient.html#af23793f4ff3b976cfb1259914ffffcc1">PartieClient</a>
+</li>
+<li>atout()
+: <a class="el" href="classCarte.html#a6592e373d97f8d35bbbc1f1c4959bb66">Carte</a>
+</li>
+<li>atout_au_chien()
+: <a class="el" href="classPartieClient.html#afdb35f34768fc6f1964ebbdf12da1f69">PartieClient</a>
+</li>
+<li>attaquant()
+: <a class="el" href="classPartie.html#abb22c4e65f62fdcab2600376ed9ea5a6">Partie</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_b"></a>- b -</h3><ul>
+<li>bout()
+: <a class="el" href="classCarte.html#a40a2742724bf0e23dfd1ff13bede25ff">Carte</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_c"></a>- c -</h3><ul>
+<li>Carte()
+: <a class="el" href="classCarte.html#a62c23cdffa5c3865d7476c7c6fd3cc58">Carte</a>
+</li>
+<li>carte_appelee()
+: <a class="el" href="classEnchere.html#a50aa5d3958400ab8337876d9f8a26d6e">Enchere</a>
+</li>
+<li>carte_jouee()
+: <a class="el" href="classPartieClient.html#a71d8622803e0afde9cc6d40fb4e37144">PartieClient</a>
+</li>
+<li>chelem()
+: <a class="el" href="classPartie.html#ad16a77a20a5699a3910766c6bda50033">Partie</a>
+</li>
+<li>chelem_demande()
+: <a class="el" href="classPartieClient.html#a0b45022ef5206211d519dbca74582752">PartieClient</a>
+</li>
+<li>chien_devoile()
+: <a class="el" href="classPartieClient.html#a3ac845b5c37413a57c1478ccf2528c6d">PartieClient</a>
+</li>
+<li>Client()
+: <a class="el" href="classClient.html#a7832757f3fa37f564a21cb2b79b2baad">Client</a>
+</li>
+<li>ClientDebogage()
+: <a class="el" href="classClientDebogage.html#a505112ff732e3a96bb01baf3e580b680">ClientDebogage</a>
+</li>
+<li>ClientJeu()
+: <a class="el" href="classClientJeu.html#a662db519474b83b36fd7353ad6233600">ClientJeu</a>
+</li>
+<li>complet()
+: <a class="el" href="classTable.html#afa5f81913df343483231eaed24f332cd">Table</a>
+, <a class="el" href="classTapis.html#a5900f861fcb2ab970746db18ea2284f0">Tapis</a>
+</li>
+<li>comprendre()
+: <a class="el" href="classTable.html#afb140b691eda8c0704cea1aeda9cd300">Table</a>
+</li>
+<li>connecte()
+: <a class="el" href="classClient.html#a81ee5a5d5df20d3bae5a7ba511fa1bb7">Client</a>
+</li>
+<li>connecter()
+: <a class="el" href="classClient.html#aca6f6439d8500cea98b540450450e8cd">Client</a>
+</li>
+<li>connexion()
+: <a class="el" href="classServeur.html#a9288c85f3aee40b409e1a58cb117c277">Serveur</a>
+</li>
+<li>contrat_final()
+: <a class="el" href="classPartieClient.html#a46b703ffdbdaae8ac4eeeea494c16304">PartieClient</a>
+, <a class="el" href="classPartie.html#a75eef78c18e161c2698ba3f88e465525">Partie</a>
+</li>
+<li>contrat_intermediaire()
+: <a class="el" href="classPartieClient.html#afbb417cef49e2055b734599e83b40a34">PartieClient</a>
+</li>
+<li>couleur()
+: <a class="el" href="classCarte.html#adf755285455670fdeb10ad62e3909f0f">Carte</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
+<li>deconnecte()
+: <a class="el" href="classClient.html#a70a5396cfd7c4bf077982ef79dbbb53e">Client</a>
+</li>
+<li>deconnecter()
+: <a class="el" href="classClient.html#a89db92336bc6b59fa17ec70fdacb9776">Client</a>
+, <a class="el" href="classServeur.html#ac7297f2d0d3ac8058c663f91b1ecc75d">Serveur</a>
+</li>
+<li>deconnexion()
+: <a class="el" href="classServeur.html#a50171a13c9d0659c94ba2099b8c20dc1">Serveur</a>
+</li>
+<li>demander_chelem()
+: <a class="el" href="classPartieClient.html#af2b4386f91d646e3f4ede4fe17a179d6">PartieClient</a>
+</li>
+<li>demander_jeu()
+: <a class="el" href="classPartieClient.html#a69d50fe756fb33cf9c1d7a24414a14b1">PartieClient</a>
+</li>
+<li>demander_ordres()
+: <a class="el" href="classClientDebogage.html#ae8e9e30cd6bea93700f0c904ee24605d">ClientDebogage</a>
+</li>
+<li>demipoints()
+: <a class="el" href="classCarte.html#a84d161365c4a090b9c10e8939e07e5b0">Carte</a>
+</li>
+<li>detacher_table()
+: <a class="el" href="classServeurJeu.html#a116bae8ae5a4ffa34ea22cc222655a48">ServeurJeu</a>
+</li>
+<li>distribuer()
+: <a class="el" href="classPartieServeur.html#a135a3037f89478ccb40547fca9ceec75">PartieServeur</a>
+</li>
+<li>distribution()
+: <a class="el" href="classMain.html#ac31fb90cebfa1d62f14995fb3393151e">Main</a>
+</li>
+<li>doit_appeler()
+: <a class="el" href="classPartieClient.html#ab343eaec323f4d92771b2e46193b96b6">PartieClient</a>
+</li>
+<li>doit_deconnecter()
+: <a class="el" href="classTable.html#abba1c52883cb52f2aaa33f6ffa9493a5">Table</a>
+</li>
+<li>doit_demander_chelem()
+: <a class="el" href="classPartieClient.html#a401255df5a76b7307a7c8f29cbda78fb">PartieClient</a>
+</li>
+<li>doit_ecarter()
+: <a class="el" href="classPartieClient.html#af7a71f0a2aefa407519be0787f8d1936">PartieClient</a>
+</li>
+<li>doit_emettre()
+: <a class="el" href="classPartieClient.html#a2be7e060ee1b3e4e91e5dd21c166c094">PartieClient</a>
+, <a class="el" href="classPartieServeur.html#a2f6f569eaaa3b006fbb7b1fd7548d4e9">PartieServeur</a>
+, <a class="el" href="classTable.html#a147a6a6c82fa213c3f89ef2250ee5d09">Table</a>
+</li>
+<li>doit_jouer()
+: <a class="el" href="classPartieClient.html#a1e4aa3b1ba12b4748859a2fc600fe016">PartieClient</a>
+</li>
+<li>doit_priser()
+: <a class="el" href="classPartieClient.html#a2429db229d7bb2719cc0c460e5538af0">PartieClient</a>
+</li>
+<li>doit_quitter()
+: <a class="el" href="classPartieClient.html#ac110cd921caa3341a15571a461de0313">PartieClient</a>
+</li>
+<li>doit_transmettre()
+: <a class="el" href="classTable.html#a07033d61c4b777c87bbb7f36729cfac0">Table</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
+<li>ecartable()
+: <a class="el" href="classCarte.html#a865d651021ee1c6a2c731fbe13701c9d">Carte</a>
+</li>
+<li>ecarter()
+: <a class="el" href="classPartieClient.html#a303f62176f502d55b7f2995df16453e7">PartieClient</a>
+</li>
+<li>Enchere()
+: <a class="el" href="classEnchere.html#a53ca08eafb911b57602f9d12c2a0d38d">Enchere</a>
+</li>
+<li>enchere_de()
+: <a class="el" href="classPartie.html#a9516c470a0d368204633894c22ff9585">Partie</a>
+</li>
+<li>enlever()
+: <a class="el" href="classTable.html#a2508504a656f681899fcb97eb4269cf1">Table</a>
+, <a class="el" href="classServeur.html#ab1481eb56cefbb965d3b002e9855abaa">Serveur</a>
+, <a class="el" href="classMain.html#a982c55b05c5f74d20be7dd476f10e355">Main</a>
+</li>
+<li>envoyer()
+: <a class="el" href="classClient.html#ac58b996759b9e999db796d92660406ca">Client</a>
+, <a class="el" href="classServeur.html#a6b1c81bdc2648c45094f07aa5ad2818c">Serveur</a>
+, <a class="el" href="classClient.html#abbc77b36d7605d1eb6811167742a31cb">Client</a>
+</li>
+<li>envoyer_suivant()
+: <a class="el" href="classServeur.html#abf3dcfadd36d5067ecd5b6fa05625377">Serveur</a>
+</li>
+<li>est_ami()
+: <a class="el" href="classPartieClient.html#ad3d0d1a55fc1b8467a58635e898c62a4">PartieClient</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_f"></a>- f -</h3><ul>
+<li>formuler_prise()
+: <a class="el" href="classPartieClient.html#a1591988be7b721fae20d45a1c8b869a0">PartieClient</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
+<li>incomplet()
+: <a class="el" href="classTable.html#a798a87b642dd6f56d74d57e2a5204550">Table</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_j"></a>- j -</h3><ul>
+<li>jouer()
+: <a class="el" href="classPartieClient.html#a830bc935819cc4fdaa1640ce0e8b5e6d">PartieClient</a>
+</li>
+<li>joueur()
+: <a class="el" href="classEnchere.html#a057f525e5858ecc9e1fb4a5fc48bb1bb">Enchere</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_l"></a>- l -</h3><ul>
+<li>lire()
+: <a class="el" href="classServeur.html#a3e1643b4ef30dfca13971f7238286120">Serveur</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_m"></a>- m -</h3><ul>
+<li>Main()
+: <a class="el" href="classMain.html#a50d4361a1b613205467a441b5c40c199">Main</a>
+</li>
+<li>message()
+: <a class="el" href="classServeur.html#aff70684b2bfe448696cc2cf273f21754">Serveur</a>
+</li>
+<li>message_brut()
+: <a class="el" href="classServeur.html#a12ffc8082b8d0419295899bc710f6cf4">Serveur</a>
+</li>
+<li>mon_tour()
+: <a class="el" href="classPartieClient.html#ad0f3ad8eec624ad558c0317d289cfec6">PartieClient</a>
+</li>
+<li>montrer_poignee()
+: <a class="el" href="classPartieClient.html#ae863676488572a8aa570231bce23da49">PartieClient</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_n"></a>- n -</h3><ul>
+<li>numero()
+: <a class="el" href="classCarte.html#a71b2fa7ab34086aed44b3430b3755df5">Carte</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_o"></a>- o -</h3><ul>
+<li>operator!=()
+: <a class="el" href="classCarte.html#ad71285776e81b86dd2ccb1c502448495">Carte</a>
+</li>
+<li>operator=()
+: <a class="el" href="classCarte.html#ab302639131adf2a8e3f31eda2ba94580">Carte</a>
+, <a class="el" href="classMain.html#a82fd48f3a0c8d177a2bafdefa3472b8a">Main</a>
+, <a class="el" href="classEnchere.html#a2523736db910ee1498f7015a233c1337">Enchere</a>
+, <a class="el" href="classCarte.html#a5115c02ca8de7244e35c8ed71a5afa5e">Carte</a>
+, <a class="el" href="classEnchere.html#ac6badae2b4475be71ec43050c2d1f757">Enchere</a>
+, <a class="el" href="classMain.html#a6df2b8fedb77ea13507fc4621e6b2ed1">Main</a>
+</li>
+<li>operator==()
+: <a class="el" href="classCarte.html#ace3391d47b7fba642b3ee74a3b64277d">Carte</a>
+</li>
+<li>operator&gt;()
+: <a class="el" href="classEnchere.html#af4c2bf3d43d110dd75315197a61a7c4c">Enchere</a>
+, <a class="el" href="classCarte.html#ab50ca28816e7f669e0cbdd8d75def400">Carte</a>
+, <a class="el" href="classEnchere.html#a0f7f9ed2ff2bed58991857f041ac6f7b">Enchere</a>
+, <a class="el" href="classCarte.html#a6c064b1b54dcb2c36d7b4c7e9b6b27f2">Carte</a>
+</li>
+<li>oublier_table()
+: <a class="el" href="classServeurJeu.html#a747a0655730eb9de9402bce5293f588e">ServeurJeu</a>
+</li>
+<li>ouvrir_global()
+: <a class="el" href="classServeur.html#ae4ebda122c157f2f7a6924fd1c9140e8">Serveur</a>
+</li>
+<li>ouvrir_local()
+: <a class="el" href="classServeur.html#af79375cb09b15add98ef5603dff4c74b">Serveur</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
+<li>Partie()
+: <a class="el" href="classPartie.html#ae40831aad10fc4a391295e2ea1447b5a">Partie</a>
+</li>
+<li>PartieClient()
+: <a class="el" href="classPartieClient.html#abc55de4a7ba655a98a9c8ca112b3dbcf">PartieClient</a>
+</li>
+<li>PartieServeur()
+: <a class="el" href="classPartieServeur.html#abfd2d5ab00fb6f82a8240c40c1dab452">PartieServeur</a>
+</li>
+<li>peut_appeler()
+: <a class="el" href="classMain.html#aadc4848554e95ee400d7b4a4fd1c644b">Main</a>
+</li>
+<li>peut_declarer()
+: <a class="el" href="classMain.html#ab62d183ee65c7cfd21803dc53782d17a">Main</a>
+</li>
+<li>peut_ecarter()
+: <a class="el" href="classMain.html#a7df3596743ce76906dc792e71adca8fa">Main</a>
+</li>
+<li>phase()
+: <a class="el" href="classPartie.html#a45201ab9e442170839bf1380e11500c4">Partie</a>
+</li>
+<li>poignee()
+: <a class="el" href="classPartie.html#a59c52f0345c8acddeb03011295f8b1b1">Partie</a>
+</li>
+<li>poignee_montree()
+: <a class="el" href="classPartieClient.html#a7cfe308b121505900fb451140976efda">PartieClient</a>
+</li>
+<li>possede()
+: <a class="el" href="classMain.html#a866b5e59e385bb3f93fe2c6745c7fe8d">Main</a>
+</li>
+<li>prise()
+: <a class="el" href="classEnchere.html#ad5162e8db4b9cc5b2b06b087f0f6d23c">Enchere</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_r"></a>- r -</h3><ul>
+<li>rattacher_table()
+: <a class="el" href="classServeurJeu.html#a9722393dea35b9265d5e55411b315f84">ServeurJeu</a>
+</li>
+<li>reagir_connexion()
+: <a class="el" href="classServeurDebogage.html#a8d3baccdda9fe509d6036b6025fe37fc">ServeurDebogage</a>
+, <a class="el" href="classServeurJeu.html#aae223d1bdaedb87dc2578c306e733b81">ServeurJeu</a>
+</li>
+<li>reagir_deconnexion()
+: <a class="el" href="classServeurDebogage.html#a2d43cbbf405f4348db87dae3823dc2d2">ServeurDebogage</a>
+</li>
+<li>reagir_message()
+: <a class="el" href="classServeurDebogage.html#a9f54d8dbc763b7a9e6ec0e95222930d1">ServeurDebogage</a>
+</li>
+<li>reconnecter()
+: <a class="el" href="classClient.html#aebb225890121c2dfc8b83f320c686db7">Client</a>
+</li>
+<li>recu()
+: <a class="el" href="classClient.html#a182ab6bbb5aecc61632f53b6404aa4d6">Client</a>
+</li>
+<li>roi()
+: <a class="el" href="classCarte.html#a54d05aa9711351d7862962486283fbfc">Carte</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
+<li>score()
+: <a class="el" href="classPartieClient.html#a27847c55ed5fe875ebf4fdfcd3f2e3e6">PartieClient</a>
+</li>
+<li>Serveur()
+: <a class="el" href="classServeur.html#af1ed0e9e9cda25c0767dda26dfd0bf43">Serveur</a>
+</li>
+<li>ServeurDebogage()
+: <a class="el" href="classServeurDebogage.html#a574a34defe7200caa599b5ffa4b51008">ServeurDebogage</a>
+</li>
+<li>ServeurJeu()
+: <a class="el" href="classServeurJeu.html#a42732713b6d1da78b632fdb80df6fb02">ServeurJeu</a>
+</li>
+<li>set_ouverture()
+: <a class="el" href="classTapis.html#ad99507e33564528fcbdab023200a6677">Tapis</a>
+</li>
+<li>set_phase()
+: <a class="el" href="classPartie.html#afdc3a79eba2d966d967225df81873693">Partie</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_t"></a>- t -</h3><ul>
+<li>Table()
+: <a class="el" href="classTable.html#a8c20b32ca7349af63e31717016103e66">Table</a>
+</li>
+<li>Tapis()
+: <a class="el" href="classTapis.html#a7323828e91137c08c7a84f279b679ca3">Tapis</a>
+</li>
+<li>tapis()
+: <a class="el" href="classPartie.html#a8e85cd52fcb26ee887b5c5441ffc00b2">Partie</a>
+</li>
+<li>terminer()
+: <a class="el" href="classTapis.html#ad12014d7aca5329282a99e7ab5fa5cb9">Tapis</a>
+</li>
+<li>terminer_tapis()
+: <a class="el" href="classPartie.html#adba70eb9ababdf3e128952996099092d">Partie</a>
+</li>
+<li>tester()
+: <a class="el" href="classPartieServeur.html#a53ae35e1da76a5602f3223019df36e83">PartieServeur</a>
+</li>
+<li>tete()
+: <a class="el" href="classCarte.html#ab978ce739fa511ddbfbd392543ff0700">Carte</a>
+</li>
+<li>tour()
+: <a class="el" href="classPartie.html#a34e5fc20f35fa22c89a3151bc8a56d55">Partie</a>
+</li>
+<li>traiter_connexion()
+: <a class="el" href="classClientDebogage.html#a9cb844a37a05695079f9ca7462ce1393">ClientDebogage</a>
+, <a class="el" href="classClientJeu.html#a3a3b071a902cacf5a91dd62c60211870">ClientJeu</a>
+</li>
+<li>traiter_deconnexion()
+: <a class="el" href="classClientJeu.html#aa930835bfedcbb4244dbd031cb5a7668">ClientJeu</a>
+, <a class="el" href="classClientDebogage.html#afb096bce05949007eba1b7b8e6e86969">ClientDebogage</a>
+</li>
+<li>traiter_message()
+: <a class="el" href="classClientJeu.html#a75013c3e7832a9652b18e8ae3bf9e015">ClientJeu</a>
+, <a class="el" href="classClientDebogage.html#ad9edd74f3f47aa148ba61d4671b1d780">ClientDebogage</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_v"></a>- v -</h3><ul>
+<li>valeur()
+: <a class="el" href="classCarte.html#a3213965a61e4f5ccc35f1b9f7cc791f2">Carte</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_0x7e"></a>- ~ -</h3><ul>
+<li>~Enchere()
+: <a class="el" href="classEnchere.html#aa503bb1c8bf255e106950b9d5917b744">Enchere</a>
+</li>
+<li>~Table()
+: <a class="el" href="classTable.html#a9a559f2e7beb37b511ee9f88873164f8">Table</a>
+</li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré le Dimanche Novembre 9 2014 12:34:43 pour Tarot par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.1.2
+</small></address>
+</body>
+</html>

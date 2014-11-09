@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>Tarot:  Fichier source de shared/carte.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Tarot
+   </div>
+   <div id="projectbrief">PE 46 à l&#39;ECL</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.1.2 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="namespaces.html"><span>Espaces&#160;de&#160;nommage</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
+      <li><a href="globals.html"><span>Membres&#160;de&#160;fichier</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Espaces de nommage</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Énumérations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Valeurs énumérées</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_9982052f7ce695d12571567315b2fafa.html">shared</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">carte.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="carte_8hpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef CARTE_DEFINIE</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="code" href="carte_8hpp.html#a76e201e9c8ae928bd2d8b57a0f9aa8d3">   11</a></span>&#160;<span class="preprocessor">#define CARTE_DEFINIE</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="code" href="carte_8hpp.html#a5f2ccaf19a8873a2086ea3eb5d2a63c4">   16</a></span>&#160;<span class="preprocessor">#define DEBUT_ATOUT 56</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="code" href="carte_8hpp.html#ade9c4cd9514be0434ac709d41a802a40">   21</a></span>&#160;<span class="preprocessor">#define DEBUT_PIQUE Carte::PIQUE * 14</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="code" href="carte_8hpp.html#aa57b8e752894087e47ab406d1ebe472c">   26</a></span>&#160;<span class="preprocessor">#define DEBUT_COEUR Carte::COEUR * 14</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="code" href="carte_8hpp.html#ac490877a96d2e9614aba06cd848ece9e">   31</a></span>&#160;<span class="preprocessor">#define DEBUT_CARREAU Carte::CARREAU * 14</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="carte_8hpp.html#ad14c5079db86597ad1c4da15c6034556">   36</a></span>&#160;<span class="preprocessor">#define DEBUT_TREFLE Carte::TREFLE * 14</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="carte_8hpp.html#a654d176f58a514eb1d420de3594f87a3">   41</a></span>&#160;<span class="preprocessor">#define PETIT 56</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="code" href="carte_8hpp.html#a53b3ef743ffea30504b5095ab09d7bd8">   46</a></span>&#160;<span class="preprocessor">#define VINGTETUN 76</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="code" href="carte_8hpp.html#a495491019001f10d2a36379111bdd5cf">   51</a></span>&#160;<span class="preprocessor">#define EXCUSE 77</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="code" href="carte_8hpp.html#a73ae32b908395c6e86179cabb6fd6328">   65</a></span>&#160;<span class="preprocessor">#define DETTE_EXCUSE 78</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="code" href="classCarte.html">   77</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCarte.html" title="Définition d&#39;une Carte du jeu.">Carte</a></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="code" href="classCarte.html#aa4b4c15fb6d1f697985b8ff04a67c45e">   87</a></span>&#160;  <span class="keyword">enum</span> <a class="code" href="classCarte.html#aa4b4c15fb6d1f697985b8ff04a67c45e" title="Énumère les 5 couleurs.">Couleur</a>{PIQUE, CARREAU, TREFLE, COEUR, ATOUT};</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  </div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="code" href="classCarte.html#ad549901ec17f99028b361164be137b7b">   94</a></span>&#160;  <span class="keyword">enum</span> <a class="code" href="classCarte.html#ad549901ec17f99028b361164be137b7b" title="Représente la valeur des cartes de couleur non atout.">Valeur</a>{AS, DEUX, TROIS, QUATRE, CINQ, SIX,</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;       SEPT, HUIT, NEUF, DIX, VALET, CAVALIER, DAME, ROI};</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  </div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="code" href="classCarte.html#ab766c46bfc445d84ad35af4149f76802">  103</a></span>&#160;  <span class="keyword">enum</span> <a class="code" href="classCarte.html#ab766c46bfc445d84ad35af4149f76802" title="Sert à dire si une carte peut être écartée ou non, et les modalités éventuelles (montrer les atouts)...">ModaliteEcart</a></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    {</div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="code" href="classCarte.html#ab766c46bfc445d84ad35af4149f76802aaa8b46b0630808f543da8a65aa509bd0">  105</a></span>&#160;      <a class="code" href="classCarte.html#ab766c46bfc445d84ad35af4149f76802aaa8b46b0630808f543da8a65aa509bd0" title="La carte est écartable.">ECARTABLE</a>,     </div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="code" href="classCarte.html#ab766c46bfc445d84ad35af4149f76802a896a78ffcbe24a7e0b0de467b03f801c">  106</a></span>&#160;      <a class="code" href="classCarte.html#ab766c46bfc445d84ad35af4149f76802a896a78ffcbe24a7e0b0de467b03f801c" title="Il faut montrer la carte.">MONTRER_CARTE</a>, </div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="code" href="classCarte.html#ab766c46bfc445d84ad35af4149f76802a4c98bdf65472fc5430057a461e5b7b80">  107</a></span>&#160;      <a class="code" href="classCarte.html#ab766c46bfc445d84ad35af4149f76802a4c98bdf65472fc5430057a461e5b7b80" title="On ne peut pas écarter cette carte.">NON_ECARTABLE</a>  </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    };</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <a class="code" href="classCarte.html#a62c23cdffa5c3865d7476c7c6fd3cc58" title="Constructeur principal.">Carte</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classCarte.html#a71b2fa7ab34086aed44b3430b3755df5" title="Retourne le numéro de la carte.">numero</a>);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <a class="code" href="classCarte.html#a62c23cdffa5c3865d7476c7c6fd3cc58" title="Constructeur principal.">Carte</a>(<span class="keyword">const</span> <a class="code" href="classCarte.html" title="Définition d&#39;une Carte du jeu.">Carte</a> &amp; carte);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classCarte.html#a6c064b1b54dcb2c36d7b4c7e9b6b27f2" title="Comparaison des cartes.">operator&gt;</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> carte) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classCarte.html#a6c064b1b54dcb2c36d7b4c7e9b6b27f2" title="Comparaison des cartes.">operator&gt;</a>(<span class="keyword">const</span> <a class="code" href="classCarte.html" title="Définition d&#39;une Carte du jeu.">Carte</a> &amp; carte) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classCarte.html#ace3391d47b7fba642b3ee74a3b64277d" title="Test d&#39;égalité entre les cartes.">operator==</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> carte) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classCarte.html#ace3391d47b7fba642b3ee74a3b64277d" title="Test d&#39;égalité entre les cartes.">operator==</a>(<span class="keyword">const</span> <a class="code" href="classCarte.html" title="Définition d&#39;une Carte du jeu.">Carte</a> &amp; carte) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classCarte.html#ad71285776e81b86dd2ccb1c502448495" title="Test de différence entre 2 cartes.">operator!=</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> carte) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classCarte.html#ad71285776e81b86dd2ccb1c502448495" title="Test de différence entre 2 cartes.">operator!=</a>(<span class="keyword">const</span> <a class="code" href="classCarte.html" title="Définition d&#39;une Carte du jeu.">Carte</a> &amp; carte) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classCarte.html#a71b2fa7ab34086aed44b3430b3755df5" title="Retourne le numéro de la carte.">numero</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  <a class="code" href="classCarte.html#aa4b4c15fb6d1f697985b8ff04a67c45e" title="Énumère les 5 couleurs.">Couleur</a> <a class="code" href="classCarte.html#adf755285455670fdeb10ad62e3909f0f" title="Retourne la couleur de la carte.">couleur</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classCarte.html#a6592e373d97f8d35bbbc1f1c4959bb66" title="Indique si la carte est de l&#39;atout.">atout</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classCarte.html#ab978ce739fa511ddbfbd392543ff0700" title="Indique si la carte est une tête.">tete</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classCarte.html#a54d05aa9711351d7862962486283fbfc" title="Indique si la carte est un roi.">roi</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classCarte.html#a40a2742724bf0e23dfd1ff13bede25ff" title="Indique si la carte est un bout.">bout</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;  <a class="code" href="classCarte.html#ad549901ec17f99028b361164be137b7b" title="Représente la valeur des cartes de couleur non atout.">Valeur</a> <a class="code" href="classCarte.html#a3213965a61e4f5ccc35f1b9f7cc791f2" title="Retourne la valeur d&#39;une carte.">valeur</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classCarte.html#a84d161365c4a090b9c10e8939e07e5b0" title="Retourne le nombre de demi-points que cette carte rapporte.">demipoints</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;  <a class="code" href="classCarte.html#ab766c46bfc445d84ad35af4149f76802" title="Sert à dire si une carte peut être écartée ou non, et les modalités éventuelles (montrer les atouts)...">ModaliteEcart</a> <a class="code" href="classCarte.html#a865d651021ee1c6a2c731fbe13701c9d" title="Indique si la carte est écartable.">ecartable</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;  <a class="code" href="classCarte.html" title="Définition d&#39;une Carte du jeu.">Carte</a> <span class="keyword">const</span> &amp; <a class="code" href="classCarte.html#a5115c02ca8de7244e35c8ed71a5afa5e" title="Affecte la carte (1).">operator=</a>(<span class="keyword">const</span> <a class="code" href="classCarte.html" title="Définition d&#39;une Carte du jeu.">Carte</a> &amp; carte);</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  <a class="code" href="classCarte.html" title="Définition d&#39;une Carte du jeu.">Carte</a> <span class="keyword">const</span> &amp; <a class="code" href="classCarte.html#a5115c02ca8de7244e35c8ed71a5afa5e" title="Affecte la carte (1).">operator=</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> carte);</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> m_numero;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;};</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="preprocessor">#endif</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré le Dimanche Novembre 9 2014 12:34:40 pour Tarot par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.1.2
+</small></address>
+</body>
+</html>
