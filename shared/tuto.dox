@@ -102,9 +102,10 @@
    Commencez par récupérer les sources, puis déplacez-vous dans
    client/. Faites un dossier, par exemple ai, puis
    déplacez-vous dedans et faites un nouveau projet Qt. Le fichier de
-   projet doit ressembler à ça : ajoute la dépendance network, et
-   inclue et compile tous les fichiers de ../shared et ../../shared.
-
+   projet doit ressembler au fichier ci-dessous : on ajoute la dépendance 
+   network, et on inclue et compile tous les fichiers de ../shared et
+   ../../shared. 
+   
    @include ../client/ai/ia.pro
 
    Maintenant, on peut travailler. Faites un fichier principal (ici,
