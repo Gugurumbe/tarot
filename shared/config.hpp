@@ -16,7 +16,8 @@
    Les sources sont disponibles sur
    [GitHub](https://github.com/Gugurumbe/tarot). Une archive
    [.zip](https://github.com/Gugurumbe/tarot/archive/master.zip) 
-   ou une archive [.tar.gz](https://github.com/Gugurumbe/tarot/archive/master.tar.gz)
+   ou une archive 
+   [.tar.gz](https://github.com/Gugurumbe/tarot/archive/master.tar.gz)
    est également disponible. Pour le moment, nous n'avons pas réglé
    le problème de la license. Profitez-en !
    Une fois l'archive décompressée, on peut compiler le tout.

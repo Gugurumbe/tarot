@@ -1,0 +1,62 @@
+/**
+   @page Tutoriel : utilisation, contribution
+
+   @section À partir de zéro
+   Vous voulez développer votre propre client (ou votre propre
+   serveur). Vous devez vous connecter en tcp sur le serveur (45678,
+   port par défaut). Des messages seront échangés avec lui. Un message
+   contient :
+   1. Sa taille, sur 1 octet non signé.
+   2. Son type, sur 1 octet non signé.
+   3. Sa partie variable.
+   
+   Voici les types :
+   * 0  : erreur_protocole. Pas de partie variable. Signification :
+   vous avez dit quelque chose à un moment inopportun, ou ça n'entre
+   pas dans le protocole.
+   * 1  : refuse. Pas de partie variable. Signification : vous avez
+   fait une requête du bon type au bon moment, mais elle ne respecte
+   pas les règles.
+   * 2  : numero. Partie variable : mon numéro sur 1 octet non
+   signé. Votre numéro est un nombre entre 0 et 4 inclus. Si c'est 0,
+   vous devez être le premier à priser. Si c'est x, il faut attendre
+   de recevoir x messages de type contrat avant de priser.
+   * 3  : distribution. Partie variable : mes 15 cartes, chacune sur 1
+   octet non signé. 
+   * 4  : prise. Partie variable : ma prise (1 octet, non signé). 0 :
+   passe, 4 : garde contre. Le client doit émettre ce message. 
+   * 5  : contrat. Partie variable : la prise du joueur (1 octet, non
+   signé). Un contrat intermédiaire a été formulé.
+   * 6  : appel. Pas de partie variable. Vous avez remporté les
+   enchères, et vous devez maintenant appeler une carte.
+   * 7  : appeler. Partie variable : la carte que vous voulez appeler
+   (1 octet, non signé).
+   * 8  : contrat_final. Partie variable : 1 octet non signé
+   (preneur), 1 octet non signé (prise), 1 octet non signé (carte
+   appelée). 
+   * 9  : chien. Partie variable : 3 octets (les 3 cartes dévoilées du
+   chien). Si vous êtes le preneur, vous devez écarter.
+   * 10 : ecart. Partie variable : 3 octets (les 3 cartes que vous
+   voudriez écarter).
+   * 11 : atout. Partie variable : au plus 3 octets (les atouts
+   écartés). 
+   * 12 : inutilisé
+   * 13 : jeu. Partie variable : 1 octet (5), le joueur ayant demandé
+   un chelem ou 5. Donc 5.
+   * 14 : inutilisé
+   * 15 : inutilisé
+   * 16 : requete. Partie variable : 1 octet (la carte que vous
+   voudriez jouer). C'est à vous s'il y a eu (votre tour - tour du
+   joueur d'ouverture) modulo 5 cartes jouées depuis le dernier pli.
+   * 17 : carte. Partie variable : 1 octet (la carte jouée). À vous de
+   déterminer qui l'a jouée, à partir du numéro du joueur d'ouverture
+   et le nombre de cartes jouées depuis la fin du dernier pli.
+   * 18 : pli. Partie variable : 1 octet (numéro du joueur
+   d'ouverture). 
+   * 19 : resultat. La partie est finie. Partie variable : 5 mots de 2
+   octets, signés (les résultats de chacun).
+
+   Vous devez donc émettre : prise, appeler, ecarter, requete,
+   requete, ... dans le cas où vous prenez (prise autre que garde
+   contre ou garde sans) en tant que client.
+*/
