@@ -1,0 +1,16 @@
+/**
+   @page Tutoriel : utilisation, contribution
+
+   @section À partir de zéro
+   Vous voulez développer votre propre client (ou votre propre
+   serveur). Vous devez vous connecter en tcp sur le serveur (45678,
+   port par défaut). Des messages seront échangés avec lui. Voici le
+   protocole :
+   * 0 : erreur_protocole
+   * 1 : refuse
+   * 2 : numero
+   * 3 : distribution
+   * 4 : prise
+   * 5 : contrat
+   * 6 : appel
+*/
