@@ -119,9 +119,9 @@ Connecteurs publics</h2></td></tr>
 <tr class="memitem:a75013c3e7832a9652b18e8ae3bf9e015"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClientJeu.html#a75013c3e7832a9652b18e8ae3bf9e015">traiter_message</a> (<a class="el" href="structProtocole_1_1Message.html">Protocole::Message</a> m)</td></tr>
 <tr class="memdesc:a75013c3e7832a9652b18e8ae3bf9e015"><td class="mdescLeft">&#160;</td><td class="mdescRight">Réaction personnalisée (message).  <a href="#a75013c3e7832a9652b18e8ae3bf9e015">Plus de détails...</a><br/></td></tr>
 <tr class="separator:a75013c3e7832a9652b18e8ae3bf9e015"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a314b62ee744f4e1666d4d4c64eff934e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClientJeu.html#a314b62ee744f4e1666d4d4c64eff934e">formuler_prise</a> (<a class="el" href="classEnchere.html#a1dfe2ab8eb7d4b82786201f95c453a3f">Enchere::Prise</a> p, bool chelem)</td></tr>
-<tr class="memdesc:a314b62ee744f4e1666d4d4c64eff934e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoie un message pour formuler une Prise.  <a href="#a314b62ee744f4e1666d4d4c64eff934e">Plus de détails...</a><br/></td></tr>
-<tr class="separator:a314b62ee744f4e1666d4d4c64eff934e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98689343a93362c3b583a27e1ef6543f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClientJeu.html#a98689343a93362c3b583a27e1ef6543f">formuler_prise</a> (<a class="el" href="classEnchere.html#a1dfe2ab8eb7d4b82786201f95c453a3f">Enchere::Prise</a> p)</td></tr>
+<tr class="memdesc:a98689343a93362c3b583a27e1ef6543f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoie un message pour formuler une Prise.  <a href="#a98689343a93362c3b583a27e1ef6543f">Plus de détails...</a><br/></td></tr>
+<tr class="separator:a98689343a93362c3b583a27e1ef6543f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf4c77f0ddfc3210a7f9ac074d862122"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClientJeu.html#abf4c77f0ddfc3210a7f9ac074d862122">formuler_appel</a> (const <a class="el" href="classCarte.html">Carte</a> &amp;c)</td></tr>
 <tr class="memdesc:abf4c77f0ddfc3210a7f9ac074d862122"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoie un message pour formuler un appel.  <a href="#abf4c77f0ddfc3210a7f9ac074d862122">Plus de détails...</a><br/></td></tr>
 <tr class="separator:abf4c77f0ddfc3210a7f9ac074d862122"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1653,7 +1653,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a class="anchor" id="a314b62ee744f4e1666d4d4c64eff934e"></a>
+<a class="anchor" id="a98689343a93362c3b583a27e1ef6543f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1664,18 +1664,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
           <td class="memname">void ClientJeu::formuler_prise </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classEnchere.html#a1dfe2ab8eb7d4b82786201f95c453a3f">Enchere::Prise</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>chelem</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -1688,8 +1678,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Envoie un message pour formuler une Prise. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">p</td><td>La prise en question. </td></tr>
-    <tr><td class="paramname">chelem</td><td>Vrai ssi vous demandez un chelem.</td></tr>
+    <tr><td class="paramname">p</td><td>La prise en question.</td></tr>
   </table>
   </dd>
 </dl>
@@ -2501,7 +2490,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Généré le Mercredi 17 Décembre 2014 18:10:53 pour Tarot par &#160;<a href="http://www.doxygen.org/index.html">
+Généré le Mercredi 17 Décembre 2014 19:08:49 pour Tarot par &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

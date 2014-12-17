@@ -114,9 +114,9 @@ Connecteurs publics</h2></td></tr>
 <tr class="memitem:a013caa86cc6b2dbfaf04a7b872bcfe75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPartieClient.html#a013caa86cc6b2dbfaf04a7b872bcfe75">assimiler</a> (const <a class="el" href="structProtocole_1_1Message.html">Protocole::Message</a> &amp;message)</td></tr>
 <tr class="memdesc:a013caa86cc6b2dbfaf04a7b872bcfe75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Comprend un <a class="el" href="structProtocole_1_1Message.html" title="Structure de Message universel. ">Protocole::Message</a>.  <a href="#a013caa86cc6b2dbfaf04a7b872bcfe75">Plus de détails...</a><br/></td></tr>
 <tr class="separator:a013caa86cc6b2dbfaf04a7b872bcfe75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4ef0ae8852f0e83b4af77c5c7bfa72f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPartieClient.html#aa4ef0ae8852f0e83b4af77c5c7bfa72f">formuler_prise</a> (<a class="el" href="classEnchere.html#a1dfe2ab8eb7d4b82786201f95c453a3f">Enchere::Prise</a> p, bool <a class="el" href="classPartie.html#ad16a77a20a5699a3910766c6bda50033">chelem</a>)</td></tr>
-<tr class="memdesc:aa4ef0ae8852f0e83b4af77c5c7bfa72f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construit un Message.  <a href="#aa4ef0ae8852f0e83b4af77c5c7bfa72f">Plus de détails...</a><br/></td></tr>
-<tr class="separator:aa4ef0ae8852f0e83b4af77c5c7bfa72f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1591988be7b721fae20d45a1c8b869a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPartieClient.html#a1591988be7b721fae20d45a1c8b869a0">formuler_prise</a> (<a class="el" href="classEnchere.html#a1dfe2ab8eb7d4b82786201f95c453a3f">Enchere::Prise</a> p)</td></tr>
+<tr class="memdesc:a1591988be7b721fae20d45a1c8b869a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construit un Message.  <a href="#a1591988be7b721fae20d45a1c8b869a0">Plus de détails...</a><br/></td></tr>
+<tr class="separator:a1591988be7b721fae20d45a1c8b869a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae37c34664850ef27f4c1b5aaa183bf4b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPartieClient.html#ae37c34664850ef27f4c1b5aaa183bf4b">appeler</a> (const <a class="el" href="classCarte.html">Carte</a> &amp;carte)</td></tr>
 <tr class="memdesc:ae37c34664850ef27f4c1b5aaa183bf4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construit un Message.  <a href="#ae37c34664850ef27f4c1b5aaa183bf4b">Plus de détails...</a><br/></td></tr>
 <tr class="separator:ae37c34664850ef27f4c1b5aaa183bf4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2539,7 +2539,7 @@ PartieClient::doit_emettre(Message) </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="aa4ef0ae8852f0e83b4af77c5c7bfa72f"></a>
+<a class="anchor" id="a1591988be7b721fae20d45a1c8b869a0"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -2550,18 +2550,8 @@ PartieClient::doit_emettre(Message) </dd></dl>
           <td class="memname">void PartieClient::formuler_prise </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classEnchere.html#a1dfe2ab8eb7d4b82786201f95c453a3f">Enchere::Prise</a>&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>chelem</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -2576,7 +2566,6 @@ PartieClient::doit_emettre(Message) </dd></dl>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">p</td><td>: la prise que souhaite effectuer le client. </td></tr>
-    <tr><td class="paramname">chelem</td><td>Vrai ssi vous demandez un chelem. </td></tr>
   </table>
   </dd>
 </dl>
@@ -3514,7 +3503,7 @@ PartieClient::doit_emettre(Message) </dd></dl>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Généré le Mercredi 17 Décembre 2014 18:10:53 pour Tarot par &#160;<a href="http://www.doxygen.org/index.html">
+Généré le Mercredi 17 Décembre 2014 19:08:49 pour Tarot par &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
