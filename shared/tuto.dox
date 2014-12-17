@@ -123,6 +123,59 @@
    
    @include ../client/ai/ia.cpp
 
+   @subsection emission Ordre d'émission des signaux
+   Les signaux sont émis dans un ordre "logique" dans les différentes
+   situations.
+
+   Phase d'enchères :
+   1. ClientJeu::contrat_intermediaire() (du joueur précédent)
+   2. ClientJeu::doit_priser() (Vous devez priser à partir de ce moment)
+   3. ClientJeu::enchere_acceptee() (ou ClientJeu::enchere_refusee()
+   et retour à 2.)
+   4. ClientJeu::contrat_intermediaire() (le vôtre)
+   5. ClientJeu::contrat_intermediaire() celui du joueur suivant.
+   
+   Appels :
+   1. ClientJeu::contrat_intermediaire() (du joueur précédent)
+   2. ClientJeu::doit_appeler() (vous devez appeler à partir de ce
+   moment)
+   3. ClientJeu::appel_accepte() (ou ClientJeu::appel_refuse() et
+   retour à 2.)
+   4. ClientJeu::contrat_final()
+   5. ClientJeu::chien() (ou saut à la phase de jeu en cas de contrat
+   supérieur) 
+   6. ClientJeu::jeu_change()
+   7. ClientJeu::doit_ecarter() (vous devez écarter à partir de ce
+   moment)
+   8. ClientJeu::atout_au_chien() (éventuellement)
+   9. ClientJeu::ecart_accepte() (ou ClientJeu::ecart_refuse() et
+   retour à 7.)
+   10. ClientJeu::jeu_change()
+
+   Jeu :
+   1. ClientJeu::carte_jouee() (par le joueur précédent)
+   2. ClientJeu::maitre_change() (éventuellement)
+   3. ClientJeu::tapis_change()
+   4. ClientJeu::doit_jouer() (vous devez jouer à partir de ce moment)
+   5. ClientJeu::requete_acceptee() (ou ClientJeu::requete_refusee()
+   et retour à 4.)
+   6. ClientJeu::jeu_change() (vous perdez la carte jouée)
+   7. ClientJeu::carte_jouee() (par vous)
+   8. ClientJeu::maitre_change() (éventuellement, dans ce cas c'est
+   vous)
+   9. ClientJeu::tapis_change()
+
+   Fin de levée :
+   1. ClientJeu::carte_jouee() (par le dernier joueur)
+   2. ClientJeu::maitre_change() (éventuellement)
+   3. 5 fois (dans l'ordre des cartes jouées)
+   ClientJeu::carte_gagnee()
+   4. ClientJeu::tapis_change()
+   5. ClientJeu::doit_jouer() (si vous avez remporté le pli)
+
+   Fin de partie : comme à la fin de la dernière levée, sans le
+   dernier point. À la place, on a ClientJeu::partie_terminee()
+
    @section conclusion Conclusion
    Il y a un protocole à respecter pour communiquer avec le serveur,
    et pour utiliser les classes existantes, il faut se mettre au bon
