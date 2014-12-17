@@ -36,6 +36,16 @@ public:
    */
   Coquille(QWidget * parent = 0);
 
+public slots:
+  /**
+     @brief Traité lorsque je demande à ajouter un client.
+   */
+  void on_bouton_plus_clicked();
+  /**
+     @brief Traité lorsque je demande à supprimer un client.
+   */
+  void on_bouton_moins_clicked();
+
 private:
   Ui::Coquille ui;
 };
