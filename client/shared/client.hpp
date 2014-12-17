@@ -14,6 +14,7 @@
 #include <QHostAddress>
 #include <QTcpSocket>
 #include "protocole.hpp"
+#include <queue>
 
 /**
    @brief Définit une classe communiquant avec un serveur sur le
@@ -161,6 +162,13 @@ private slots:
      Ce slot est déclenché automatiquement.
    */
   void recevoir();
+
+  /**
+     @brief Envoie les données suivantes.
+     @param taille_ecrite La taille de ce qu'on a écrit depuis la
+     dernière fois.
+   */
+  void envoyer_suivant(qint64 taille_ecrite);
   
 private:
   
@@ -179,7 +187,10 @@ private:
    */
   unsigned int port;
   
-  int taille_paquet;
+  int taille_paquet; //Utilisé pour la lecture
+
+  qint64 taille_restante;
+  std::queue<QByteArray> file_attente;
 };
 
 #ifndef PRINT_ARRAY

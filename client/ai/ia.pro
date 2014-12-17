@@ -37,3 +37,5 @@ SOURCES += ../../shared/protocole.cpp
 SOURCES += ../../shared/tapis.cpp      
 
 QT += network 
+
+QT -= gui

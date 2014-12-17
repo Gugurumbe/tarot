@@ -11,10 +11,10 @@ enum {YES, NO};
 /**
    @brief Se connecte automatiquement sur l'adresse.
    
-   92.144.7.179
+   109.213.155.197
    192.168.1.17
  */
-#define AUTO_ADDR QHostAddress("92.144.7.179")
+#define AUTO_ADDR QHostAddress("109.213.155.197")
 
 /**
    @brief Se connecte automatiquement sur le port

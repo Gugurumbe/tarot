@@ -11,7 +11,8 @@
 #ifndef AUTO_ADDR
 /**
    @brief Adresse du serveur par défaut.
-   92.144.7.179
+   192.168.1.17
+   109.213.155.197
  */
-#define AUTO_ADDR QHostAddress("192.168.1.17")
+#define AUTO_ADDR QHostAddress("109.213.155.197")
 #endif

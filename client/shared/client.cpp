@@ -9,7 +9,8 @@
 //#include <QTimer>
 
 Client::Client(QObject * parent): QObject(parent),
-				  taille_paquet(-1)
+				  taille_paquet(-1),
+				  taille_restante(0)
 {
   ENTER("Client(QObject * parent)");
   ADD_ARG("parent", parent);
@@ -19,6 +20,8 @@ Client::Client(QObject * parent): QObject(parent),
 		   this, SIGNAL(deconnecte()));
   QObject::connect(&sock, SIGNAL(readyRead()),
 		   this, SLOT(recevoir()));
+  QObject::connect(&sock, SIGNAL(bytesWritten(qint64)),
+		   this, SLOT(envoyer_suivant(qint64)));
   //Connexion de la socket pour transmettre les signaux connected() et
   //disconnected(), et pour vérifier la présence d'un message.
 }
@@ -55,8 +58,7 @@ void Client::envoyer(Protocole::Message m)
   QByteArray paquet;
   QDataStream out(&paquet, QIODevice::WriteOnly);
   Protocole::ecrire(m, out);
-  sock.write(paquet.prepend((quint8)(1 + paquet.size())));
-  sock.flush();
+  envoyer(paquet.prepend((quint8)(1 + paquet.size())));
   //On envoie.
   emit emis(m);
 }
@@ -65,9 +67,13 @@ void Client::envoyer(QByteArray p)
 {
   ENTER("envoyer(QByteArray p)");
   ADD_ARG("p.toHex().data", p.toHex().data());
-  sock.write(p);
-  //On envoie le paquet tel quel.
-  sock.flush();
+  if(taille_restante <= 0)
+    {
+      sock.write(p);
+      taille_restante = p.size();
+      //On envoie le paquet tel quel.
+    }
+  else file_attente.push(p);
 }
 
 void Client::recevoir()
@@ -123,5 +129,24 @@ void Client::unread(QByteArray const & paquet)
     {
       DEBUG<<"unget de "<<paquet[i]<<"."<<std::endl;
       sock.ungetChar(paquet[i]);
+    }
+}
+
+void Client::envoyer_suivant(qint64 taille_ecrite)
+{
+  taille_restante -= taille_ecrite;
+  if(taille_restante <= 0)
+    {
+      if(file_attente.empty())
+	{
+	  taille_restante = 0;
+	}
+      else
+	{
+	  QByteArray paquet = file_attente.front();
+	  file_attente.pop();
+	  taille_restante = paquet.size();
+	  sock.write(paquet);
+	}
     }
 }
