@@ -29,7 +29,7 @@ void IA::doit_priser(Option<Enchere>)
 void IA::doit_jouer()
 {
   //Je dois jouer. Je commence par changer de carte :
-  Carte suivante(testee.numero() + 1);
+  Carte suivante((testee.numero() + 1) % 78);
   
   //Je fais dire au serveur que je veux jouer cette carte :
   jeu.formuler_requete(suivante);
