@@ -82,4 +82,49 @@
    Vous devez donc émettre : prise, appeler, ecarter, requete,
    requete, ... dans le cas où vous prenez (prise autre que garde
    contre ou garde sans) en tant que client.
+   
+   @section un En utilisant ce qu'on a déjà
+   
+   L'objectif est d'utiliser la classe ClientJeu, qui fournit de
+   l'information sous forme de signaux Qt, et qui permet d'enregistrer
+   des ordres facilement. Vous avez droit à tous les signaux de
+   ClientJeu, plus ClientJeu::partie qui vous fournit une
+   PartieClient, d'où vous pourrez savoir le Partie::tour(), 
+   Partie::attaquant(), PartieClient::mon_jeu(), Partie::tapis(),
+   ... 
+   
+   En ce qui concerne les ordres à envoyer, vous pouvez utiliser
+   ClientJeu::formuler_prise, ClientJeu::formuler_appel,
+   ClientJeu::formuler_ecart, ClientJeu::formuler_requete.
+
+   Étape par étape :
+   
+   Commencez par récupérer les sources, puis déplacez-vous dans
+   client/. Faites un dossier, par exemple ai, puis
+   déplacez-vous dedans et faites un nouveau projet Qt. Le fichier de
+   projet doit ressembler à ça : ajoute la dépendance network, et
+   inclue et compile tous les fichiers de ../shared et ../../shared.
+
+   @include ../client/ai/ia.pro
+
+   Maintenant, on peut travailler. Faites un fichier principal (ici,
+   main_program.cpp), ici :
+
+   @include ../client/ai/main_program.cpp
+
+   On voit que l'on a fait une classe externe, IA. Il suffit après de
+   connecter les signaux d'information de ClientJeu aux slots de notre
+   nouvelle classe. Ensuite, il faut appeler les slots
+   ClientJeu::formuler_* pour interagir avec le serveur. Dans
+   l'exemple, j'ai fait une IA dite "basique" :
+
+   @include ../client/ai/ia.hpp
+   
+   @include ../client/ai/ia.cpp
+
+   @section conclusion Conclusion
+   Il y a un protocole à respecter pour communiquer avec le serveur,
+   et pour utiliser les classes existantes, il faut se mettre au bon
+   endroit, compiler les bons fichiers, utilier la dépendance netork,
+   de déclarer une variable de type ClientJeu.
 */
