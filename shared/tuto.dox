@@ -57,8 +57,8 @@
 
    - 12 : inutilisé
 
-   - 13 : jeu. Morceau variable : 1 octet (5), le joueur ayant demandé
-   un chelem ou 5. Donc 5.
+   - 13 : jeu. Morceau variable : 1 octet, le joueur devant
+     ouvrir. Pour l'instant, c'est 0.
 
    - 14 : inutilisé
 

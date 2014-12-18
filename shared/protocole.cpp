@@ -225,16 +225,16 @@ void ecrire_chelem(Protocole::Msg_chelem const & chelem,
 bool lire_jeu(QDataStream & in,
 	      Protocole::Msg_jeu & jeu)
 {
-  quint8 demandeur;
-  in>>demandeur;
-  jeu.chelem = demandeur;
+  quint8 ouvreur;
+  in>>ouvreur;
+  jeu.ouvreur = ouvreur;
   return in.status() == QDataStream::Ok;
 }
 
 void ecrire_jeu(Protocole::Msg_jeu const & jeu,
 		QDataStream & out)
 {
-  out<<(quint8)jeu.chelem;
+  out<<(quint8)jeu.ouvreur;
 }
 
 bool lire_montrer_poignee(QDataStream & in,

@@ -202,14 +202,10 @@ void Partie::assimiler(const Protocole::Message & m)
       break;
     case Protocole::JEU:
       m_phase = PHASE_JEU;
-      if(m_chelem) m_tour = attaquant();
-      else 
-	{
-	  //Ça n'a pas bcp de sens, mais je le rajoute :
-	  m_tour_precedent = m_tour;
-	  //là, par contre, c'est importnt :
-	  m_tour = 0;
-	}
+      //Ça n'a pas bcp de sens, mais je le rajoute :
+      m_tour_precedent = m_tour;
+      //là, par contre, c'est importnt :
+      m_tour = m.m.jeu.ouvreur;
       //Le joueur ayant demandé un chelem joue.
       m_tapis->set_ouverture(m_tour);
       break;

@@ -130,7 +130,7 @@ void PartieServeur::assimiler(Protocole::Message const & message)
 	    }
 	  Protocole::Message jeu;
 	  jeu.type = Protocole::JEU;
-	  jeu.m.jeu.chelem = (chelem() >= 0 ? chelem() : 5);
+	  jeu.m.jeu.ouvreur = (chelem() >= 0 ? chelem() : 0);
 	  EMETTRE_A_TOUS(jeu);
 	}
       else
@@ -218,7 +218,7 @@ void PartieServeur::assimiler(Protocole::Message const & message)
 	  //Envoi du message Jeu
 	  Protocole::Message mess_jeu;
 	  mess_jeu.type = Protocole::JEU;
-	  mess_jeu.m.jeu.chelem = (chelem() >= 0 ? chelem() : 5);
+	  mess_jeu.m.jeu.ouvreur = (chelem() >= 0 ? chelem() : 5);
 	  EMETTRE_A_TOUS(mess_jeu);
 	}
       break;

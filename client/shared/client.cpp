@@ -87,7 +87,8 @@ void Client::recevoir()
 	{
 	  DEBUG<<"Je peux lire !"<<std::endl;
 	  Protocole::Message m;
-	  QDataStream in(&sock);
+	  QByteArray paquet = sock.read(taille_paquet);
+	  QDataStream in(paquet);
 	  if(Protocole::lire(in, m))
 	    {
 	      DEBUG<<"J'ai lu : "<<m<<std::endl;

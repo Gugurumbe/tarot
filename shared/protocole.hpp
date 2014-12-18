@@ -141,7 +141,7 @@ namespace Protocole
 
       /**
 	 Transmission serveur -> client : le serveur annonce que le jeu
-	 commence, et éventuellement s'il y a un chelem déclaré.
+	 commence, et donne le numéro du premier joueur.
 	 @see Msg_jeu
       */
       JEU,
@@ -427,12 +427,12 @@ namespace Protocole
   struct Msg_jeu
   {
     /**
-       @brief Un chelem a-t-il été annoncé ?
-     
-       Si la valeur est 5 (ou toute autre valeur hors de [|0 ; 4|]),
-       alors aucun chelem n'a été annoncé.
+       @brief Numéro du premier joueur.
+       
+       En général, c'est 0. Lorsqu'on pourra faire un chelem, ça
+       deviendra utile.
     */
-    int chelem;
+    int ouvreur;
   };
 
   /**
