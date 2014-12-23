@@ -53,13 +53,33 @@ public slots:
   void on_bouton_requete_clicked();
 
   /**
-     @brief Traité lorsque le chien est dévoilé;
+     @brief Traité lorsque le chien est dévoilé.
      
      @param c1 La première carte du chien.
      @param c2 La deuxième carte du chien.
      @param c3 La troisième carte du chien.
    */
   void chien(Carte c1, Carte c2, Carte c3);
+
+  /**
+     @brief Traité en cas de connexion réussie.
+   */
+  void enable();
+
+  /**
+     @brief Traité en cas de déconnexion.
+   */
+  void disable();
+  
+  /**
+     @brief Connecte le client.
+     
+     @param hote L'adresse de l'hôte.
+     @param port Le numéro de port.
+
+     @see client/ui/config.hpp
+   */
+  void connecter(const QHostAddress & hote, quint16 port);
   
 private:
   Ui::ClientGraphique ui;

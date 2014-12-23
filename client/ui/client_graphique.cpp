@@ -1,24 +1,5 @@
 #include "client_graphique.hpp"
-#include "config.hpp"
-
-QHostAddress adresse()
-{
-#ifdef AUTO_ADDR
-  return AUTO_ADDR;
-#else
-  return QHostAddress("127.0.0.1");
-#endif
-}
-
-quint16 port()
-{
-#ifdef AUTO_PORT
-  return AUTO_PORT;
-#else
-  return 45678;
-#endif
-}
-
+#include "config.hpp" 
 ClientGraphique::ClientGraphique(QWidget * parent): 
   QWidget(parent), jeu(this)
 {
@@ -31,7 +12,7 @@ ClientGraphique::ClientGraphique(QWidget * parent):
   //L'autre est cartes_jouables
 #define C(signal) connect(&jeu, SIGNAL(signal), \
 			  ui.journal, SLOT(signal));
-  jeu.connecter(adresse(), port());
+  setEnabled(false);
   C(connecte());
   C(deconnecte());
   C(numero_change(unsigned int));
@@ -82,6 +63,10 @@ ClientGraphique::ClientGraphique(QWidget * parent):
 	  ui.nom_maitre, SLOT(set_num(unsigned int)));
   connect(&jeu, SIGNAL(tapis_change(const Tapis &)),
 	  ui.tapis, SLOT(recalculer(const Tapis &)));
+  connect(&jeu, SIGNAL(connecte()),
+	  this, SLOT(enable()));
+  connect(&jeu, SIGNAL(deconnecte()),
+	  this, SLOT(disable()));
 }
 
 void ClientGraphique::on_bouton_enchere_clicked()
@@ -147,4 +132,20 @@ void ClientGraphique::on_bouton_requete_clicked()
       c = ui.cartes_jouables->carte_selectionnee();
     }
   jeu.formuler_requete(c);
+}
+
+void ClientGraphique::enable()
+{
+  setEnabled(true);
+}
+
+void ClientGraphique::disable()
+{
+  setDisabled(true);
+}
+
+void ClientGraphique::connecter(const QHostAddress & hote,
+				quint16 port)
+{
+  jeu.connecter(hote, port);
 }

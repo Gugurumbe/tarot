@@ -14,5 +14,5 @@
    192.168.1.17
    109.213.155.197
  */
-#define AUTO_ADDR QHostAddress("109.213.155.197")
+#define AUTO_ADDR QHostAddress("192.168.1.17")
 #endif
