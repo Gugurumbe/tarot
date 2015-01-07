@@ -42,7 +42,7 @@ public:
      @brief Retourne la partie en cours.
      @return La partie en cours.
    */
-  const PartieClient & partie() const;
+  const PartieClient * partie() const;
 public slots:
   
   /**
@@ -289,7 +289,7 @@ signals:
    */
   void partie_terminee(std::vector<int> scores);
 private:
-  PartieClient m_partie;
+  PartieClient *m_partie;
 };
 
 #endif

@@ -279,8 +279,7 @@ bool Main::peut_pisser(Carte::Valeur atout_max) const
   bool b = true;
   for(unsigned int i = 0 ; i < m_cartes.size() ; i++)
     {
-      if(m_cartes[i].atout() && m_cartes[i].valeur() > atout_max
-	 && m_cartes[i] != EXCUSE)
+      if(m_cartes[i].atout() && m_cartes[i].valeur() > atout_max)
 	{
 	  b = false ;
 	  i = m_cartes.size();
@@ -295,7 +294,8 @@ bool Main::peut_defausser() const
   bool b = true;
   for(unsigned int i = 0 ; i < m_cartes.size() ; i++)
     {
-      if(m_cartes[i].atout())
+      if(m_cartes[i].atout()
+	 && m_cartes[i] != EXCUSE)
 	{
 	  b = false;
 	  i = m_cartes.size();

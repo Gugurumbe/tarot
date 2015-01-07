@@ -28,7 +28,7 @@
 /**
    @brief Définit le port de listage.
  */
-#define PORT 45678
+#define PORT 80
 
 /**
    @brief Définit le comportement en cas de déconnexion.
