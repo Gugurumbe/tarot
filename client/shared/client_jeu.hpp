@@ -35,6 +35,11 @@ public:
   ClientJeu(QObject * parent = 0);
 
   /**
+     @brief Destructeur.
+   */
+  virtual ~ClientJeu();
+
+  /**
      @brief Présente l'état des cartes.
    */
   void presenter_etat();
@@ -42,7 +47,7 @@ public:
      @brief Retourne la partie en cours.
      @return La partie en cours.
    */
-  const PartieClient * partie() const;
+  const PartieClient & partie() const;
 public slots:
   
   /**
@@ -289,7 +294,7 @@ signals:
    */
   void partie_terminee(std::vector<int> scores);
 private:
-  PartieClient *m_partie;
+  PartieClient m_partie;
 };
 
 #endif

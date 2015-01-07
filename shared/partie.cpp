@@ -70,6 +70,26 @@ Partie::Partie(): m_encheres(5), m_chelem(false),
   ENTER("Partie()");
 }
 
+void Partie::reinitialiser()
+{
+  ENTER("reinitialiser()");
+  m_encheres.clear();
+  m_encheres.resize(5);
+  m_chelem = false;
+  m_tapis->reinitialiser();
+  m_attaquant = 5;
+  m_tour = 0 ;
+  m_tour_precedent = 5;
+  plis_joues = 0;
+  m_phase = CONSTITUTION_TABLE;
+  m_tailles_poignees.clear();
+  m_tailles_poignees.resize(5);
+  for(unsigned int i = 0 ; i < m_tailles_poignees.size() ; i++)
+    {
+      m_tailles_poignees[i] = 0;
+    }
+}
+
 Partie::~Partie()
 {
   ENTER("~Partie()");

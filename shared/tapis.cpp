@@ -2,7 +2,7 @@
 
 #define NOM_CLASSE "Tapis"
 
-#include "ne_pas_deboguer.hpp"
+#include "deboguer.hpp"
 
 Tapis::Tapis():joueur_ouverture(-1), joueur_maitre(-1), 
 	       maitre_fixe(false)
@@ -19,6 +19,16 @@ Tapis::Tapis(const Tapis & tap):
 {
   ENTER("Tapis(const Tapis & tap)");
   DEBUG<<"Joueur maître : "<<joueur_maitre<<std::endl;
+}
+
+void Tapis::reinitialiser()
+{
+  ENTER("reinitialiser()");
+  joueur_ouverture = -1;
+  joueur_maitre = -1;
+  maitre_fixe = false;
+  m_tapis.clear();
+  m_tapis.reserve(5);
 }
 
 Tapis::~Tapis()

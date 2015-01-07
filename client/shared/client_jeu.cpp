@@ -3,10 +3,10 @@
 
 #define NOM_CLASSE "ClientJeu"
 
-#include "ne_pas_deboguer.hpp"
+#include "deboguer.hpp"
 
 ClientJeu::ClientJeu(QObject * parent) : 
-  Client(parent), m_partie(0)					 
+  Client(parent), m_partie(this)
 {
   ENTER("ClientJeu(QObject * parent)");
   ADD_ARG("parent", parent);
@@ -18,19 +18,20 @@ ClientJeu::ClientJeu(QObject * parent) :
 		   this, SLOT(traiter_message(Protocole::Message)));
 }
 
+ClientJeu::~ClientJeu()
+{
+  ENTER("~ClientJeu()");
+}
+
 void ClientJeu::traiter_connexion()
 {
   ENTER("traiter_connexion()");
-  if(m_partie)
-    {
-      m_partie->deleteLater();
-    }
-  m_partie = new PartieClient(this);
-  QObject::connect(m_partie, SIGNAL(doit_emettre(Protocole::Message)),
+  m_partie.reinitialiser();
+  QObject::connect(&m_partie, SIGNAL(doit_emettre(Protocole::Message)),
 		   this, SLOT(envoyer(Protocole::Message)));
 
 #define C(signal_entree, signal_sortie) \
-  connect(m_partie, SIGNAL(signal_entree), this, \
+  connect(&m_partie, SIGNAL(signal_entree), this, \
 	  SIGNAL(signal_sortie));
 #define S(signal) C(signal, signal)
   S(numero_change(unsigned int));
@@ -63,9 +64,7 @@ void ClientJeu::traiter_connexion()
 void ClientJeu::traiter_deconnexion()
 {
   ENTER("traiter_deconnexion()");
-  m_partie->disconnect(this);
-  m_partie->deleteLater();
-  m_partie = 0;
+  m_partie.disconnect(this);
   reconnecter();
   //C'est critiquable : si le serveur nous déconnecte délibérément,
   //c'est la boucle infinie. Mais bon, le serveur doit savoir résister
@@ -80,8 +79,9 @@ void ClientJeu::presenter_etat()
 	   <<"."<<std::endl;*/
 }
 
-const PartieClient * ClientJeu::partie() const
+const PartieClient & ClientJeu::partie() const
 {
+  ENTER("partie() const");
   return m_partie;
 }
 
@@ -89,30 +89,33 @@ void ClientJeu::traiter_message(Protocole::Message m)
 {
   ENTER("traiter_message(Message m)");
   ADD_ARG("m", m);
-  if(m_partie)
-    m_partie->assimiler(m);
+  m_partie.assimiler(m);
 }
 
 void ClientJeu::formuler_prise(Enchere::Prise p)
 {
-  if(m_partie)
-    m_partie->formuler_prise(p);
+  ENTER("formuler_prise(Enchere::Prise p)");
+  ADD_ARG("p", p);
+  m_partie.formuler_prise(p);
 }
 
 void ClientJeu::formuler_appel(const Carte & c)
 {
-  if(m_partie)
-    m_partie->appeler(c);
+  ENTER("formuler_appel(const Carte & c)");
+  ADD_ARG("c", c);
+  m_partie.appeler(c);
 }
 
 void ClientJeu::formuler_ecart(std::vector<Carte> ecart)
 {
-  if(m_partie)
-    m_partie->ecarter(ecart);
+  ENTER("formuler_ecart(std::vector<Carte> ecart)");
+  ADD_ARG("ecart", ecart);
+  m_partie.ecarter(ecart);
 }
 
 void ClientJeu::formuler_requete(Carte requete)
 {
-  if(m_partie)
-    m_partie->jouer(requete);
+  ENTER("formuler_requete(Carte requete)");
+  ADD_ARG("requete", requete);
+  m_partie.jouer(requete);
 }

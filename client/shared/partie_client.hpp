@@ -43,6 +43,11 @@ public:
   PartieClient(QObject * parent = 0);
 
   /**
+     @brief Réinitialise la partie
+   */
+  void reinitialiser();
+
+  /**
      @brief Indique si c'est mon tour.
      
      @return vrai ssi je dois faire une Enchere ou demander à jouer

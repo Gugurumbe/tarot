@@ -133,6 +133,11 @@ public:
   Partie();
 
   /**
+     @brief Réinitialise la partie.
+   */
+  void reinitialiser();
+
+  /**
      @brief Destructeur.
    */
   virtual ~Partie();

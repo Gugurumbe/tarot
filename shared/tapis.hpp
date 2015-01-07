@@ -53,6 +53,11 @@ public:
   Tapis(const Tapis & tap);
 
   /**
+     @brief Réinitialise le tapis.
+   */
+  void reinitialiser();
+  
+  /**
      @brief Destructeur virtuel.
    */
   virtual ~Tapis();

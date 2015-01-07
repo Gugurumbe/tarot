@@ -17,6 +17,24 @@ PartieClient::PartieClient(QObject * parent):
 	  this, SLOT(assimiler(Protocole::Message)));
 }
 
+void PartieClient::reinitialiser()
+{
+  ENTER("reinitialiser()");
+  Partie::reinitialiser();
+  m_mon_tour = 5;
+  mes_cartes = Main();
+  chien_si_devoile.clear();
+  m_doit_priser = false;
+  m_doit_appeler = false;
+  m_doit_ecarter = false;
+  m_doit_jouer = false;
+  m_cartes_gagnees.clear();
+  m_poseurs.clear();
+  m_gagnants.clear();
+  while(!m_changements_maitres.empty())
+    m_changements_maitres.pop();
+}
+
 bool PartieClient::mon_tour() const
 {
   return tour() == m_mon_tour;
