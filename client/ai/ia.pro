@@ -4,6 +4,7 @@ DEPENDPATH += .
 INCLUDEPATH += . ../shared ../../shared
 
 # Input
+HEADERS += config.hpp
 HEADERS += ia.hpp
 HEADERS += ../shared/client.hpp
 HEADERS += ../shared/client_jeu.hpp

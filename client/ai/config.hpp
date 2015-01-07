@@ -6,7 +6,7 @@
 /**
    @brief Port de listage par défaut.
  */
-#define AUTO_PORT 45678
+#define AUTO_PORT 80
 #endif
 #ifndef AUTO_ADDR
 /**
@@ -14,5 +14,5 @@
    192.168.1.17
    109.213.155.197
  */
-#define AUTO_ADDR QHostAddress("192.168.1.17")
+#define AUTO_ADDR QHostAddress("156.18.26.70")
 #endif

@@ -20,7 +20,8 @@
 
    - 1  : refuse. Pas de partie variable. Signification : vous avez
    fait une requête du bon type au bon moment, mais elle ne respecte
-   pas les règles.
+   pas les règles. Valable aussi si le nom que vous souhaitez utiliser
+   est déjà pris.
 
    - 2  : numero. Morceau variable : mon numéro sur 1 octet non
    signé. Votre numéro est un nombre entre 0 et 4 inclus. Si c'est 0,
@@ -75,13 +76,84 @@
    - 18 : pli. Morceau variable : 1 octet (numéro du joueur
    d'ouverture). 
 
-   - 19 : resultat. La partie est finie. Morceau variable : 5 mots de 2
-   octets, signés (les résultats de chacun).
+   - 19 : resultat. La donne est finie. Morceau variable : 5 mots de 2
+   octets, signés (les résultats de chacun depuis le dernier
+   changement de siège).
+   
+   - 20 : identification. Vous devez donner un nom.
+
+   - 21 : identifier. Vous tentez de vous donner un nom. Morceau
+   variable : 16 octets pour votre nom (utf-8). Attention : si le nom
+   est déjà pris, vous recevez un "refuse", mais le serveur s'en
+   souvient pour dire aux autres que quelqu'un d'autre voulait se
+   connecter avec ce nom. Vous avez droit à 3 essais, puis c'est la
+   déconnexion. Dans ce cas, personne ne reçoit aucun message. Si
+   c'est réussi, vous recevez "connexion".
+
+   - 22 : connexion. Un nouveau joueur vient de se connecter. Morceau
+   variable : 3 * 16 octets, les 3 noms successifs qu'il a
+   essayés. S'il n'en a essayé que 1 ou 2, le dernier est répété.
+
+   - 23 : invitation. Une table vous a invité. Morceau variable : le
+   nom de la table, sur 16 octets. Peut arriver à n'importe quel
+   moment.
+
+   - 24 : deconnexion. Un joueur s'est déconnecté. Morceau variable :
+   16 octets, le nom du joueur.
+
+   - 25 : rejoindre. Vous voulez rejoindre une table. Morceau variable
+   : 16 octets, le nom de la table. Accepté lorsque l'on reçoit
+   "accueilli". 
+
+   - 26 : accueilli. Vous faites partie de cette table jusqu'à votre
+   déconnexion. Vous ne recevez plus d'invitations et toutes les
+   invitations à votre nom sont annulées. Morceau variable : 16 octets
+   pour le nom du joueur, 16 octets pour le nom de la table.
+
+   - 27 : joueur. Un nouveau joueur vient rejoindre votre partie. 1
+   octet : son numéro, 16 octets : son nom. Survient à chaque nouvelle
+   donne, avec le numéro adapté pour que le 0 commence
+   toujours. Enchaîne avec numero, distribution et le jeu.
+
+   - 28 : accueillir. Vous voulez accueillir une nouvelle
+   table. Morceau variable : 16 octets, le nom de votre table.
+
+   - 29 : table. Une nouvelle table a été ouverte. Morceau variable :
+   16 octets, le nom de la table.
+
+   - 30 : inviter. En tant que chef de table, vous changez
+   l'invitation pour un siège. Morceau variable : 1 octet pour le
+   numéro, 1 octet qui vaut 0 (personne), 1 (tout le monde) ou 2 (un
+   nom en particulier, auquel cas 16 octets suivent pour le nom de la
+   personne). Arrête la partie si elle est en cours. Refusé si on
+   reçoit "refuse". Accepté si on reçoit "siege", peut être refusé si
+   la partie n'est pas stoppée, ou si le joueur existe et est en
+   jeu. Si le joueur n'existe pas, l'invitation lui sera envoyée à sa
+   connexion. Si le joueur existe, elle lui est envoyée
+   immédiatement. Le joueur qui perd son siège est déconnecté, sauf
+   s'il s'agit du chef. Auquel cas il doit y avoir au moins un siège
+   qui n'accueille personne, sans quoi la transaction est
+   refusée. Pour changer votre numéro, vous devez donc : inviter
+   personne sur votre nouveau numéro, inviter le nom de celui que vous
+   venez de renvoyer sur votre ancien numéro, vous inviter sur votre
+   nouveau numéro. Si les 5 joueurs sont présents, chacun reçoit
+   officiellement son numéro, puis ses cartes. La partie commence.
+
+   - 31 : siege. Un nouveau siège a été attribué. Même partie variable
+   que "inviter".
+
+   - 32 : stopper. Sans partie variable, le chef demande de stopper la
+     partie.
+
+   - 33 : stop. Pas de partie variable. La levée est annulée, on peut
+   changer les sièges. Survient si un joueur se déconnecte pendant la
+   partie, ou si le chef demande "stopper".
    .
 
    Vous devez donc émettre : prise, appeler, ecarter, requete,
    requete, ... dans le cas où vous prenez (prise autre que garde
-   contre ou garde sans) en tant que client.
+   contre ou garde sans) en tant que client. Hors jeu, vous devez
+   émettre rejoindre ou accueillir, et dans ce cas gérer votre table.
    
    @section un En utilisant ce qu'on a déjà
    
