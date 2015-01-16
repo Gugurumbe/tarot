@@ -57,6 +57,16 @@ public:
      @return 2 si la requête est refusée.
    */
   int tester(unsigned int joueur, const Protocole::Message & m) const;
+
+  /**
+     @brief Réinitialise la partie.
+
+     - Réinitialise la Partie
+     - Réinitialise les scores, le chien et l'enchère max
+     - Réinitialise le joueur appelé
+     - Réinitialise le nombre de plis joués.
+   */
+  void reinitialiser();
 private:
 
   /**
@@ -137,6 +147,13 @@ signals:
      @param m : le Message à adresser.
    */
   void doit_emettre_a_tous(Protocole::Message m);
+
+  /**
+     @brief La partie est finie.
+
+     Émis uniquement lorsque le message resultat est transféré.
+   */
+  void termine();
 };
 
 #endif

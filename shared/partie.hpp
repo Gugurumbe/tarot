@@ -53,8 +53,11 @@ public:
     {
       /**
 	 Phase initiale où on peut trouver les Messages :
-	 1. Msg_numero
-	 2. Msg_distribution
+	 1. Msg_entree
+	 2. Msg_sortie
+	 3. Msg_noms
+	 4. Msg_numero
+	 5. Msg_distribution
        */
       CONSTITUTION_TABLE,
 
@@ -296,6 +299,13 @@ public:
      part du joueur 0.
    */
   Enchere meilleure_enchere() const;
+  /**
+     @brief Donne le nom de tel joueur.
+
+     @param i Le numéro du joueur à trouver.
+     @return Le nom du joueur i.
+   */
+  std::string nom_de(unsigned int i) const;
 
 protected:
   
@@ -319,6 +329,8 @@ protected:
    std::vector<unsigned int> const & gagnants);
   
 private:
+
+  std::vector<std::string> m_noms_types;
 
   /**
      @brief Enchères enregistrées.

@@ -107,6 +107,22 @@ public slots:
    */
   void formuler_requete(Carte requete);
 
+  /**
+     @brief Traité lorsqu'on demande une identification.
+
+     @param nom Le nom que j'aimerais porter.
+     @see PartieClient::identifier(const std::string &)
+   */
+  void formuler_identification(const std::string & nom);
+
+  /**
+     @brief Traité lorsqu'on demande d'inviter des adversaires.
+
+     @param adversaires Les noms des adversaires.
+     @see PartieClient::inviter(const std::vector<std::string> &)
+   */
+  void formuler_invitation(const std::vector<std::string> & adversaires); 
+
 signals:
   
   /**
@@ -293,6 +309,58 @@ signals:
      @param scores Les scores à la fin de la partie.
    */
   void partie_terminee(std::vector<int> scores);
+
+  /**
+     @brief Émis lorsque je dois m'identifier.
+   */
+  void doit_identifier();
+
+  /**
+     @brief Émis lorsque mon identification a été acceptée.
+     
+     @param nom Le nom que j'ai reçu.
+   */
+  void identification_acceptee(std::string nom);
+
+  /**
+     @brief Émis lorsque mon identification a été refusée.
+
+     @param nom Le nom que j'avais tenté.
+   */
+  void identification_refusee(std::string nom);
+  
+  /**
+     @brief Émis lorsqu'un nouveau joueur est disponible.
+     
+     @param nom Le nom du nouveau venu.
+   */
+  void entree(std::string nom);
+
+  /**
+     @brief Émis lorsqu'un joueur n'est plus disponible.
+
+     @param nom Le nom du joueur qui se casse.
+   */
+  void sortie(std::string nom);
+
+  /**
+     @brief Émis lorsqu'on prépare une manche.
+
+     @param noms Les noms des joueurs, dans l'ordre de jeu.
+   */
+  void adversaires(std::vector<std::string> noms);
+
+  /**
+     @brief Émis lorsque mon invitation a été acceptée.
+     @param adversaires Mes adversaires.
+   */
+  void invitation_acceptee(std::vector<std::string> adversaires);
+  
+  /**
+     @brief Émis lorsque mon invitation a été refusée.
+     @param adversaires Les adversaires que j'avais demandés.
+   */
+  void invitation_refusee(std::vector<std::string> adversaires);
 private:
   PartieClient m_partie;
 };

@@ -8,6 +8,7 @@
 
 PartieClient::PartieClient(QObject * parent):
   QObject(parent), Partie(), m_mon_tour(5),
+  m_doit_identifier(true),
   m_doit_priser(false), m_doit_appeler(false),
   m_doit_ecarter(false), m_doit_jouer(false)
 {
@@ -21,9 +22,11 @@ void PartieClient::reinitialiser()
 {
   ENTER("reinitialiser()");
   Partie::reinitialiser();
+  m_vestibule.clear();
   m_mon_tour = 5;
   mes_cartes = Main();
   chien_si_devoile.clear();
+  m_doit_identifier = true;
   m_doit_priser = false;
   m_doit_appeler = false;
   m_doit_ecarter = false;
@@ -83,7 +86,7 @@ void PartieClient::assimiler(const Protocole::Message & m)
     case Protocole::CONTRAT:
       if(m_mon_tour == tour_precedent() && phase() == ENCHERES)
 	{ 
-	  transaction_acceptee();
+	  transaction_enchere_acceptee();
 	}
       emit contrat_intermediaire
 	(Enchere(tour_precedent(), m.m.contrat));
@@ -105,7 +108,7 @@ void PartieClient::assimiler(const Protocole::Message & m)
       break;
     case Protocole::CONTRAT_FINAL:
       // L'appel a été acepté.
-      transaction_acceptee();
+      transaction_appel_acceptee();
       emit contrat_final(Enchere(m.m.contrat_final));
       if(m.m.contrat_final.niveau >= Enchere::GARDE_SANS)
 	{
@@ -155,7 +158,7 @@ void PartieClient::assimiler(const Protocole::Message & m)
       if(mon_numero() == attaquant())
 	{
 	  //L'écart a été accepté.
-	  transaction_acceptee();
+	  transaction_jeu_acceptee();
 	}
       if(mon_tour())
 	{
@@ -175,7 +178,7 @@ void PartieClient::assimiler(const Protocole::Message & m)
     case Protocole::CARTE:
       if(m_mon_tour == tour_precedent())
 	{
-	  transaction_acceptee();
+	  transaction_jeu_acceptee();
 	}
       emit carte_jouee(tour_precedent(), Carte(m.m.carte.carte));
       while(!m_changements_maitres.empty())
@@ -224,6 +227,52 @@ void PartieClient::assimiler(const Protocole::Message & m)
 	  emit score(scores);
 	}
       break;
+    case Protocole::IDENTIFIER:
+      m_mon_nom = m.m.identifier.nom;
+      ajouter_transaction_identification(m_mon_nom);
+      break;
+    case Protocole::ENTREE:
+      if(m_mon_nom == m.m.entree.nom)
+	transaction_identification_acceptee();
+      m_vestibule.push_back(m.m.entree.nom);
+      emit entree(m_vestibule[m_vestibule.size() - 1]);
+      break;
+    case Protocole::SORTIE:
+      for(unsigned int i = 0 ; i < m_vestibule.size() ; i++)
+	{
+	  if(m_vestibule[i] == m.m.sortie.nom)
+	    {
+	      m_vestibule.erase(m_vestibule.begin() + i);
+	      i--;
+	    }
+	}
+      break;
+    case Protocole::NOMS:
+      transaction_invitation_acceptee();
+      m_vestibule.clear(); //Je ne suis plus tenu au courant de ce qui
+			   //s'y passe. 
+      mes_cartes = Main();
+      chien_si_devoile.clear();
+      if(true)
+	{
+	  std::vector<std::string> noms;
+	  for(unsigned int i = 0 ; i < 5 ; i++)
+	    {
+	      noms.push_back(nom_de(i));
+	    }
+	  emit adversaires(noms);
+	}
+      break;
+    case Protocole::INVITER:
+      if(true)
+	{
+	  std::vector<std::string> adversaires;
+	  for(unsigned int i = 0 ; i < 4 ; i ++)
+	    {
+	      adversaires.push_back(m.m.inviter.noms[i]);
+	    }
+	  ajouter_transaction_invitation(adversaires);
+	}
     default:
       break;
     }
@@ -250,6 +299,17 @@ void PartieClient::jouer(const Carte & c)
   Protocole::Message m;
   m.type = Protocole::REQUETE;
   m.m.requete.carte = c.numero();
+  emit doit_emettre(m);
+}
+
+void PartieClient::identifier(const std::string & nom)
+{
+  ENTER("identifier(const std::string & nom)");
+  ADD_ARG("nom", nom);
+  Protocole::Message m;
+  m.type = Protocole::IDENTIFIER;
+  for(unsigned int i = 0 ; i < nom.size() && i < TAILLE_NOM ; i++)
+    m.m.identifier.nom[i] = nom[i];
   emit doit_emettre(m);
 }
 
@@ -294,6 +354,18 @@ void PartieClient::demander_chelem()
 void PartieClient::demander_jeu()
 {
   ENTER("demander_jeu()");
+}
+
+void PartieClient::inviter(std::vector<std::string> const & adversaires)
+{
+  ENTER("inviter(std::vector<std::string> const & adversaires)");
+  ADD_ARG("adversaires", adversaires);
+  Protocole::Message m;
+  m.type = Protocole::INVITER;
+  for(unsigned int i = 0 ; i < adversaires.size() ; i++)
+    for(unsigned int j = 0 ; j < adversaires[i].size() && j < TAILLE_NOM ; j++)
+      m.m.inviter.noms[i][j] = adversaires[i][j];
+  emit doit_emettre(m);
 }
 
 const Main & PartieClient::mon_jeu() const
@@ -401,14 +473,26 @@ void PartieClient::annuler_transaction()
 	      emit doit_jouer();
 	    }
 	}
+      if(!(t.identification().aucun()))
+	{
+	  DEBUG<<"Annulation d'une identification."<<std::endl;
+	  std::string nom = t.identification().get().obtenir().get();
+	  emit identification_refusee(nom);
+	}
+      if(!(t.invitation().aucun()))
+	{
+	  DEBUG<<"Annulation d'une invitation."<<std::endl;
+	  std::vector<std::string> adv = t.invitation().get().obtenir().get();
+	  emit invitation_refusee(adv);
+	}
     }
 }
-void PartieClient::transaction_acceptee()
+void PartieClient::transaction_enchere_acceptee()
 {
-  ENTER("transaction_acceptee()");
+  ENTER("transaction_enchere_acceptee()");
   if(en_cours.empty())
     {
-      //Euh...
+      DEBUG<<"Aucune enchère à considérer comme acceptée."<<std::endl;
     }
   else
     {
@@ -416,18 +500,56 @@ void PartieClient::transaction_acceptee()
       en_cours.pop();
       if(!(t.enchere().aucun()))
 	{
-	  //C'est une enchère !
 	  Enchere enchere = t.enchere().get().obtenir().get();
 	  emit enchere_acceptee(enchere);
 	  m_doit_priser = false;
 	}
+      else
+	{
+	  DEBUG<<"Problème : aucun statut sur la transaction en cours."
+	       <<std::endl;
+	  oublier_transaction();
+	  transaction_enchere_acceptee();
+	}
+    }
+}
+void PartieClient::transaction_appel_acceptee()
+{
+  ENTER("transaction_appel_acceptee()");
+  if(en_cours.empty())
+    {
+      DEBUG<<"Aucun appel à considérer comme accepté."<<std::endl;
+    }
+  else
+    {
+      Transaction t = en_cours.front();
+      en_cours.pop();
       if(!(t.appel().aucun()))
 	{
-	  //C'est un appel !
 	  Carte appelee = t.appel().get().obtenir().get();
 	  emit appel_accepte(appelee);
 	  m_doit_appeler = false;
 	}
+      else
+	{
+	  DEBUG<<"Problème : aucun statut sur la transaction en cours."
+	       <<std::endl;
+	  oublier_transaction();
+	  transaction_appel_acceptee();
+	}
+    }
+}
+void PartieClient::transaction_ecart_acceptee()
+{
+  ENTER("transaction_ecart_acceptee()");
+  if(en_cours.empty())
+    {
+      DEBUG<<"Aucun écart à considérer comme accepté."<<std::endl;
+    }
+  else
+    {
+      Transaction t = en_cours.front();
+      en_cours.pop();
       if(!(t.ecart().aucun()))
 	{
 	  std::vector<Carte> ecart = t.ecart().get().obtenir().get();
@@ -437,6 +559,26 @@ void PartieClient::transaction_acceptee()
 	  emit jeu_change(std::vector<Carte>(), ecart);
 	  m_doit_ecarter = false;
 	}
+      else
+	{
+	  DEBUG<<"Problème : aucun statut sur la transaction en cours."
+	       <<std::endl;
+	  oublier_transaction();
+	  transaction_ecart_acceptee();
+	}
+    }
+}
+void PartieClient::transaction_jeu_acceptee()
+{
+  ENTER("transaction_jeu_acceptee()");
+  if(en_cours.empty())
+    {
+      DEBUG<<"Aucun jeu de carte à considérer comme accepté."<<std::endl;
+    }
+  else
+    {
+      Transaction t = en_cours.front();
+      en_cours.pop();
       if(!(t.jeu().aucun()))
 	{
 	  Carte carte = t.jeu().get().obtenir().get();
@@ -447,7 +589,68 @@ void PartieClient::transaction_acceptee()
 	  emit jeu_change(std::vector<Carte>(), temp);
 	  m_doit_jouer = false;
 	}
+      else
+	{
+	  DEBUG<<"Problème : aucun statut sur la transaction en cours."
+	       <<std::endl;
+	  oublier_transaction();
+	  transaction_jeu_acceptee();
+	}
     }
+}
+void PartieClient::transaction_identification_acceptee()
+{
+  ENTER("transaction_identification_acceptee()");
+  if(en_cours.empty())
+    {
+      DEBUG<<"Aucune identification à considérer comme acceptée."<<std::endl;
+    }
+  else
+    {
+      Transaction t = en_cours.front();
+      en_cours.pop();
+      if(!(t.identification().aucun()))
+	{
+	  m_doit_identifier = false;
+	  emit identification_acceptee(m_mon_nom);
+	}
+      else
+	{
+	  DEBUG<<"Problème : aucun statut sur la transaction en cours."
+	       <<std::endl;
+	  oublier_transaction();
+	  transaction_identification_acceptee();
+	}
+    }
+}
+void PartieClient::transaction_invitation_acceptee()
+{
+  ENTER("transaction_invitation_acceptee()");
+  if(en_cours.empty())
+    {
+      DEBUG<<"Aucune invitation à considérer comme acceptée."<<std::endl;
+    }
+  else
+    {
+      Transaction t = en_cours.front();
+      en_cours.pop();
+      if(!(t.invitation().aucun()))
+	{
+	  emit invitation_acceptee(m_mon_nom);
+	}
+      else
+	{
+	  DEBUG<<"Problème : aucun statut sur la transaction en cours."
+	       <<std::endl;
+	  oublier_transaction();
+	  transaction_invitation_acceptee();
+	}
+    }
+}
+void PartieClient::oublier_transaction()
+{
+  ENTER("oublier_transaction()");
+  en_cours.pop();
 }
 std::vector<Carte> PartieClient::cartes_appelables() const
 {
@@ -487,6 +690,14 @@ PartieClient::cartes_ecartables() const
   resultat.push_back(atouts);
   return resultat;
 }
+std::string PartieClient::mon_nom() const
+{
+  return m_mon_nom;
+}
+std::vector<std::string> PartieClient::vestibule() const
+{
+  return m_vestibule;
+}
 void PartieClient::ajouter_transaction_prise(unsigned int prise)
 {
   ENTER("ajouter_transaction_prise(unsigned int prise)");
@@ -523,6 +734,19 @@ void PartieClient::ajouter_transaction_jeu(unsigned int carte)
   Carte c(carte);
   Transaction::Jeu j(c);
   Transaction t(j);
+  en_cours.push(t);
+}
+void PartieClient::ajouter_transaction_identification(const std::string nom)
+{
+  Transaction::Identification i(nom);
+  Transaction t(i);
+  en_cours.push(t);
+}
+void PartieClient::ajouter_transaction_invitation
+(const std::vector<std::string> & adversaires)
+{
+  Transaction::Invitation i(adversaires);
+  Transaction t(i);
   en_cours.push(t);
 }
 void PartieClient::presenter() const

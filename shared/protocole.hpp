@@ -18,6 +18,15 @@
 
 #include <QDataStream>
 #include <iostream>
+#include <string>
+#include <vector>
+
+/**
+   @brief Nombre maximal d'octet utilisés par un nom. Comme ils seront
+   encodés en UTF-8 (unicode), il y aura AU PLUS ce nombre de
+   caractères, parfois strictement moins.
+ */
+#define TAILLE_NOM 16
 
 /**
    @brief Regroupe les traitements du protocole.
@@ -188,7 +197,40 @@ namespace Protocole
 	 partie.
 	 @see Msg_resultat
       */
-      RESULTAT
+      RESULTAT,
+      
+      /**
+	Transmission client -> serveur : je voudrais porter tel nom,
+	s'il te plaît gentil serveur.
+	@see Msg_refuse en cas de refus : nom déjà pris dans le
+	vestibule. 
+	@see Msg_entree si le serveur accepte.
+      */
+      IDENTIFIER,
+      
+      /**
+	 Transmission serveur -> client : ce client a refusé une
+	 invitation, ou il vient d'arriver.
+       */
+      ENTREE,
+
+      /**
+	 Transmission serveur -> client : ce client a accepté une
+	 invitation, ou il vient de partir.
+       */
+      SORTIE,
+      
+      /**
+	 Transmission serveur -> client : vous jouez maintenant avec
+	 ces 4 autres types, dans cet ordre. Émis avant chaque manche.
+       */
+      NOMS,
+      
+      /**
+	 Transmission client -> serveur : vous demandez à faire une
+	 partie avec 4 autres types.
+       */
+      INVITER
     };
 
   /**
@@ -223,7 +265,9 @@ namespace Protocole
      interdite, en écartant une Carte interdite ou qu'il n'a pas, en
      souhaitant montrer une Poignée incompatible avec les règles, en
      souhaitant jouer une Carte interdite ou qu'il n'a pas, le client 
-     reçoit un tel message.
+     reçoit un tel message. De plus, s'il demande un nom déjà pris par
+     quelqu'un dans le vestibule (lors de la phase d'identification),
+     il le reçoit également.
      @see PartieClient::refuse()
      @see PartieServeur::tester
   */
@@ -234,8 +278,8 @@ namespace Protocole
   /**
      @brief Contenu d'un Message de transmission de numéro.
 
-     Circonstances dans lesquelles il apparaît : en début de partie,
-     tous les joueurs reçoivent leur numéro de tour.
+     Circonstances dans lesquelles il apparaît : en début de chaque
+     manche, tous les joueurs reçoivent leur numéro de tour.
   */
   struct Msg_numero
   {
@@ -250,9 +294,9 @@ namespace Protocole
   /**
      @brief Contenu d'un Message de distribution des cartes.
    
-     Circonstances dans lesquelles il apparaît : en début de partie,
-     après la distribution de numéro, tous les joueurs reçoivent 15
-     cartes.
+     Circonstances dans lesquelles il apparaît : en début de chaque
+     manche, après la distribution de numéro, tous les joueurs
+     reçoivent 15 cartes.
      @see Main::Main(const Msg_distribution &)
   */
   struct Msg_distribution
@@ -526,8 +570,8 @@ namespace Protocole
   /**
      @brief Contenu d'un Message d'information de fin de partie.
 
-     Circonstances dans lesquelles il apparaît : à la fin de la partie,
-     retourne les points de chacun.
+     Circonstances dans lesquelles il apparaît : à la fin de chaque
+     manche, retourne les points de chacun pour cette manche.
   */
   struct Msg_resultat
   {
@@ -535,6 +579,81 @@ namespace Protocole
        @brief Les résultats.
     */
     int resultats[5];
+  };
+
+  /**
+     @brief Contenu d'un Message de requête d'identification.
+
+     Circonstances dans lesquelles il apparaît : à chaque fois qu'un
+     client se connecte, ce qui comprend également les fois où on
+     l'invite et où il refuse en se déconnectant.
+   */
+  struct Msg_identifier
+  {
+    /**
+       @brief Le nom que j'aimerais utiliser.
+     */
+    char nom[TAILLE_NOM];
+  };
+  
+  /**
+     @brief Contenu d'un message d'information de connexion.
+
+     Circonstances dans lesquelles il apparaît : à chaque fois qu'un
+     Msg_identifier est accepté par le serveur, tous les membres du
+     vestibule en sont informés.
+  */
+  struct Msg_entree
+  {
+    /**
+       @brief Nom du nouveau venu.
+     */
+    char nom[TAILLE_NOM];
+  };
+
+  /**
+     @brief Contenu d'un message d'information de cessation de
+     disponibilité. 
+
+     Circonstances dans lesquelles il apparaît : à chaque fois qu'un
+     client est invité, et à chaque fois qu'un client du vestibule
+     quitte. 
+   */
+  struct Msg_sortie
+  {
+    /**
+       @brief Nom de celui qui s'en va.
+     */
+    char nom[TAILLE_NOM];
+  };
+
+  /**
+     @brief Contenu d'un message de dénomination de vos adversaires.
+
+     Circonstances dans lesquelles il apparaît : à chaque nouvelle
+     manche, et donc en particulier lorsque vous êtes invité. Vous
+     recevrez votre Msg_numero juste après.
+   */
+  struct Msg_noms
+  {
+    /**
+       @brief Noms dans l'ordre de jeu.
+     */
+    char noms[TAILLE_NOM][5];
+  };
+
+  /**
+     @brief Contenu d'un message de demande d'invitation.
+
+     Circonstances dans lesquelles il apparaît : à chaque fois qu'une
+     table se crée.
+   */
+  struct Msg_inviter
+  {
+    /**
+       @brief Noms de vos adversaires, dans le désordre.
+     */
+    char noms[TAILLE_NOM][4];
   };
 
   /**
@@ -624,6 +743,26 @@ namespace Protocole
        @brief Champ de RESULTAT.
     */
     struct Msg_resultat resultat;
+    /**
+       @brief Champ de IDENTIFIER.
+     */
+    struct Msg_identifier identifier;
+    /**
+       @brief Champ de ENTREE.
+     */
+    struct Msg_entree entree;
+    /**
+       @brief Champ de SORTIE.
+     */
+    struct Msg_sortie sortie;
+    /**
+       @brief Champ de NOMS.
+     */
+    struct Msg_noms noms;
+    /**
+       @brief Champ de INVITER.
+     */
+    struct Msg_inviter inviter;
   };
 
   /**
@@ -727,6 +866,16 @@ std::ostream & operator<<(std::ostream & out,
 			  const Protocole::Msg_pli & m);
 std::ostream & operator<<(std::ostream & out, 
 			  const Protocole::Msg_resultat & m);
+std::ostream & operator<<(std::ostream & out, 
+			  const Protocole::Msg_identifier & m);
+std::ostream & operator<<(std::ostream & out, 
+			  const Protocole::Msg_entree & m);
+std::ostream & operator<<(std::ostream & out, 
+			  const Protocole::Msg_sortie & m);
+std::ostream & operator<<(std::ostream & out, 
+			  const Protocole::Msg_noms & m);
+std::ostream & operator<<(std::ostream & out, 
+			  const Protocole::Msg_inviter & m);
 std::ostream & operator<<(std::ostream & out, 
 			  const Protocole::Message & m);
 

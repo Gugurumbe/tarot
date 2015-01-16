@@ -132,10 +132,58 @@ const Option<Carte> & Transaction::Jeu::obtenir() const
   return m_carte;
 }
 //////////////////////////////////////////////////////////////////
+Transaction::Identification::Identification(){}
+Transaction::Identification::Identification
+(const Transaction::Identification & i):
+  m_nom(i.m_nom){}
+Transaction::Identification::Identification(const std::string & nom):
+  m_nom(nom) {}
+Transaction::Identification & Transaction::Identification::operator=
+(const Transaction::Identification & i)
+{
+  m_nom = i.m_nom;
+  return *this;
+}
+Transaction::Identification & Transaction::Identification::operator=
+(const std::string & nom)
+{
+  m_nom = nom;
+  return *this;
+}
+const Option<std::string> & Transaction::Identification::obtenir() const
+{
+  return nom;
+}
+//////////////////////////////////////////////////////////////////
+Transaction::Invitation::Invitation(){}
+Transaction::Invitation::Invitation
+(const Transaction::Invitation & i):
+  m_adv(i.m_adv){}
+Transaction::Invitation::Invitation(const std::vector<std::string> & adv):
+  m_adv(adv) {}
+Transaction::Invitation & Transaction::Invitation::operator=
+(const Transaction::Invitation & i)
+{
+  m_adv = i.m_adv;
+  return *this;
+}
+Transaction::Invitation & Transaction::Invitation::operator=
+(const std::vector<std::string> & adv)
+{
+  m_adv = adv;
+  return *this;
+}
+const Option<std::vector<std::string> > & Transaction::Invitation::obtenir() const
+{
+  return adv;
+}
+//////////////////////////////////////////////////////////////////
 Transaction::Transaction() {}
 Transaction::Transaction(const Transaction & t):
   m_enchere(t.m_enchere), m_appel(t.m_appel), 
-  m_ecart(t.m_ecart), m_jeu(t.m_jeu) {}
+  m_ecart(t.m_ecart), m_jeu(t.m_jeu),
+  m_identification(t.m_identification),
+  m_invitation(t.m_invitation){}
 Transaction::Transaction(const Transaction::Enchere & t):
   m_enchere(t) {}
 Transaction::Transaction(const Transaction::Appel & t):
@@ -144,12 +192,18 @@ Transaction::Transaction(const Transaction::Ecart & t):
   m_ecart(t) {}
 Transaction::Transaction(const Transaction::Jeu & t):
   m_jeu(t) {}
+Transaction::Transaction(const Transaction::Identification & t):
+  m_identification(t) {}
+Transaction::Transaction(const Transaction::Invitation & t):
+  m_invitation(t) {}
 Transaction & Transaction::operator=(const Transaction & t)
 {
   m_enchere = t.m_enchere;
   m_appel = t.m_appel;
   m_ecart = t.m_ecart;
   m_jeu = t.m_jeu;
+  m_identification = t.m_identification;
+  m_invitation = t.m_invitation;
   return *this;
 }
 Transaction & Transaction::operator=(const Transaction::Enchere & t)
@@ -158,6 +212,8 @@ Transaction & Transaction::operator=(const Transaction::Enchere & t)
   m_appel.set();
   m_ecart.set();
   m_jeu.set();
+  m_identification.set();
+  m_invitation.set();
   return *this;
 }
 Transaction & Transaction::operator=(const Transaction::Appel & t)
@@ -166,6 +222,8 @@ Transaction & Transaction::operator=(const Transaction::Appel & t)
   m_appel = t;
   m_ecart.set();
   m_jeu.set();
+  m_identification.set();
+  m_invitation.set();
   return *this;
 }
 Transaction & Transaction::operator=(const Transaction::Ecart & t)
@@ -174,6 +232,8 @@ Transaction & Transaction::operator=(const Transaction::Ecart & t)
   m_appel.set();
   m_ecart = t;
   m_jeu.set();
+  m_identification.set();
+  m_invitation.set();
   return *this;
 }
 Transaction & Transaction::operator=(const Transaction::Jeu & t)
@@ -182,6 +242,28 @@ Transaction & Transaction::operator=(const Transaction::Jeu & t)
   m_appel.set();
   m_ecart.set();
   m_jeu = t;
+  m_identification.set();
+  m_invitation.set();
+  return *this;
+}
+Transaction & Transaction::operator=(const Transaction::Identification & t)
+{
+  m_enchere.set();
+  m_appel.set();
+  m_ecart.set();
+  m_jeu.set();
+  m_identification = t;
+  m_invitation.set();
+  return *this;
+}
+Transaction & Transaction::operator=(const Transaction::Invitation & t)
+{
+  m_enchere.set();
+  m_appel.set();
+  m_ecart.set();
+  m_jeu.set();
+  m_identification.set();
+  m_invitation = t;
   return *this;
 }
 const Option<Transaction::Enchere> & Transaction::enchere() const
@@ -200,9 +282,19 @@ const Option<Transaction::Jeu> & Transaction::jeu() const
 {
   return m_jeu;
 }
+const Option<Transaction::Identification> & Transaction::identification() const
+{
+  return m_identification;
+}
+const Option<Transaction::Invitation> & Transaction::invitation() const
+{
+  return m_invitation;
+}
 template class Option<Transaction::Enchere>;
 template class Option<Transaction::Appel>;
 template class Option<Transaction::Ecart>;
 template class Option<Transaction::Jeu>;
+template class Option<Transaction::Identification>;
+template class Option<Transaction::Invitation>;
 template class Option<Carte>;
 template class Option<std::vector<Carte> >;

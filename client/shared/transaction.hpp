@@ -266,6 +266,94 @@ public:
     Option<Carte> m_carte;
   };
   /**
+     @brief Classe permettant de stocker des informations pour une
+     identification.
+   */
+  class Identification
+  {
+    /**
+       @brief Constructeur par défaut.
+     */
+    Identification();
+    /**
+       @brief Constructeur de copie.
+       @param i La transaction-identification à copier.
+     */
+    Identification(const Transaction::Identification & i);
+    /**
+       @brief Constructeur standard.
+       
+       @param nom Le nom demandé.
+     */
+    Identification(const std::string & nom);
+    /**
+       @brief Affectation par copie.
+       
+       @param i La transaction-identification à copier.
+     */
+    Transaction::Identification & operator=
+    (const Transaction::Identification & i);
+    /**
+       @brief Affectation standard.
+
+       @param nom Le nom demandé.
+     */
+    Transaction::Identification & operator=(const std::string & nom);
+    /**
+       @brief Retourne le nom demandé.
+       
+       @return Le nom, ou rien.
+     */
+    const Option<std::string> & obtenir() const;
+    
+  private:
+    Option<std::string> m_nom;
+  };
+  /**
+     @brief Classe permettant de stocker des informations pour une
+     invitation.
+   */
+  class Invitation
+  {
+    /**
+       @brief Constructeur par défaut.
+     */
+    Invitation();
+    /**
+       @brief Constructeur de copie.
+       @param i La transaction-invitation à copier.
+     */
+    Invitation(const Transaction::Invitation & i);
+    /**
+       @brief Constructeur standard.
+       
+       @param adv Les adversaires demandés.
+     */
+    Invitation(const std::vector<std::string> & adv);
+    /**
+       @brief Affectation par copie.
+       
+       @param i La transaction-invitation à copier.
+     */
+    Transaction::Invitation & operator=
+    (const Transaction::Invitation & i);
+    /**
+       @brief Affectation standard.
+
+       @param adv Les adversaires demandés.
+     */
+    Transaction::Invitation & operator=(const std::string & nom);
+    /**
+       @brief Retourne les adversaires demandés.
+       
+       @return Les adversaires, ou rien.
+     */
+    const Option<std::vector<std::string> > & obtenir() const;
+    
+  private:
+    Option<std::vector<std::string> > m_adv;
+  };
+  /**
      @brief Constructeur par défaut.
    */
   Transaction();
@@ -297,8 +385,20 @@ public:
      @brief Constructeur de jeu d'une carte.
      
      @param t Le jeu de carte à représenter.
-   */
+  */
   Transaction(const Transaction::Jeu & t);
+  /**
+     @brief Constructeur de demande d'identification.
+     
+     @param i Le nom à demander.
+  */
+  Transaction(const Transaction::Identification & i);
+  /**
+     @brief Constructeur de demande d'invitation.
+     
+     @param i Les adversaires à demander.
+  */
+  Transaction(const Transaction::Invitation & i);
   /**
      @brief Copie.
 
@@ -335,6 +435,20 @@ public:
    */
   Transaction & operator=(const Transaction::Jeu & t);
   /**
+     @brief Copie d'une identification
+
+     @param i L'identification.
+     @return Une transaction valide.
+   */
+  Transaction & operator=(const Transaction::Identification & i);
+  /**
+     @brief Copie d'une invitation
+
+     @param i L'invitation.
+     @return Une transaction valide.
+   */
+  Transaction & operator=(const Transaction::Invitation & i);
+  /**
      @brief Teste si la transaction est une enchère.
      
      @return Une enchère de transaction, ou rien.
@@ -358,11 +472,25 @@ public:
      @return Un jeu de carte (transaction), ou rien.
    */
   const Option<Transaction::Jeu> & jeu() const;
+  /**
+     @brief Teste si la transaction est une demande d'identification.
+     
+     @return Un nom (transaction), ou rien.
+   */
+  const Option<Transaction::Identification> & identification() const;
+  /**
+     @brief Teste si la transaction est une demande d'invitation.
+     
+     @return Les invités (transaction), ou rien.
+   */
+  const Option<Transaction::Invitation> & invitation() const;
 private:
   
   Option<Transaction::Enchere> m_enchere;
   Option<Transaction::Appel> m_appel;
   Option<Transaction::Ecart> m_ecart;
   Option<Transaction::Jeu> m_jeu;
+  Option<Transaction::Identification> m_identification;
+  Option<Transaction::Invitation> m_invitation;
 };
 #endif

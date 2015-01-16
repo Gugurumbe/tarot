@@ -88,7 +88,28 @@ public:
      écartables en dernier recours.
   */
   std::vector<std::vector<Carte> > cartes_ecartables() const;
+
+  /**
+     @brief Indique quel est mon nom.
+
+     @return Mon nom, que l'identification ait réussi ou pas.
+   */
+  std::string mon_nom() const;
+
+  /**
+     @brief Retourne la liste des gens disponibles.
+     
+     @return Les noms.
+   */
+  std::vector<std::string> vestibule() const;
 private:
+
+  /**
+     Retient mon nom
+   */
+  std::string m_mon_nom;
+  /** Retient les noms des gens présents */
+  std::vector<std::string> m_vestibule;
 
   /** Retient le numéro de mon tour. */
   unsigned int m_mon_tour;
@@ -100,13 +121,21 @@ private:
   void annuler_transaction();
   //Une fois acceptée, la transaction doit mettre à jour les 4
   //booléens plus bas, ainsi que le jeu (retirer les cartes jouées). 
-  void transaction_acceptee();
+  void transaction_enchere_acceptee();
+  void transaction_appel_acceptee();
+  void transaction_ecart_acceptee();
+  void transaction_jeu_acceptee();
+  void transaction_identification_acceptee();
+  void transaction_invitation_acceptee();
+  void oublier_transaction();
   //Ajouter une transaction, ça ajoute la bonne transaction à la
   //pile.
-  void ajouter_transaction_prise(unsigned int prise);
+  void ajouter_transaction_enchere(unsigned int prise);
   void ajouter_transaction_appel(unsigned int carte);
   void ajouter_transaction_ecart(const int ecart[3]);
   void ajouter_transaction_jeu(unsigned int carte);
+  void ajouter_transaction_identification(const std::string nom);
+  bool m_doit_identifier;
   bool m_doit_priser; //Vaut vrai jusqu'à ce que notre prise soit
 		      //acceptée. 
   bool m_doit_appeler;//Vaut vrai jusqu'à ce que notre appel soit
@@ -203,6 +232,24 @@ public slots:
      @see PartieClient::doit_emettre(Message)
    */
   void jouer(const Carte & carte);
+
+  /**
+     @brief Construit un Message.
+     
+     Construit un message de type "identifier".
+     @param nom Le nom à tester.
+     @see PartieClient::doit_emettre(Message)
+   */
+  void identifier(const std::string & nom);
+
+  /**
+     @brief Construit un Message.
+
+     Construit un message de type "inviter".
+     @param adversaires Les adversaires que je demande.
+     @see PartieClient::doit_emettre(Message)
+   */
+  void inviter(const std::vector<std::string> & adversaires);
   
 signals:
   
@@ -488,6 +535,63 @@ signals:
      @param joueur Le joueur maître.
    */
   void maitre(unsigned int joueur);
+
+  /**
+     @brief J'ai réussi à m'identifier.
+     
+     Ce signal est émis lorsque je suis identifié.
+     
+     @param nom Le nom que j'ai reçu.
+   */
+  void identification_acceptee(std::string nom);
+
+  /**
+     @brief Quelqu'un porte déjà ce nom dans le vestibule.
+
+     @param nom Le nom que j'avais choisi.
+   */
+  void identification_refusee(std::string nom);
+
+  /**
+     @brief On vient de se connecter.
+     
+     @param nom Le nom du joueur qui vient de se connecter.
+
+     @note Si c'est moi, ce signal est émis juste après 
+     PartieClient::identification_acceptee.
+   */
+  void entree(std::string nom);
+
+  /**
+     @brief On vient de se déconnecter.
+     @param nom Le nom du joueur qui s'est déconnecté.
+     @note Si c'est moi, est émis juste avant PartieClient::adversaires.
+   */
+  void sortie(std::string nom);
+
+  /**
+     @brief Mes adversaires ont changé de nom ou de numéro.
+     @param noms Les noms dans l'ordre de jeu.
+   */
+  void adversaires(std::vector<std::string> noms);
+
+  /**
+     @brief Mon invitation a été acceptée.
+
+     @param adversaires Mes adversaires.
+   */
+  void invitation_acceptee(std::vector<std::string> adversaires);
+
+  /**
+     @brief Mon invitation a été refusée.
+
+     @param adversaires Les adversaires que j'avais demandés.
+
+     @note Ça n'a pas échoué parce que l'un d'entre eux a refusé, mais
+     parce que les noms n'existaient pas dans le vestibule ou qu'un
+     nom était dupliqué.
+   */
+  void invitation_refusee(std::vector<std::string> adversaires);
 
 protected:
   virtual void changement_maitre(unsigned int ancien,

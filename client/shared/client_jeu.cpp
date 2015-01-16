@@ -59,6 +59,15 @@ void ClientJeu::traiter_connexion()
   C(pli(unsigned int), pli_termine(unsigned int));
   S(tapis_change(Tapis));
   C(score(std::vector<int>), partie_terminee(std::vector<int>));
+  S(identification_acceptee(std::string));
+  S(identification_refusee(std::string));
+  S(entree(std::string));
+  S(sortie(std::string));
+  S(adversaires(std::vector<std::string>));
+  S(invitation_acceptee(std::vector<std::string>));
+  S(invitation_refusee(std::vector<std::string>));
+
+  emit doit_identifier();
 }
 
 void ClientJeu::traiter_deconnexion()
@@ -118,4 +127,18 @@ void ClientJeu::formuler_requete(Carte requete)
   ENTER("formuler_requete(Carte requete)");
   ADD_ARG("requete", requete);
   m_partie.jouer(requete);
+}
+
+void ClientJeu::formuler_identification(const std::string & nom)
+{
+  ENTER("formuler_identification(const std::string & nom)");
+  ADD_ARG("nom", nom);
+  m_partie.identifier(nom);
+}
+void ClientJeu::formuler_invitation
+(const std::vector<std::string> & adversaires)
+{
+  ENTER("formuler_invitation(const std::vector<std::string> & adversaires)");
+  ADD_ARG("adversaires", adversaires);
+  m_partie.formuler_invitation(adversaires);
 }

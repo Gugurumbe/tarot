@@ -60,12 +60,14 @@ private:
   Partie * const m_parent;
 };
 
-Partie::Partie(): m_encheres(5), m_chelem(false), 
-		  m_tapis(new TapisPartie(this)), 
-		  m_attaquant(5),
-		  m_tour(0), m_tour_precedent(5), plis_joues(0),
-		  m_phase(CONSTITUTION_TABLE),
-		  m_tailles_poignees(5, 0)
+Partie::Partie(): 
+  m_noms_types(5, ""),
+  m_encheres(5), m_chelem(false), 
+  m_tapis(new TapisPartie(this)), 
+  m_attaquant(5),
+  m_tour(0), m_tour_precedent(5), plis_joues(0),
+  m_phase(CONSTITUTION_TABLE),
+  m_tailles_poignees(5, 0)
 {
   ENTER("Partie()");
 }
@@ -73,6 +75,8 @@ Partie::Partie(): m_encheres(5), m_chelem(false),
 void Partie::reinitialiser()
 {
   ENTER("reinitialiser()");
+  for(unsigned int i = 0 ; i < m_noms_types.size() ; i++)
+    m_noms_types[i] = "";
   m_encheres.clear();
   m_encheres.resize(5);
   m_chelem = false;
@@ -261,6 +265,27 @@ void Partie::assimiler(const Protocole::Message & m)
       break;
     case Protocole::RESULTAT:
       m_phase = FIN;
+      break;
+    case Protocole::IDENTIFIER:
+      m_phase = CONSTITUTION_TABLE;
+      break;
+    case Protocole::ENTREE:
+      m_phase = CONSTITUTION_TABLE;
+      break;
+    case Protocole::SORTIE:
+      m_phase = CONSTITUTION_TABLE;
+      break;
+    case Protocole::NOMS:
+      m_noms_types.clear();
+      m_noms_types.reserve(5);
+      for(unsigned int i = 0 ; i < 5 ; i++)
+	{
+	  m_noms_types.push_back(m.m.noms.noms[i]);
+	}
+      m_phase = CONSTITUTION_TABLE;
+      break;
+    case Protocole::INVITER:
+      break;
     default:
       break;
     }
@@ -310,6 +335,13 @@ Enchere Partie::meilleure_enchere() const
   // Dans les faits, l'attaquant est le dernier qui a effectué une
   // enchère validée par le serveur.
   return donner_contrat_final();
+}
+
+std::string Partie::nom_de(unsigned int i) const
+{
+  if(i < m_noms_types.size())
+    return m_noms_types[i];
+  return "";
 }
 
 void Partie::changement_maitre(unsigned int, unsigned int)

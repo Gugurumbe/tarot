@@ -37,10 +37,10 @@ public slots :
 
   /**
      @brief Réaction personnalisée (connexion).
-
-     Tente de compléter une Table.
      
-     @param c : l'identification du client.
+     Ajoute un type sur le paillasson.
+     
+     @param c : le numéro d'identification du client.
    */
   void reagir_connexion(unsigned int c);
 
@@ -50,6 +50,8 @@ public slots :
      Utilisé quand une Table contient 5 joueurs.
      
      @param t : la Table pleine.
+
+     @note Inutilisé depuis qu'on fait des tables authentifiées.
    */
   void detacher_table(Table * t);
 
@@ -62,6 +64,8 @@ public slots :
      s'autodétruira si un client se déconnecte.
 
      @param t : la Table incomplète.
+
+     @note Inutilisé depuis qu'on fait des tables authentifiées.
    */
   void rattacher_table(Table * t);
 
@@ -69,14 +73,38 @@ public slots :
      @brief Oublie une Table détruite.
 
      @param t : la Table sur le point d'être détruite.
+
+     @note Inutilisé depuis qu'on fait des tables authentifiées.
    */
   void oublier_table(QObject * t);
-private:
 
   /**
-     @brief Les tables incomplètes.
-  */
-  std::vector<Table *> incompletes;
+     @brief Une socket s'est déconnectée.
+
+     @param client Le client qui s'est déconnecté.
+
+     @note Il n'est pas forcément dans le vestibule, ni sur le
+     paillasson. 
+   */
+  void oublier_socket(unsigned int client);
+
+  /**
+     @brief Identifie.
+
+     @param client Le client sur le paillasson qui veut s'identifier.
+     @param m Un message, probablement d'identification.
+
+     émet "refuse", "erreur_protocole" ou fait les présentations avec
+     le reste du vestibule.
+   */
+  void lire(unsigned int client, Protocole::Message m);
+private:
+  
+  std::vector<unsigned int> paillasson; // Sockets non encore
+					// identifiées 
+  std::vector<unsigned int> vestibule; //Sockets identifiées mais pas
+				       //en jeu.
+  std::vector<std::string> noms; //Noms correspondant au vestibule.
 };
 
 #endif

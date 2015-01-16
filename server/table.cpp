@@ -19,6 +19,7 @@ Table::Table(QObject * parent) : QObject(parent)
     {
       joueurs.push_back(-1); // -1 : pas de joueur
       ordre.push_back(i);
+      noms.push_back("");
     }
   //Mélange de ordre :
   int r = 0 ;
@@ -31,8 +32,11 @@ Table::Table(QObject * parent) : QObject(parent)
       ordre[r] = ordre[i];
       ordre[i] = tmp;
     }
-  QObject::connect(&partie, SIGNAL(doit_emettre(unsigned int, Protocole::Message, bool)),
-		   this, SLOT(doit_transmettre(unsigned int, Protocole::Message, bool)));
+  QObject::connect(&partie, SIGNAL(doit_emettre
+				   (unsigned int, Protocole::Message, bool)),
+		   this, SLOT(doit_transmettre
+			      (unsigned int, Protocole::Message, bool)));
+  QObject::connect(&partie, SIGNAL(termine()), this, SLOT(doit_recommencer()));
   nombre_tables++;
   DEBUG<<"Il y a maintenant "<<nombre_tables<<" table(s)."<<std::endl;
 }
@@ -49,26 +53,24 @@ Table::~Table()
   DEBUG<<"Il n'y a plus que "<<nombre_tables<<" table(s)."<<std::endl;
 }
 
-void Table::ajouter(unsigned int sock)
+void Table::ajouter(unsigned int sock, std::string nom)
 {
-  ENTER("ajouter(unsigned int sock)");
+  ENTER("ajouter(unsigned int sock, std::string nom)");
   ADD_ARG("sock", sock);
+  ADD_ARG("nom", nom);
   unsigned int i = 0;
   while(i < joueurs.size() && joueurs[i] >= 0) i++;
- if(i < joueurs.size())
+  if(i < joueurs.size())
     {
       joueurs[i] = sock;
-      Protocole::Message m;
-      m.type = Protocole::NUMERO;
-      m.m.numero.n = ordre[i];
-      emit doit_emettre(sock, m);
+      noms[i] = nom;
       //Si on est complet, on lance la partie
       i = 0 ;
       while(i < joueurs.size() && joueurs[i] >= 0) i++;
       if(i >= joueurs.size())
 	{
 	  DEBUG<<"La partie commence..."<<std::endl;
-	  partie.distribuer();
+	  doit_recommencer();
 	  emit complet(this);
 	}
     }
@@ -123,6 +125,7 @@ void Table::enlever(unsigned int sock)
   if(i < joueurs.size())
     {
       joueurs[i] = -1 ;
+      noms[i] = "";
       //Comptons les joueurs restants. S'ils sont 4, il faut envoyer
       //le signal incomplet.
       unsigned int j = 0 ;
@@ -153,4 +156,43 @@ void Table::doit_transmettre(unsigned int j, Protocole::Message m,
     }
   if(analyser)
     partie.assimiler(m);
+}
+void Table::doit_recommencer()
+{
+  //Réinitialisation de la partie :
+  partie.reinitialiser();
+  //Permutations
+  std::vector<unsigned int> nouvel_ordre;
+  for(unsigned int i = 0 ; i < joueurs.size() ; i++)
+    {
+      nouvel_ordre.push_back(ordre[(i + 1) % ordre.size()]);
+    }
+  ordre = nouvel_ordre;
+  //Attention : on ne change pas l'ordre des noms des joueurs !
+  //Émission de noms
+  Protocole::Message msg_noms;
+  msg_noms.type = Protocole::NOMS;
+  for(unsigned int j = 0 ; j < joueurs.size() ; j++)
+    {
+      for(unsigned int k = 0 ; k < noms[ordre[j]].size() 
+	    && k < TAILLE_NOM ; k++)
+	{
+	  msg_noms.m.noms.noms[j][k] = noms[ordre[j]][k];
+	}
+    }
+  for(unsigned int j = 0 ; j < joueurs.size() ; j++)
+    {
+      emit doit_emettre(joueurs[j], msg_noms);
+    }
+  //La partie a besoin de le savoir !
+  partie.assimiler(msg_noms);
+  //Émission des numéros : la partie s'en moque
+  for(unsigned int j = 0 ; j < joueurs.size() ; j++)
+    {
+      Protocole::Message m;
+      m.type = Protocole::NUMERO;
+      m.m.numero.n = ordre[j];
+      emit doit_emettre(joueurs[j], m);
+    }
+  partie.distribuer();
 }

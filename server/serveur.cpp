@@ -57,7 +57,7 @@ void Serveur::remove(unsigned int i)
 unsigned int Serveur::ouvrir_local()
 {
   ENTER("ouvrir_local()");
-  listener.listen(QHostAddress(QHostAddress::Any), PORT);
+  listener.listen(QHostAddress("127.0.0.1"), PORT);
   //On liste sur l'adresse loopback, pour n'accepter que les sockets de la
   //même machine. On peut spécifier le port explicitement, mais rien ne dit
   //qu'il soit déjà pris.
@@ -163,6 +163,8 @@ void Serveur::lire()
 	  if(m.compris)
 	    {
 	      DEBUG<<"Le message a été compris. Transmission..."<<std::endl;
+	      // INTERCEPTION DES REQUETES IDENTIFICATION ET INVITATION
+	      // Sinon, 
 	      emit message(sock, m);
 	      DEBUG<<"Transmission terminée."<<std::endl;
 	    }

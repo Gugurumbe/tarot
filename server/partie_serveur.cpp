@@ -246,6 +246,14 @@ void PartieServeur::assimiler(Protocole::Message const & message)
       break;
     case Protocole::RESULTAT:
       break;
+    case Protocole::IDENTIFIER:
+      break;
+    case Protocole::ENTREE:
+      break;
+    case Protocole::SORTIE:
+      break;
+    case Protocole::INVITER:
+      break;
     default :
       DEBUG<<"Penser à assimiler côté serveur.\n";
     }
@@ -516,6 +524,18 @@ int PartieServeur::tester(unsigned int joueur,
 	}
       else ok = 1;
       break;
+    case Protocole::IDENTIFIER:
+      ok = 1;
+      break;
+    case Protocole::ENTREE:
+      ok = 1;
+      break;
+    case Protocole::SORTIE:
+      ok = 1;
+      break;
+    case Protocole::INVITER:
+      ok = 1;
+      break;
     default :
       ok = 1;
       break;
@@ -649,5 +669,18 @@ void PartieServeur::cartes_gagnees
 	  res.m.resultat.resultats[i] = r[i];
 	}
       EMETTRE_A_TOUS(res);
+      emit termine();
     }
+}
+
+void PartieServeur::reinitialiser()
+{
+  Partie::reinitialiser();
+  jeu_reel.clear(); //Inutile en fait
+  cartes_attaque.clear();
+  cartes_defense.clear();
+  chien.clear();//Idem
+  e_max = Enchere();
+  joueur_appele = 5;
+  plis_restants = 15;
 }

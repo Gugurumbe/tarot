@@ -393,6 +393,117 @@ void ecrire_resultat(Protocole::Msg_resultat const & resultat,
     }
 }
 
+bool lire_identifier(QDataStream & in,
+		     Protocole::Msg_identifier & identifier)
+{
+  /* En utilisant un qint8 au lieu d'un quint8, on est sûr de ne pas
+     perdre de précision dans le transfert. */
+  qint8 c;
+  for(int i = 0 ; i < TAILLE_NOM ; i++)
+    {
+      in>>c;
+      identifier.nom[i] = (char)c;
+    }
+  return in.status() == QDataStream::Ok;
+}
+
+void ecrire_identifier(Protocole::Msg_identifier const & identifier,
+		       QDataStream & out)
+{
+  for(int i = 0 ; i < TAILLE_NOM ; i++)
+    {
+      out<<(qint8)identifier.nom[i];
+    }
+}
+
+bool lire_entree(QDataStream & in,
+		     Protocole::Msg_entree & entree)
+{
+  qint8 c;
+  for(int i = 0 ; i < TAILLE_NOM ; i++)
+    {
+      in>>c;
+      entree.nom[i] = (char)c;
+    }
+  return in.status() == QDataStream::Ok;
+}
+
+void ecrire_entree(Protocole::Msg_entree const & entree,
+		       QDataStream & out)
+{
+  for(int i = 0 ; i < TAILLE_NOM ; i++)
+    {
+      out<<(qint8)entree.nom[i];
+    }
+}
+
+bool lire_sortie(QDataStream & in,
+		     Protocole::Msg_sortie & sortie)
+{
+  qint8 c;
+  for(int i = 0 ; i < TAILLE_NOM ; i++)
+    {
+      in>>c;
+      sortie.nom[i] = (char)c;
+    }
+  return in.status() == QDataStream::Ok;
+}
+
+void ecrire_sortie(Protocole::Msg_sortie const & sortie,
+		       QDataStream & out)
+{
+  for(int i = 0 ; i < TAILLE_NOM ; i++)
+    {
+      out<<(qint8)sortie.nom[i];
+    }
+}
+
+bool lire_noms(QDataStream & in,
+		     Protocole::Msg_noms & noms)
+{
+  qint8 c;
+  for(int i = 0 ; i < 5 ; i++)
+    for(int j = 0 ; j < TAILLE_NOM ; j++)
+      {
+	in>>c;
+	noms.noms[i][j] = (char)c;
+      }
+  return in.status() == QDataStream::Ok;
+}
+
+void ecrire_noms(Protocole::Msg_noms const & noms,
+		       QDataStream & out)
+{
+  for(int i = 0 ; i < 5 ; i++)
+    for(int j = 0 ; j < TAILLE_NOM ; j++)
+      {
+	out<<(qint8)noms.noms[i][j];
+      }
+}
+
+bool lire_inviter(QDataStream & in,
+		     Protocole::Msg_inviter & inviter)
+{
+  qint8 c;
+  for(int i = 0 ; i < 4 ; i++)
+    for(int j = 0 ; j < TAILLE_NOM ; j++)
+      {
+	in>>c;
+	inviter.noms[i][j] = (char)c;
+      }
+  return in.status() == QDataStream::Ok;
+}
+
+void ecrire_inviter(Protocole::Msg_inviter const & inviter,
+		       QDataStream & out)
+{ 
+  for(int i = 0 ; i < 4 ; i++)
+    for(int j = 0 ; j < TAILLE_NOM ; j++)
+      {
+	out<<(qint8)inviter.noms[i][j];
+      }
+}
+
 //Fonctions générale :
 
 bool Protocole::lire(QDataStream & in, Protocole::Message & m)
@@ -468,6 +579,21 @@ bool Protocole::lire(QDataStream & in, Protocole::Message & m)
 	case Protocole::RESULTAT:
 	  lu = lire_resultat(in, m.m.resultat);
 	  break;
+	case Protocole::IDENTIFIER:
+	  lu = lire_identifier(in, m.m.identifier);
+	  break;
+	case Protocole::ENTREE:
+	  lu = lire_entree(in, m.m.entree);
+	  break;
+	case Protocole::SORTIE:
+	  lu = lire_sortie(in, m.m.sortie);
+	  break;
+	case Protocole::NOMS:
+	  lu = lire_noms(in, m.m.noms);
+	  break;
+	case Protocole::INVITER:
+	  lu = lire_inviter(in, m.m.inviter);
+	  break;
 	default:
 	  // Je n'ai pas compris le message du serveur. Je peux si je le 
 	  // souhaite enoyer au serveur un message de type "erreur_protocole".
@@ -542,6 +668,21 @@ void Protocole::ecrire(Protocole::Message const & m, QDataStream & out)
       break;
     case Protocole::RESULTAT:
       ecrire_resultat(m.m.resultat, out);
+      break;
+    case Protocole::IDENTIFIER:
+      ecrire_identifier(m.m.identifier, out);
+      break;
+    case Protocole::ENTREE:
+      ecrire_entree(m.m.entree, out);
+      break;
+    case Protocole::SORTIE:
+      ecrire_sortie(m.m.sortie, out);
+      break;
+    case Protocole::NOMS:
+      ecrire_noms(m.m.noms, out);
+      break;
+    case Protocole::INVITER:
+      ecrire_inviter(m.m.inviter, out);
       break;
     default:
       break;
@@ -703,6 +844,56 @@ std::ostream & operator<<(std::ostream & out,
     }
   return out<<m.resultats[4]<<"|]>";
 }
+std::ostream & operator<<(std::ostream & out, 
+			  const Protocole::Msg_identifier & m)
+{
+  std::string nom(m.nom);
+  return out<<"<identifier : nom=\""<<nom<<"\">";
+}
+std::ostream & operator<<(std::ostream & out, 
+			  const Protocole::Msg_entree & m)
+{
+  std::string nom(m.nom);
+  return out<<"<entree : nom=\""<<nom<<"\">";
+}
+std::ostream & operator<<(std::ostream & out, 
+			  const Protocole::Msg_sortie & m)
+{
+  std::string nom(m.nom);
+  return out<<"<sortie : nom=\""<<nom<<"\">";
+}
+std::ostream & operator<<(std::ostream & out, 
+			  const Protocole::Msg_noms & m)
+{
+  std::vector<std::string> noms;
+  noms.reserve(5);
+  for(int i = 0 ; i < 5 ; i++)
+    {
+      noms.push_back(std::string(m.noms[i]));
+    }
+  out<<"<noms : noms=[|";
+  for(unsigned int i = 0 ; i + 1 < noms.size() ; i++)
+    {
+      out<<"\""<<noms[i]<<"\" ; ";
+    }
+  return out<<"\""<<noms[noms.size() - 1]<<"\"|]>";
+}
+std::ostream & operator<<(std::ostream & out, 
+			  const Protocole::Msg_inviter & m)
+{
+  std::vector<std::string> noms;
+  noms.reserve(4);
+  for(int i = 0 ; i < 4 ; i++)
+    {
+      noms.push_back(std::string(m.noms[i]));
+    }
+  out<<"<inviter : noms=[|";
+  for(unsigned int i = 0 ; i + 1 < noms.size() ; i++)
+    {
+      out<<"\""<<noms[i]<<"\" ; ";
+    }
+  return out<<"\""<<noms[noms.size() - 1]<<"\"|]>";
+}
 
 std::ostream & operator<<(std::ostream & out, 
 			  const Protocole::Message & m)
@@ -731,6 +922,11 @@ std::ostream & operator<<(std::ostream & out,
     case Protocole::CARTE:out<<m.m.carte;break;
     case Protocole::PLI:out<<m.m.pli;break;
     case Protocole::RESULTAT:out<<m.m.resultat;break;
+    case Protocole::IDENTIFIER:out<<m.m.identifier;break;
+    case Protocole::ENTREE:out<<m.m.entree;break;
+    case Protocole::SORTIE:out<<m.m.sortie;break;
+    case Protocole::NOMS:out<<m.m.noms;break;
+    case Protocole::INVITER:out<<m.m.inviter;break;
     default:out<<"<type inconnu>";
     }
   return out;

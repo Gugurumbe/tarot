@@ -96,10 +96,11 @@ public slots:
      Peut émettre complet(Table *) avec 'this' en argument.
 
      @param c : l'identification du nouveau client.
+     @param nom Le nom du joueur.
 
      @see Serveur::connexion(unsigned int)
    */
-  void ajouter(unsigned int c);
+  void ajouter(unsigned int c, std::string nom = "");
 
   /**
      @brief Transmet un Message à la Partie
@@ -145,6 +146,13 @@ public slots:
      @param analyser : vrai s'il faut faire analyser le message.
    */
   void doit_transmettre(unsigned int j, Protocole::Message m, bool analyser);
+
+  /**
+     @brief Commence une nouvelle partie.
+
+     Permute les joueurs, réemet noms, numero, et recommence la partie.
+   */
+  void doit_recommencer();
   
 private:
   
@@ -157,6 +165,11 @@ private:
      @brief Numéros des joueurs.
    */
   std::vector<unsigned int> ordre;
+  
+  /**
+     @brief Noms des joueurs.
+   */
+  std::vector<std::string> noms;
 
   /**
      @brief Environnement de jeu.
