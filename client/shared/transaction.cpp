@@ -152,7 +152,7 @@ Transaction::Identification & Transaction::Identification::operator=
 }
 const Option<std::string> & Transaction::Identification::obtenir() const
 {
-  return nom;
+  return m_nom;
 }
 //////////////////////////////////////////////////////////////////
 Transaction::Invitation::Invitation(){}
@@ -175,7 +175,7 @@ Transaction::Invitation & Transaction::Invitation::operator=
 }
 const Option<std::vector<std::string> > & Transaction::Invitation::obtenir() const
 {
-  return adv;
+  return m_adv;
 }
 //////////////////////////////////////////////////////////////////
 Transaction::Transaction() {}

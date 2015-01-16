@@ -271,6 +271,7 @@ public:
    */
   class Identification
   {
+  public:
     /**
        @brief Constructeur par défaut.
      */
@@ -315,6 +316,7 @@ public:
    */
   class Invitation
   {
+  public:
     /**
        @brief Constructeur par défaut.
      */
@@ -342,7 +344,8 @@ public:
 
        @param adv Les adversaires demandés.
      */
-    Transaction::Invitation & operator=(const std::string & nom);
+    Transaction::Invitation & operator=
+    (const std::vector<std::string> & adv);
     /**
        @brief Retourne les adversaires demandés.
        

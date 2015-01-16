@@ -134,7 +134,8 @@ private:
   void ajouter_transaction_appel(unsigned int carte);
   void ajouter_transaction_ecart(const int ecart[3]);
   void ajouter_transaction_jeu(unsigned int carte);
-  void ajouter_transaction_identification(const std::string nom);
+  void ajouter_transaction_identification(const std::string & nom);
+  void ajouter_transaction_invitation(const std::vector<std::string> & nom);
   bool m_doit_identifier;
   bool m_doit_priser; //Vaut vrai jusqu'à ce que notre prise soit
 		      //acceptée. 
@@ -249,7 +250,7 @@ public slots:
      @param adversaires Les adversaires que je demande.
      @see PartieClient::doit_emettre(Message)
    */
-  void inviter(const std::vector<std::string> & adversaires);
+  void formuler_invitation(const std::vector<std::string> & adversaires);
   
 signals:
   

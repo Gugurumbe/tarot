@@ -81,7 +81,7 @@ void PartieClient::assimiler(const Protocole::Message & m)
 	}
       break;
     case Protocole::PRISE:
-      ajouter_transaction_prise(m.m.prise.niveau);
+      ajouter_transaction_enchere(m.m.prise.niveau);
       break;
     case Protocole::CONTRAT:
       if(m_mon_tour == tour_precedent() && phase() == ENCHERES)
@@ -356,7 +356,8 @@ void PartieClient::demander_jeu()
   ENTER("demander_jeu()");
 }
 
-void PartieClient::inviter(std::vector<std::string> const & adversaires)
+void PartieClient::formuler_invitation
+(std::vector<std::string> const & adversaires)
 {
   ENTER("inviter(std::vector<std::string> const & adversaires)");
   ADD_ARG("adversaires", adversaires);
@@ -636,7 +637,9 @@ void PartieClient::transaction_invitation_acceptee()
       en_cours.pop();
       if(!(t.invitation().aucun()))
 	{
-	  emit invitation_acceptee(m_mon_nom);
+	  std::vector<std::string> adv;
+	  adv=t.invitation().get().obtenir().get();
+	  emit invitation_acceptee(adv);
 	}
       else
 	{
@@ -698,9 +701,9 @@ std::vector<std::string> PartieClient::vestibule() const
 {
   return m_vestibule;
 }
-void PartieClient::ajouter_transaction_prise(unsigned int prise)
+void PartieClient::ajouter_transaction_enchere(unsigned int prise)
 {
-  ENTER("ajouter_transaction_prise(unsigned int prise)");
+  ENTER("ajouter_transaction_enchere(unsigned int prise)");
   ADD_ARG("prise", prise);
   Protocole::Msg_prise m;
   m.niveau = prise;
@@ -711,6 +714,8 @@ void PartieClient::ajouter_transaction_prise(unsigned int prise)
 }
 void PartieClient::ajouter_transaction_appel(unsigned int carte)
 {
+  ENTER("ajouter_transaction_appel(unsigned int carte)");
+  ADD_ARG("carte", carte);
   Carte c(carte);
   Transaction::Appel a(c, cartes_appelables());
   Transaction t(a);
@@ -719,6 +724,10 @@ void PartieClient::ajouter_transaction_appel(unsigned int carte)
 void PartieClient::ajouter_transaction_ecart
 (const int ecart[3])
 {
+  ENTER("ajouter_transaction_ecart(const int ecart[3])");
+  ADD_ARG("ecart[0]", ecart[0]);
+  ADD_ARG("ecart[1]", ecart[1]);
+  ADD_ARG("ecart[2]", ecart[2]);
   std::vector<Carte> ec;
   for(unsigned int i = 0 ; i < 3 ; i++)
     {
@@ -731,13 +740,17 @@ void PartieClient::ajouter_transaction_ecart
 }
 void PartieClient::ajouter_transaction_jeu(unsigned int carte)
 {
+  ENTER("ajouter_transaction_jeu(unsigned int carte)");
+  ADD_ARG("carte", carte);
   Carte c(carte);
   Transaction::Jeu j(c);
   Transaction t(j);
   en_cours.push(t);
 }
-void PartieClient::ajouter_transaction_identification(const std::string nom)
+void PartieClient::ajouter_transaction_identification(const std::string & nom)
 {
+  ENTER("ajouter_transaction_identification(const std::string & nom)");
+  ADD_ARG("nom", nom);
   Transaction::Identification i(nom);
   Transaction t(i);
   en_cours.push(t);
@@ -745,6 +758,8 @@ void PartieClient::ajouter_transaction_identification(const std::string nom)
 void PartieClient::ajouter_transaction_invitation
 (const std::vector<std::string> & adversaires)
 {
+  ENTER("ajouter_transaction_invitation(const std::vector<std::string> & adversaires)");
+  ADD_ARG("adversaires", adversaires);
   Transaction::Invitation i(adversaires);
   Transaction t(i);
   en_cours.push(t);
