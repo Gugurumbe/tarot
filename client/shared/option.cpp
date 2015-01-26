@@ -74,3 +74,7 @@ std::ostream & operator<<(std::ostream & out, const Option<T> & t)
     }
   return out;
 }
+
+#include "enchere.hpp"
+
+template class Option<Enchere>;

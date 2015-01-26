@@ -1,5 +1,6 @@
 TEMPLATE = app
 TARGET = client
+CONFIG += console
 DEPENDPATH += .
 INCLUDEPATH += . ../shared ../../shared
 
@@ -8,6 +9,7 @@ QT += core
 
 # Input
 HEADERS +=                                          \
+interface_moche.hpp                                 \
 ../shared/client.hpp                                \
 ../shared/client_jeu.hpp                            \
 ../shared/option.hpp                                \
@@ -26,6 +28,7 @@ HEADERS +=                                          \
 # Sources
 SOURCES +=                                          \
 main_program.cpp                                    \
+interface_moche.cpp                                 \
 ../shared/client.cpp                                \
 ../shared/client_jeu.cpp                            \
 ../shared/option.cpp                                \

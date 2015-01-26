@@ -6,6 +6,8 @@
 
 #include "option.cpp"
 
+#define MIN(a, b) (a < b ? a : b)
+
 PartieClient::PartieClient(QObject * parent):
   QObject(parent), Partie(), m_mon_tour(5),
   m_doit_identifier(true),
@@ -310,6 +312,7 @@ void PartieClient::identifier(const std::string & nom)
   m.type = Protocole::IDENTIFIER;
   for(unsigned int i = 0 ; i < nom.size() && i < TAILLE_NOM ; i++)
     m.m.identifier.nom[i] = nom[i];
+  m.m.identifier.nom[MIN(nom.size(), TAILLE_NOM - 1)] = 0;
   emit doit_emettre(m);
 }
 

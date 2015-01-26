@@ -275,6 +275,7 @@ void ServeurJeu::oublier_socket(unsigned int client)
 	{
 	  DEBUG<<"J'enlève un client du vestibule."<<std::endl;
 	  vestibule.erase(vestibule.begin() + i);
+	  noms.erase(noms.begin() + i);
 	  i = vestibule.size() ;
 	  DEBUG<<vestibule<<std::endl;
 	}

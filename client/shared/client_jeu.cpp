@@ -61,6 +61,7 @@ void ClientJeu::traiter_connexion()
   C(score(std::vector<int>), partie_terminee(std::vector<int>));
   S(identification_acceptee(std::string));
   S(identification_refusee(std::string));
+  C(identification_refusee(std::string), doit_identifier());
   S(entree(std::string));
   S(sortie(std::string));
   S(adversaires(std::vector<std::string>));
@@ -74,10 +75,6 @@ void ClientJeu::traiter_deconnexion()
 {
   ENTER("traiter_deconnexion()");
   m_partie.disconnect(this);
-  reconnecter();
-  //C'est critiquable : si le serveur nous déconnecte délibérément,
-  //c'est la boucle infinie. Mais bon, le serveur doit savoir résister
-  //à ce genre d'attaque.
 }
 
 void ClientJeu::presenter_etat()
@@ -108,9 +105,9 @@ void ClientJeu::formuler_prise(Enchere::Prise p)
   m_partie.formuler_prise(p);
 }
 
-void ClientJeu::formuler_appel(const Carte & c)
+void ClientJeu::formuler_appel(Carte c)
 {
-  ENTER("formuler_appel(const Carte & c)");
+  ENTER("formuler_appel(Carte c)");
   ADD_ARG("c", c);
   m_partie.appeler(c);
 }
@@ -129,16 +126,16 @@ void ClientJeu::formuler_requete(Carte requete)
   m_partie.jouer(requete);
 }
 
-void ClientJeu::formuler_identification(const std::string & nom)
+void ClientJeu::formuler_identification(std::string nom)
 {
-  ENTER("formuler_identification(const std::string & nom)");
+  ENTER("formuler_identification(std::string nom)");
   ADD_ARG("nom", nom);
   m_partie.identifier(nom);
 }
 void ClientJeu::formuler_invitation
-(const std::vector<std::string> & adversaires)
+(std::vector<std::string> adversaires)
 {
-  ENTER("formuler_invitation(const std::vector<std::string> & adversaires)");
+  ENTER("formuler_invitation(std::vector<std::string> adversaires)");
   ADD_ARG("adversaires", adversaires);
   m_partie.formuler_invitation(adversaires);
 }

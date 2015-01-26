@@ -89,7 +89,7 @@ public slots:
 
      @see PartieClient::appeler(const Carte & c)
    */
-  void formuler_appel(const Carte & c);
+  void formuler_appel(Carte);
 
   /**
      @brief Envoie un message pour formuler un écart.
@@ -113,7 +113,7 @@ public slots:
      @param nom Le nom que j'aimerais porter.
      @see PartieClient::identifier(const std::string &)
    */
-  void formuler_identification(const std::string & nom);
+  void formuler_identification(std::string nom);
 
   /**
      @brief Traité lorsqu'on demande d'inviter des adversaires.
@@ -121,7 +121,7 @@ public slots:
      @param adversaires Les noms des adversaires.
      @see PartieClient::inviter(const std::vector<std::string> &)
    */
-  void formuler_invitation(const std::vector<std::string> & adversaires); 
+  void formuler_invitation(std::vector<std::string> adversaires); 
 
 signals:
   
