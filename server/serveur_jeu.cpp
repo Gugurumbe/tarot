@@ -32,91 +32,8 @@ void ServeurJeu::lire(unsigned int client, Protocole::Message m)
   ENTER("lire(unsigned int client, Protocole::Message m)");
   ADD_ARG("client", client);
   ADD_ARG("m", m);
-  //Présence du client dans le paillasson
-  for(unsigned int i = 0 ; i < paillasson.size() ; i++)
-    {
-      if(paillasson[i] == client)
-	{
-	  DEBUG<<"Celui qui cause est sur le paillasson ("<<i<<")."<<std::endl;
-	  if(m.compris && m.type == Protocole::IDENTIFIER)
-	    {
-	      std::string nom;
-	      for(unsigned int j = 0 ; 
-		  j < TAILLE_NOM && m.m.identifier.nom[j] != '\0' ; j++)
-		{
-		  nom.push_back(m.m.identifier.nom[j]);
-		}
-	      DEBUG<<"Il veut s'appeler "<<nom<<std::endl;
-	      //Est-ce que le nom est dispo ?
-	      bool ok = true;
-	      for(unsigned int j = 0 ; j < noms.size() ; j++)
-		{
-		  if(noms[j] == nom)
-		    {
-		      //Refusé
-		      DEBUG<<"Le client du vestibule "<<j<<" a déjà ce nom."
-			   <<std::endl;
-		      ok = false;
-		      j = noms.size();
-		    }
-		}
-	      if(ok)
-		{
-		  //Accepté
-		  DEBUG<<"Le nom est accepté."<<std::endl;
-		  Protocole::Message nouveau;
-		  nouveau.type = Protocole::ENTREE;
-		  for(unsigned int j = 0 ; j < TAILLE_NOM ; j++)
-		    {
-		      if(j < nom.size())
-			nouveau.m.entree.nom[j] = nom[j];
-		      else nouveau.m.entree.nom[j] = '\0';
-		    }
-		  Protocole::Message ancien;
-		  ancien.type = Protocole::ENTREE;
-		  for(unsigned int j = 0 ; j < vestibule.size() ; j++)
-		    {
-		      //Échange de poignée de main
-		      emit envoyer(vestibule[j], nouveau);
-		      for(unsigned int k = 0 ; k < TAILLE_NOM ; k++)
-			{
-			  if(k < noms[j].size())
-			    ancien.m.entree.nom[k] = noms[j][k];
-			  else
-			    ancien.m.entree.nom[k] = '\0';
-			}
-		      emit envoyer(client, ancien);
-		    }
-		  //Ajout au vestibule
-		  vestibule.push_back(client);
-		  noms.push_back(nom);
-		  //Sortie du paillasson
-		  paillasson.erase(paillasson.begin() + i);
-		  DEBUG<<"Voici le paillasson : "<<paillasson<<std::endl;
-		  DEBUG<<"Voici le vestibule : "<<vestibule<<std::endl;
-		  DEBUG<<"Les noms correspondants sont : "<<noms<<std::endl;
-		}
-	      else
-		{
-		  //On refuse !
-		  DEBUG<<"On refuse."<<std::endl;
-		  Protocole::Message refus;
-		  refus.type = Protocole::REFUSE;
-		  emit envoyer(client, refus);
-		}
-	    }
-	  else
-	    {
-	      //Erreur de protocole
-	      DEBUG<<"Erreur de protocole détectée : "<<m<<std::endl;
-	      Protocole::Message erreur;
-	      erreur.type = Protocole::ERREUR_PROTOCOLE;
-	      emit envoyer(client, erreur);
-	    }
-	  i = paillasson.size();
-	}
-    }
-  //Présence du client dans le vestibule
+  //Présence du client dans le vestibule : avant le paillasson, car au
+  //cours du traitement le client du paillasson est ajouté au vestibule.
   for(unsigned int i = 0 ; i < vestibule.size() ; i++)
     {
       if(vestibule[i] == client)
@@ -202,7 +119,7 @@ void ServeurJeu::lire(unsigned int client, Protocole::Message m)
 		    {
 		      for(unsigned int k = 0 ; k < sorties.size() ; k++)
 			{
-			  emit envoyer(vestibule[j], sorties[k]);
+			  envoyer(vestibule[j], sorties[k]);
 			}
 		    }
 		  //Les 5 joueurs vont être envoyés dans une table. 
@@ -227,7 +144,7 @@ void ServeurJeu::lire(unsigned int client, Protocole::Message m)
 		  DEBUG<<"On refuse."<<std::endl;
 		  Protocole::Message refus;
 		  refus.type = Protocole::REFUSE;
-		  emit envoyer(client, refus);
+		  envoyer(client, refus);
 		}
 	    }
 	  else
@@ -236,9 +153,99 @@ void ServeurJeu::lire(unsigned int client, Protocole::Message m)
 	      DEBUG<<"Erreur de protocole détectée : "<<m<<std::endl;
 	      Protocole::Message erreur;
 	      erreur.type = Protocole::ERREUR_PROTOCOLE;
-	      emit envoyer(client, erreur);
+	      envoyer(client, erreur);
 	    }
 	  i = vestibule.size();
+	}
+    }
+  //Présence du client dans le paillasson
+  for(unsigned int i = 0 ; i < paillasson.size() ; i++)
+    {
+      if(paillasson[i] == client)
+	{
+	  DEBUG<<"Celui qui cause est sur le paillasson ("<<i<<")."<<std::endl;
+	  if(m.compris && m.type == Protocole::IDENTIFIER)
+	    {
+	      std::string nom;
+	      for(unsigned int j = 0 ; 
+		  j < TAILLE_NOM && m.m.identifier.nom[j] != '\0' ; j++)
+		{
+		  nom.push_back(m.m.identifier.nom[j]);
+		}
+	      DEBUG<<"Il veut s'appeler "<<nom<<std::endl;
+	      //Est-ce que le nom est dispo ?
+	      bool ok = (nom != "");
+	      for(unsigned int j = 0 ; j < noms.size() && ok ; j++)
+		{
+		  if(noms[j] == nom)
+		    {
+		      //Refusé
+		      DEBUG<<"Le client du vestibule "<<j<<" a déjà ce nom."
+			   <<std::endl;
+		      ok = false;
+		      j = noms.size();
+		    }
+		}
+	      if(ok)
+		{
+		  //Accepté
+		  DEBUG<<"Le nom est accepté."<<std::endl;
+		  Protocole::Message nouveau;
+		  nouveau.type = Protocole::ENTREE;
+		  for(unsigned int j = 0 ; j < TAILLE_NOM ; j++)
+		    {
+		      if(j < nom.size())
+			nouveau.m.entree.nom[j] = nom[j];
+		      else nouveau.m.entree.nom[j] = '\0';
+		    }
+		  Protocole::Message ancien;
+		  ancien.type = Protocole::ENTREE;
+		  for(unsigned int j = 0 ; j < vestibule.size() ; j++)
+		    {
+		      //Échange de poignée de main
+		      envoyer(vestibule[j], nouveau);
+		      for(unsigned int k = 0 ; k < TAILLE_NOM ; k++)
+			{
+			  if(k < noms[j].size())
+			    ancien.m.entree.nom[k] = noms[j][k];
+			  else
+			    ancien.m.entree.nom[k] = '\0';
+			}
+		      envoyer(client, ancien);
+		    }
+		  //Cas du premier client
+		  if(vestibule.size() == 0)
+		    {
+		      DEBUG<<"Cas du premier client."<<std::endl;
+		      envoyer(client, nouveau);
+		    }
+		  //Ajout au vestibule
+		  vestibule.push_back(client);
+		  noms.push_back(nom);
+		  //Sortie du paillasson
+		  paillasson.erase(paillasson.begin() + i);
+		  DEBUG<<"Voici le paillasson : "<<paillasson<<std::endl;
+		  DEBUG<<"Voici le vestibule : "<<vestibule<<std::endl;
+		  DEBUG<<"Les noms correspondants sont : "<<noms<<std::endl;
+		}
+	      else
+		{
+		  //On refuse !
+		  DEBUG<<"On refuse."<<std::endl;
+		  Protocole::Message refus;
+		  refus.type = Protocole::REFUSE;
+		  envoyer(client, refus);
+		}
+	    }
+	  else
+	    {
+	      //Erreur de protocole
+	      DEBUG<<"Erreur de protocole détectée : "<<m<<std::endl;
+	      Protocole::Message erreur;
+	      erreur.type = Protocole::ERREUR_PROTOCOLE;
+	      envoyer(client, erreur);
+	    }
+	  i = paillasson.size();
 	}
     }
 }

@@ -4,7 +4,7 @@
 
 #define NOM_CLASSE "Serveur"
 
-#include "ne_pas_deboguer.hpp"
+#include "deboguer.hpp"
 
 Serveur::Serveur(QObject * parent) : QObject(parent), ppl(0)
 {
@@ -143,7 +143,7 @@ void Serveur::lire()
   // d'avoir trouvé l'appelant. Cependant, je préfère ne vérifier les 
   // nouveaux messages que quand le signal readyRead() a été émis.
   unsigned int sock = find(QObject::sender());
-  DEBUG<<"C'est la socket "<<sock<<"qui cause."<<std::endl;
+  DEBUG<<"C'est la socket "<<sock<<" qui cause."<<std::endl;
   if(sock < clients.size())
     {
       QTcpSocket * s = clients[sock];
