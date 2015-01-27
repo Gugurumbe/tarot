@@ -1,0 +1,19 @@
+Authors for server files (i.e. files within the "server" folder) :
+
+Vivien Kraus <vivien.kraus@ecl14.ec-lyon.fr>
+
+Authors for shared files (i.e. files within the "shared" folder) :
+
+Vivien Kraus <vivien.kraus@ecl14.ec-lyon.fr>
+
+Authors for client files (i.e. files within the "client" folder) :
+
+Authors for the shared client files 
+	(i.e. files within the "client/shared" folder) :
+
+Vivien Kraus <vivien.kraus@ecl14.ec-lyon.fr
+
+Authors for the dummy interface "moche" 
+	(i.e. files within the "client/moche" folder) :
+
+Vivien Kraus <vivien.kraus@ecl14.ec-lyon.fr
