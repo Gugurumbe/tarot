@@ -148,6 +148,14 @@ public:
   */
   Carte(unsigned int numero);
   /**
+     @brief Constructeur par défaut. À PROSCRIRE.
+
+     @note Sa présence sert pour émettre des signaux contenant des
+     Carte entre plusieurs QThread. Lorsqu'on n'utilisera plus la
+     console moche, ce constructeur sera supprimé.
+   */
+  Carte();
+  /**
      @brief Constructeur de copie.
 
      @param carte : la carte à copier.

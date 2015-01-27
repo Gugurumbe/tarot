@@ -21,6 +21,7 @@
 #include <iostream>
 #include <QThread>
 #include <QSharedPointer>
+#include <QMutex>
 
 /**
    @brief Classe d'interface moche.
@@ -84,6 +85,8 @@ signals:
   void formuler_requete(Carte requete);
   void deconnecter();
   void reconnecter();
+
+  void doit_quitter();
 protected:
   virtual void run();
 private:
@@ -95,6 +98,7 @@ private:
   QVector<QSharedPointer<Carte> > mon_jeu;
   std::ostream & o;
   bool continuer;
+  QMutex m_mutex;
 };
 
 std::ostream & operator<<(std::ostream & out, const QString & str);

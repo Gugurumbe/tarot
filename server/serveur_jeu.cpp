@@ -16,6 +16,8 @@ ServeurJeu::ServeurJeu(QObject * parent) : Serveur(parent)
   // les tables.
   QObject::connect(this, SIGNAL(deconnexion(unsigned int)),
 		   this, SLOT(oublier_socket(unsigned int)));
+  QObject::connect(this, SIGNAL(message(unsigned int, Protocole::Message)),
+		   this, SLOT(lire(unsigned int, Protocole::Message)));
 }
 
 void ServeurJeu::reagir_connexion(unsigned int i)
@@ -24,8 +26,6 @@ void ServeurJeu::reagir_connexion(unsigned int i)
   ADD_ARG("i", i);
   paillasson.push_back(i);
   DEBUG<<"Voici le paillasson : "<<paillasson<<std::endl;
-  QObject::connect(this, SIGNAL(message(unsigned int, Protocole::Message)),
-		   this, SLOT(lire(unsigned int, Protocole::Message)));
 }
 void ServeurJeu::lire(unsigned int client, Protocole::Message m)
 {
@@ -41,8 +41,10 @@ void ServeurJeu::lire(unsigned int client, Protocole::Message m)
 	  DEBUG<<"C'est un client du vestibule qui cause."<<std::endl;
 	  if(m.compris && m.type == Protocole::INVITER)
 	    {
+	      DEBUG<<"Il demande une invitation."<<std::endl;
 	      std::vector<std::string> joueurs;
 	      joueurs.push_back(noms[i]);
+	      //Il est sûr de s'inviter.
 	      for(unsigned int j = 0 ; j < 4 ; j++)
 		{
 		  std::string n;
@@ -53,8 +55,10 @@ void ServeurJeu::lire(unsigned int client, Protocole::Message m)
 		      n.push_back(m.m.inviter.noms[j][k]);
 		    }
 		  joueurs.push_back(n);
+		  DEBUG<<"Il demande à inviter "<<n<<"."<<std::endl;
 		}
 	      std::vector<unsigned int> sockets;
+	      //On ajoute lui-même.
 	      std::vector<unsigned int> indice_vestibule;
 	      std::vector<unsigned int> vestibule_filtre;
 	      std::vector<std::string> noms_filtres;
@@ -66,8 +70,10 @@ void ServeurJeu::lire(unsigned int client, Protocole::Message m)
 		    {
 		      if(noms[k] == joueurs[j])
 			{
+			  DEBUG<<"J'ai trouvé "<<joueurs[j]<<"."<<std::endl;
 			  sockets.push_back(vestibule[k]);
 			  indice_vestibule.push_back(k);
+			  k = noms.size();
 			}
 		    }
 		}
@@ -78,6 +84,7 @@ void ServeurJeu::lire(unsigned int client, Protocole::Message m)
 		      if(sockets[j] == sockets[k])
 			{
 			  //Doublon, on refuse
+			  DEBUG<<"Doublon ("<<j<<"ième nom)."<<std::endl;
 			  sockets.clear();
 			}
 		    }
@@ -92,6 +99,7 @@ void ServeurJeu::lire(unsigned int client, Protocole::Message m)
 		      while(k < 5 && sockets[k] != vestibule[j])k++;
 		      if(k >= 5)
 			{
+			  DEBUG<<noms[j]<<" n'est pas concerné."<<std::endl;
 			  vestibule_filtre.push_back(vestibule[j]);
 			  noms_filtres.push_back(noms[j]);
 			}		      
@@ -124,9 +132,10 @@ void ServeurJeu::lire(unsigned int client, Protocole::Message m)
 		    }
 		  //Les 5 joueurs vont être envoyés dans une table. 
 		  Table * t = new Table(this);
-		  connect(t, SIGNAL(envoyer
+		  connect(t, SIGNAL(doit_emettre
 				    (unsigned int, Protocole::Message)),
-			  this, SLOT(envoyer(unsigned int, Protocole::Message)));
+			  this, SLOT(envoyer
+				     (unsigned int, Protocole::Message)));
 		  connect(this, SIGNAL(deconnexion(unsigned int)),
 			  t, SLOT(enlever(unsigned int)));
 		  connect(this, SIGNAL(message
@@ -135,7 +144,7 @@ void ServeurJeu::lire(unsigned int client, Protocole::Message m)
 				      (unsigned int, Protocole::Message)));
 		  for(unsigned int j = 0 ; j < sockets.size() ; j++)
 		    {
-		      t->ajouter(sockets[j], noms[sockets[j]]);
+		      t->ajouter(sockets[j], joueurs[j]);
 		    }
 		}
 	      else
@@ -278,9 +287,22 @@ void ServeurJeu::oublier_socket(unsigned int client)
       if(vestibule[i] == client)
 	{
 	  DEBUG<<"J'enlève un client du vestibule."<<std::endl;
+	  Protocole::Message depart;
+	  depart.type = Protocole::SORTIE;
+	  for(unsigned int k = 0 ; k < TAILLE_NOM ; k++)
+	    {
+	      if(k < noms[i].size())
+		depart.m.sortie.nom[k] =      
+		  noms[i][k];
+	      else depart.m.sortie.nom[k] = '\0';
+	    }
 	  vestibule.erase(vestibule.begin() + i);
 	  noms.erase(noms.begin() + i);
 	  i = vestibule.size() ;
+	  for(unsigned int j = 0 ; j < vestibule.size() ; j++)
+	    {
+	      envoyer(vestibule[j], depart);
+	    }
 	  DEBUG<<vestibule<<std::endl;
 	}
     }

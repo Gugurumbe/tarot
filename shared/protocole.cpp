@@ -848,12 +848,14 @@ std::ostream & operator<<(std::ostream & out,
 			  const Protocole::Msg_identifier & m)
 {
   std::string nom(m.nom);
+  nom.resize(TAILLE_NOM);
   return out<<"<identifier : nom=\""<<nom<<"\">";
 }
 std::ostream & operator<<(std::ostream & out, 
 			  const Protocole::Msg_entree & m)
 {
   std::string nom(m.nom);
+  nom.resize(TAILLE_NOM);
   return out<<"<entree : nom=\""<<nom<<"\">";
 }
 std::ostream & operator<<(std::ostream & out, 
@@ -870,6 +872,7 @@ std::ostream & operator<<(std::ostream & out,
   for(int i = 0 ; i < 5 ; i++)
     {
       noms.push_back(std::string(m.noms[i]));
+      noms[i].resize(TAILLE_NOM);
     }
   out<<"<noms : noms=[|";
   for(unsigned int i = 0 ; i + 1 < noms.size() ; i++)
@@ -886,6 +889,7 @@ std::ostream & operator<<(std::ostream & out,
   for(int i = 0 ; i < 4 ; i++)
     {
       noms.push_back(std::string(m.noms[i]));
+      noms[i].resize(TAILLE_NOM);
     }
   out<<"<inviter : noms=[|";
   for(unsigned int i = 0 ; i + 1 < noms.size() ; i++)

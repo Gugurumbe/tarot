@@ -639,7 +639,7 @@ namespace Protocole
     /**
        @brief Noms dans l'ordre de jeu.
      */
-    char noms[TAILLE_NOM][5];
+    char noms[5][TAILLE_NOM];
   };
 
   /**
@@ -653,7 +653,7 @@ namespace Protocole
     /**
        @brief Noms de vos adversaires, dans le désordre.
      */
-    char noms[TAILLE_NOM][4];
+    char noms[4][TAILLE_NOM];
   };
 
   /**

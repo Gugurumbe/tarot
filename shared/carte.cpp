@@ -8,6 +8,12 @@
 //Commenter si c'est trop moche.
 #define INDIQUER_NUMERO_CARTE
 
+Carte::Carte(): m_numero(0)
+{
+  ENTER("Carte()");
+  DEBUG<<"ATTENTION : UTILISATION DU MAUVAIS CONSTRUCTEUR"<<std::endl;
+}
+
 Carte::Carte(unsigned int numero): m_numero(numero % 79)
 {
   ENTER("Carte(unsigned int numero)");

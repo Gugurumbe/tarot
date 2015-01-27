@@ -8,6 +8,10 @@
 #define ENDL std::endl;
 
 Q_DECLARE_METATYPE (std::string)
+Q_DECLARE_METATYPE (Enchere::Prise)
+Q_DECLARE_METATYPE (Carte)
+Q_DECLARE_METATYPE (std::vector<std::string>)
+Q_DECLARE_METATYPE (std::vector<Carte>)
 
 int main(int argc, char * argv[])
 {
@@ -17,6 +21,11 @@ int main(int argc, char * argv[])
   InterfaceMoche interface(std::cout);
   int r = 0;
   qRegisterMetaType<std::string>("<std::string>");
+  qRegisterMetaType<Enchere::Prise>("<Enchere::Prise>");
+  qRegisterMetaType<Carte>("<Carte>");
+  qRegisterMetaType<std::vector<std::string> >("<std::vector<std::string> >");
+  qRegisterMetaType<std::vector<std::string> >("<std::vector<std::string>>");
+  qRegisterMetaType<std::vector<Carte> >("<std::vector<Carte> >");
   if(arguments.size() != 3)
     {
       if(arguments.size() >= 1)
@@ -87,6 +96,8 @@ int main(int argc, char * argv[])
       R(formuler_requete(Carte));
       R(deconnecter());
       R(reconnecter());
+      QObject::connect(&interface, SIGNAL(doit_quitter()),
+		       &app, SLOT(quit()));
       jeu.connecter(hote, port);
       interface.start();
       r = app.exec();

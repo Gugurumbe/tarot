@@ -281,6 +281,7 @@ void Partie::assimiler(const Protocole::Message & m)
       for(unsigned int i = 0 ; i < 5 ; i++)
 	{
 	  m_noms_types.push_back(m.m.noms.noms[i]);
+	  m_noms_types[i].resize(TAILLE_NOM);
 	}
       m_phase = CONSTITUTION_TABLE;
       break;

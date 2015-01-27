@@ -231,22 +231,34 @@ void PartieClient::assimiler(const Protocole::Message & m)
       break;
     case Protocole::IDENTIFIER:
       m_mon_nom = m.m.identifier.nom;
+      m_mon_nom.resize(TAILLE_NOM);
       ajouter_transaction_identification(m_mon_nom);
       break;
     case Protocole::ENTREE:
-      if(m_mon_nom == m.m.entree.nom)
-	transaction_identification_acceptee();
-      m_vestibule.push_back(m.m.entree.nom);
-      emit entree(m_vestibule[m_vestibule.size() - 1]);
+      if(true)
+	{
+	  std::string nom_entre(m.m.entree.nom);
+	  nom_entre.resize(TAILLE_NOM);
+	  if(m_mon_nom == nom_entre)
+	    transaction_identification_acceptee();
+	  m_vestibule.push_back(nom_entre);
+	  emit entree(nom_entre);
+	}
       break;
     case Protocole::SORTIE:
-      for(unsigned int i = 0 ; i < m_vestibule.size() ; i++)
+      if(true)
 	{
-	  if(m_vestibule[i] == m.m.sortie.nom)
+	  std::string nom = m.m.sortie.nom;
+	  nom.resize(TAILLE_NOM);
+	  for(unsigned int i = 0 ; i < m_vestibule.size() ; i++)
 	    {
-	      m_vestibule.erase(m_vestibule.begin() + i);
-	      i--;
+	      if(m_vestibule[i] == m.m.sortie.nom)
+		{
+		  m_vestibule.erase(m_vestibule.begin() + i);
+		  i--;
+		}
 	    }
+	  emit sortie(nom);
 	}
       break;
     case Protocole::NOMS:
@@ -310,9 +322,17 @@ void PartieClient::identifier(const std::string & nom)
   ADD_ARG("nom", nom);
   Protocole::Message m;
   m.type = Protocole::IDENTIFIER;
-  for(unsigned int i = 0 ; i < nom.size() && i < TAILLE_NOM ; i++)
-    m.m.identifier.nom[i] = nom[i];
-  m.m.identifier.nom[MIN(nom.size(), TAILLE_NOM - 1)] = 0;
+  for(unsigned int i = 0 ; i < TAILLE_NOM ; i++)
+    {
+      if(i < nom.size())
+	{
+	  m.m.identifier.nom[i] = nom[i];
+	}
+      else
+	{
+	  m.m.identifier.nom[i] = '\0';
+	}
+    }
   emit doit_emettre(m);
 }
 
@@ -366,9 +386,20 @@ void PartieClient::formuler_invitation
   ADD_ARG("adversaires", adversaires);
   Protocole::Message m;
   m.type = Protocole::INVITER;
+  DEBUG<<"0 <= i < "<<adversaires.size()<<std::endl;
   for(unsigned int i = 0 ; i < adversaires.size() ; i++)
-    for(unsigned int j = 0 ; j < adversaires[i].size() && j < TAILLE_NOM ; j++)
-      m.m.inviter.noms[i][j] = adversaires[i][j];
+    {
+      DEBUG<<"i="<<i<<", adversaire "<<adversaires[i]
+	   <<", 0 <= k < "<<TAILLE_NOM
+	   <<std::endl;
+      std::string s(adversaires[i]);
+      s.resize(TAILLE_NOM);
+      for(unsigned int j = 0 ; j < s.size() ; j++)
+	{
+	  m.m.inviter.noms[i][j] = s[j];
+	}
+      DEBUG<<"i="<<i<<" : "<<m.m.inviter.noms[i]<<std::endl;
+    }
   emit doit_emettre(m);
 }
 
