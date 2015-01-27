@@ -668,6 +668,7 @@ void InterfaceMoche::jeu_est(std::vector<Carte> cartes)
       jeu.append(QString::fromUtf8(cartes[i].nom().c_str()));
       mon_jeu.append(QSharedPointer<Carte>(new Carte(cartes[i])));
     }
+  trier_jeu();
   o<<"Vous disposez de : ";
   for(int i = 0 ; i < jeu.size() ; i++)
     {
@@ -685,7 +686,6 @@ void InterfaceMoche::jeu_est(std::vector<Carte> cartes)
 	  o<<", ";
 	}
     }
-  trier_jeu();
   unlock;
 }
 void InterfaceMoche::doit_jouer()

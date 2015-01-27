@@ -161,6 +161,8 @@ void ServeurJeu::lire(unsigned int client, Protocole::Message m)
 				       (unsigned int, Protocole::Message)),
 			  t, SLOT(comprendre
 				      (unsigned int, Protocole::Message)));
+		  connect(t, SIGNAL(incomplet()), 
+			  t, SLOT(deleteLater()));
 		  for(unsigned int j = 0 ; j < sockets.size() ; j++)
 		    {
 		      t->ajouter(sockets[j], joueurs[j]);
