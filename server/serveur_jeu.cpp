@@ -214,11 +214,8 @@ void ServeurJeu::lire(unsigned int client, Protocole::Message m)
 		      envoyer(client, ancien);
 		    }
 		  //Cas du premier client
-		  if(vestibule.size() == 0)
-		    {
-		      DEBUG<<"Cas du premier client."<<std::endl;
-		      envoyer(client, nouveau);
-		    }
+		  DEBUG<<"Cas du premier client."<<std::endl;
+		  envoyer(client, nouveau);
 		  //Ajout au vestibule
 		  vestibule.push_back(client);
 		  noms.push_back(nom);

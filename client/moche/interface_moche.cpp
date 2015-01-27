@@ -726,7 +726,7 @@ void InterfaceMoche::run()
 	      o<<"0 / autre -> annuler"<<ENDL;
 	      for(int i = 0 ; i < copie.size() ; i++)
 		{
-		  o<<i<<" -> "<<copie[i]<<ENDL;
+		  o<<(i + 1)<<" -> "<<copie[i]<<ENDL;
 		}
 	      o<<copie.size() + 1<<" -> un autre type"<<ENDL;
 	      o<<"Quels numéros voulez-vous inviter ?"<<ENDL;
