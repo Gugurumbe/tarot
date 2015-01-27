@@ -50,4 +50,4 @@
 /**
    @brief Flux d'erreur.
  */
-#define ERROR std::cerr<<"!"<<
+#define ERROR std::cerr<<"!"

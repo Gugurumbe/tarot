@@ -111,10 +111,10 @@ void Table::comprendre(unsigned int sock, Protocole::Message m)
   //Attention : je ne suis pas sûr que sock fasse partie de la table !
   for(unsigned int i = 0 ; i < joueurs.size() ; i++)
     {
-      if(joueurs[i] == (int)sock)
+      if(joueurs[ordre[i]] == (int)sock)
 	{
 	  Protocole::Message reponse;
-	  switch(partie.tester(ordre[i], m))
+	  switch(partie.tester(i, m))
 	    {
 	    case 1 :
 	      reponse.type = Protocole::ERREUR_PROTOCOLE;
@@ -178,6 +178,7 @@ void Table::doit_transmettre(unsigned int j, Protocole::Message m,
 }
 void Table::doit_recommencer()
 {
+  ENTER("doit_recommencer()");
   //Réinitialisation de la partie :
   partie.reinitialiser();
   //Permutations
@@ -187,16 +188,25 @@ void Table::doit_recommencer()
       nouvel_ordre.push_back(ordre[(i + 1) % ordre.size()]);
     }
   ordre = nouvel_ordre;
+  DEBUG<<"Ordre : "<<ordre<<std::endl;
+  DEBUG<<"Joueurs dans l'ordre d'inscription : "<<joueurs<<" ("
+       <<noms<<")"<<std::endl;
   //Attention : on ne change pas l'ordre des noms des joueurs !
   //Émission de noms
   Protocole::Message msg_noms;
   msg_noms.type = Protocole::NOMS;
   for(unsigned int j = 0 ; j < joueurs.size() ; j++)
     {
-      for(unsigned int k = 0 ; k < noms[ordre[j]].size() 
-	    && k < TAILLE_NOM ; k++)
+      for(unsigned int k = 0 ; k < TAILLE_NOM ; k++)
 	{
-	  msg_noms.m.noms.noms[j][k] = noms[ordre[j]][k];
+	  if(k < noms[ordre[j]].size())
+	    {
+	      msg_noms.m.noms.noms[j][k] = noms[ordre[j]][k];
+	    }
+	  else 
+	    {
+	      msg_noms.m.noms.noms[j][k] = '\0';
+	    }
 	}
     }
   for(unsigned int j = 0 ; j < joueurs.size() ; j++)
@@ -208,10 +218,11 @@ void Table::doit_recommencer()
   //Émission des numéros : la partie s'en moque
   for(unsigned int j = 0 ; j < joueurs.size() ; j++)
     {
+      DEBUG<<"Numéro de "<<ordre[j]<<" : "<<j<<std::endl;
       Protocole::Message m;
       m.type = Protocole::NUMERO;
-      m.m.numero.n = ordre[j];
-      emit doit_emettre(joueurs[j], m);
+      m.m.numero.n = j;
+      emit doit_emettre(joueurs[ordre[j]], m);
     }
   partie.distribuer();
 }

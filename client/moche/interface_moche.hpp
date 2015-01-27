@@ -117,6 +117,7 @@ private:
   std::ostream & o;
   bool continuer;
   QMutex m_mutex;
+  void trier_jeu();
 };
 
 std::ostream & operator<<(std::ostream & out, const QString & str);

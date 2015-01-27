@@ -120,11 +120,12 @@ void InterfaceMoche::sortie(std::string nom)
   ADD_ARG("nom", nom);
   QString str = QString::fromUtf8(nom.c_str());
   int i = vestibule.indexOf(str);
-  do
-    {
-      vestibule.remove(i);
-      i = vestibule.indexOf(str);
-    }while(i < vestibule.size());
+  if(i >= 0 && i < vestibule.size())
+    do
+      {
+	vestibule.remove(i);
+	i = vestibule.indexOf(str);
+      }while(i >= 0 && i < vestibule.size());
   o<<str<<" n'est plus disponible."<<ENDL;
   unlock;
 }
@@ -568,6 +569,25 @@ void InterfaceMoche::maitre_change(unsigned int joueur)
    <<m_adversaires[joueur]<<"."<<ENDL;
   unlock;
 }
+bool contient(const Carte & c, 
+	      const QVector<QSharedPointer<Carte> > & cartes)
+{
+  int i = 0;
+  while(i < cartes.size() && *(cartes[i]) != c)i++;
+  return i < cartes.size();
+}
+void InterfaceMoche::trier_jeu()
+{
+  QVector<QSharedPointer<Carte> > jeu_trie;
+  for(unsigned int i = 0 ; i < 79 ; i++)
+    {
+      if(contient(Carte(i), mon_jeu))
+	{
+	  jeu_trie.append(QSharedPointer<Carte>(new Carte(i)));
+	}
+    }
+  mon_jeu = jeu_trie;
+}
 void InterfaceMoche::jeu_change(std::vector<Carte> gagnees,
 				std::vector<Carte> perdues)
 {
@@ -633,6 +653,7 @@ void InterfaceMoche::jeu_change(std::vector<Carte> gagnees,
 	    }
 	}
     }
+  trier_jeu();
   unlock;
 }
 void InterfaceMoche::jeu_est(std::vector<Carte> cartes)
@@ -664,6 +685,7 @@ void InterfaceMoche::jeu_est(std::vector<Carte> cartes)
 	  o<<", ";
 	}
     }
+  trier_jeu();
   unlock;
 }
 void InterfaceMoche::doit_jouer()
