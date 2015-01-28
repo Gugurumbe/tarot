@@ -995,6 +995,7 @@ void InterfaceMoche::run()
 	    std::cin>>choix;
 	    if(std::cin)
 	      {
+		int carte = choix;
 		lock;
 		o<<"Vous êtes prêt à jouer "<<Carte(choix).nom()
 		 <<". Continuer ?"<<ENDL;
@@ -1004,7 +1005,7 @@ void InterfaceMoche::run()
 		std::cin>>choix;
 		if(std::cin && choix == 1)
 		  {
-		    emit formuler_requete(Carte(choix));
+		    emit formuler_requete(Carte(carte));
 		  }
 	      }
 	    break;
