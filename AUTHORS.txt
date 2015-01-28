@@ -1,19 +1,7 @@
-Authors for server files (i.e. files within the "server" folder) :
+All authors for project Tarot Virtuel, by alphabetical order :
 
+Adrien Roussin <adrien.roussin@ecl14.ec-lyon.fr>
+Dorian Paret <dorian.paret@ecl14.ec-lyon.fr>
+Gauthier Fanucci <gauthier.fanucci@ecl14.ec-lyon.fr>
+Mael Millardet <mael.millardet@ecl14.ec-lyon.fr>
 Vivien Kraus <vivien.kraus@ecl14.ec-lyon.fr>
-
-Authors for shared files (i.e. files within the "shared" folder) :
-
-Vivien Kraus <vivien.kraus@ecl14.ec-lyon.fr>
-
-Authors for client files (i.e. files within the "client" folder) :
-
-Authors for the shared client files 
-	(i.e. files within the "client/shared" folder) :
-
-Vivien Kraus <vivien.kraus@ecl14.ec-lyon.fr
-
-Authors for the dummy interface "moche" 
-	(i.e. files within the "client/moche" folder) :
-
-Vivien Kraus <vivien.kraus@ecl14.ec-lyon.fr
