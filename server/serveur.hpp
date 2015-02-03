@@ -183,7 +183,7 @@ public slots:
    */
   void envoyer(unsigned int c, Protocole::Message m);
 
-  /*
+  /**
      @brief Envoie le message suivant sur la liste de l'objet
      appelant. 
 

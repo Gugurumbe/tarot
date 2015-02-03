@@ -212,10 +212,32 @@ private:
      C'est celui du bloc parent.
    */
   static Debogueur * current;
+
+  /**
+     @brief Débogueur parent.
+   */
   Debogueur * parent;
+
+  /**
+     @brief Valeur de retour à afficher lors de la destruction du
+     débogueur.
+   */
   std::string retour;
+
+  /**
+     @brief Nom de la méthode.
+   */
   std::string nom_methode;
+
+  /**
+     @brief Nom de la classe. Mettez "" pour une fonction globale. 
+   */
   std::string nom_classe;
+
+  /**
+     @brief Adresse de l'objet appelant. NULL pour une fonction
+     globale. 
+   */
   const void * objet;
 };
 

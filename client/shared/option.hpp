@@ -112,6 +112,19 @@ private:
 
 #include <iostream>
 
+/**
+   @brief Écrit le contenu d'une option.
+
+   Le résultat a la forme `<none>` ou `<some texte>`, où texte est la 
+   représentation sous forme de chaîne de T.
+
+   @tparam T Un type quelconque, pourvu que 
+   `std::ostream & operator<<(std::ostream &, const T &)` soit
+   définie. 
+   @param[out] out Le flux où il faut écrire.
+   @param t L'option qu'il faut décrire.
+   @return Un flux d'écriture valide.
+ */
 template<typename T>
 std::ostream & operator<<(std::ostream & out, const Option<T> & t);
 

@@ -131,32 +131,57 @@
    Étape par étape :
    
    Commencez par récupérer les sources, puis déplacez-vous dans
-   client/. Faites un dossier, par exemple ai, puis
+   client/. Faites un dossier, par exemple bete, puis
    déplacez-vous dedans et faites un nouveau projet Qt. Le fichier de
    projet doit ressembler au fichier ci-dessous : on ajoute la dépendance 
    network, et on inclue et compile tous les fichiers de ../shared et
    ../../shared. 
    
-   @include ../client/ai/ia.pro
+   @include ../client/bete/client.pro
 
    Maintenant, on peut travailler. Faites un fichier principal (ici,
-   main_program.cpp), ici :
+   main_program.cpp), à cet endroit :
 
-   @include ../client/ai/main_program.cpp
+   @include ../client/bete/main_program.cpp
 
-   On voit que l'on a fait une classe externe, IA. Il suffit après de
+   On voit que l'on a fait une classe externe, Ia. Il suffit après de
    connecter les signaux d'information de ClientJeu aux slots de notre
    nouvelle classe. Ensuite, il faut appeler les slots
    ClientJeu::formuler_* pour interagir avec le serveur. Dans
-   l'exemple, j'ai fait une IA dite "basique" :
+   l'exemple, j'ai fait une Ia dite "basique", plutôt étroite d'esprit
+   : elle ne prend jamais, n'invite jamais personne, et n'accepte les
+   invitations que de certaines personnes. Lorsque la partie est
+   terminée, le programme termine. 
 
-   @include ../client/ai/ia.hpp
+   @include ../client/bete/ia.hpp
    
-   @include ../client/ai/ia.cpp
+   @include ../client/bete/ia.cpp
 
    @subsection emission Ordre d'émission des signaux
    Les signaux sont émis dans un ordre "logique" dans les différentes
    situations.
+
+   Identification :
+   1. ClientJeu::doit_identifier()
+   2. ClientJeu::entree() éventuellement (avec multiplicité, en
+   finissant par moi) ou ClientJeu::identification_refusee() et retour
+   à 1. 
+   3. ClientJeu::identification_acceptee()
+   4. ClientJeu::entree(), ClientJeu::sortie() : d'autres gens
+   arrivent et partent. NB : un client qui trouve une partie SORT.
+
+   Constitution de la table :
+   1. ClientJeu::invitation_acceptee() ou
+   ClientJeu::invitation_refusee() si j'ai demandé une invitation. NB
+   : le fait que l'invitation soit refusée signifie que l'une des
+   personnes que je demande n'est pas présente, ou que je ne m'inclus
+   pas, ou qu'il y a un doublon. La partie commence dès que
+   l'invitation est acceptée par le SERVEUR. Si le client n'est pas
+   d'accord, il est prié de se déconnecter et reconnecter.
+   2. ClientJeu::adversaires(), qui me donne les noms de mes
+   adversaires dans l'ordre de jeu. Premier signal répété à chaque
+   manche !
+   3. ClientJeu::numero_change()
 
    Phase d'enchères :
    1. ClientJeu::contrat_intermediaire() (du joueur précédent)
@@ -176,12 +201,13 @@
    5. ClientJeu::chien() (ou saut à la phase de jeu en cas de contrat
    supérieur) 
    6. ClientJeu::jeu_change()
-   7. ClientJeu::doit_ecarter() (vous devez écarter à partir de ce
+   7. ClientJeu::jeu_est()
+   8. ClientJeu::doit_ecarter() (vous devez écarter à partir de ce
    moment)
-   8. ClientJeu::atout_au_chien() (éventuellement)
-   9. ClientJeu::ecart_accepte() (ou ClientJeu::ecart_refuse() et
+   9. ClientJeu::atout_au_chien() (éventuellement)
+   10. ClientJeu::ecart_accepte() (ou ClientJeu::ecart_refuse() et
    retour à 7.)
-   10. ClientJeu::jeu_change()
+   11. ClientJeu::jeu_change()
 
    Jeu :
    1. ClientJeu::carte_jouee() (par le joueur précédent)
@@ -191,10 +217,11 @@
    5. ClientJeu::requete_acceptee() (ou ClientJeu::requete_refusee()
    et retour à 4.)
    6. ClientJeu::jeu_change() (vous perdez la carte jouée)
-   7. ClientJeu::carte_jouee() (par vous)
-   8. ClientJeu::maitre_change() (éventuellement, dans ce cas c'est
+   7. ClientJeu::jeu_est()
+   8. ClientJeu::carte_jouee() (par vous)
+   9. ClientJeu::maitre_change() (éventuellement, dans ce cas c'est
    vous)
-   9. ClientJeu::tapis_change()
+   10. ClientJeu::tapis_change()
 
    Fin de levée :
    1. ClientJeu::carte_jouee() (par le dernier joueur)
@@ -205,7 +232,8 @@
    5. ClientJeu::doit_jouer() (si vous avez remporté le pli)
 
    Fin de partie : comme à la fin de la dernière levée, sans le
-   dernier point. À la place, on a ClientJeu::partie_terminee()
+   dernier point. À la place, on a ClientJeu::partie_terminee(). On
+   recommence une nouvelle partie immédiatement.
 
    @section conclusion Conclusion
    Il y a un protocole à respecter pour communiquer avec le serveur,

@@ -63,11 +63,6 @@ Table::Table(QObject * parent) : QObject(parent)
 Table::~Table()
 {
   ENTER("~Table()");
-  for(unsigned int i = 0 ; i < joueurs.size() ; i++)
-    {
-      if(joueurs[i]>=0)
-	emit doit_deconnecter(joueurs[i]);
-    }
   nombre_tables--;
   DEBUG<<"Il n'y a plus que "<<nombre_tables<<" table(s)."<<std::endl;
 }
@@ -101,6 +96,9 @@ void Table::ajouter(unsigned int sock, std::string nom)
       emit doit_deconnecter(sock);
       //Sinon, la socket sera perdue
     }
+  DEBUG<<"Joueurs : "<<joueurs<<std::endl;
+  DEBUG<<"Noms : "<<noms<<std::endl;
+  DEBUG<<"Ordres : "<<ordre<<std::endl;
 }
 
 void Table::comprendre(unsigned int sock, Protocole::Message m)
@@ -152,6 +150,16 @@ void Table::enlever(unsigned int sock)
 	if(joueurs[k]>=0) j++;
       if(j == 4)
 	{
+	  //On vire tout le monde. Ça fait un paquet d'appels
+	  //récursifs, mais tant pis.
+	  for(unsigned int i = 0 ; i < joueurs.size() ; i++)
+	    {
+	      if(joueurs[i]>=0)
+		{
+		  DEBUG<<"Déconnexion de "<<joueurs[i]<<std::endl;
+		  emit doit_deconnecter(joueurs[i]);
+		}
+	    }
 	  DEBUG<<"Émission de Table::incomplet(Table *)..."<<std::endl;
 	  emit incomplet(this);
 	}
@@ -165,14 +173,10 @@ void Table::doit_transmettre(unsigned int j, Protocole::Message m,
   ADD_ARG("m", m);
   ADD_ARG("analyser", analyser);
   DEBUG<<"Transmission à "<<j<<std::endl;
-  for(unsigned int i = 0 ; i < joueurs.size() ; i++)
-    {
-      if(ordre[i] == j)
-	{
-	  emit doit_emettre(joueurs[i], m);
-	  DEBUG<<"C'est "<<i<<std::endl;
-	}
-    }
+  DEBUG<<"Joueurs : "<<joueurs<<std::endl;
+  DEBUG<<"Noms : "<<noms<<std::endl;
+  DEBUG<<"Ordres : "<<ordre<<std::endl;
+  emit doit_emettre(joueurs[ordre[j]], m);
   if(analyser)
     partie.assimiler(m);
 }

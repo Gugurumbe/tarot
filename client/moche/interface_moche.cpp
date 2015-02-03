@@ -421,8 +421,8 @@ void InterfaceMoche::doit_ecarter(std::vector<Carte> possibles,
   QString nom;
   for(unsigned int i = 0 ; i < possibles.size() ; i++)
     {
-      nom = QString::fromUtf8(atouts[i].nom().c_str());
-      ecartables.append(QSharedPointer<Carte>(new Carte(atouts[i])));
+      nom = QString::fromUtf8(possibles[i].nom().c_str());
+      ecartables.append(QSharedPointer<Carte>(new Carte(possibles[i])));
       obligatoires.append(nom);
     }
   for(unsigned int i = 0 ; i < atouts.size() ; i++)
@@ -578,15 +578,21 @@ bool contient(const Carte & c,
 }
 void InterfaceMoche::trier_jeu()
 {
+  ENTER("trier_jeu()");
   QVector<QSharedPointer<Carte> > jeu_trie;
   for(unsigned int i = 0 ; i < 79 ; i++)
     {
       if(contient(Carte(i), mon_jeu))
 	{
+	  DEBUG<<"Mon jeu contient "<<Carte(i)<<std::endl;
 	  jeu_trie.append(QSharedPointer<Carte>(new Carte(i)));
 	}
     }
-  mon_jeu = jeu_trie;
+  mon_jeu.clear();
+  for(int i = 0 ; i < jeu_trie.size() ; i++)
+    {
+      mon_jeu.append(jeu_trie[i]);
+    }
 }
 void InterfaceMoche::jeu_change(std::vector<Carte> gagnees,
 				std::vector<Carte> perdues)
@@ -613,6 +619,7 @@ void InterfaceMoche::jeu_change(std::vector<Carte> gagnees,
 	    }
 	}
     }
+  trier_jeu();
   if(g.size() != 0)
     {
       o<<"Vous avez reçu : ";
@@ -653,7 +660,6 @@ void InterfaceMoche::jeu_change(std::vector<Carte> gagnees,
 	    }
 	}
     }
-  trier_jeu();
   unlock;
 }
 void InterfaceMoche::jeu_est(std::vector<Carte> cartes)
@@ -668,7 +674,9 @@ void InterfaceMoche::jeu_est(std::vector<Carte> cartes)
       jeu.append(QString::fromUtf8(cartes[i].nom().c_str()));
       mon_jeu.append(QSharedPointer<Carte>(new Carte(cartes[i])));
     }
+  DEBUG<<"Tri du jeu..."<<std::endl;
   trier_jeu();
+  DEBUG<<"Trié."<<std::endl;
   o<<"Vous disposez de : ";
   for(int i = 0 ; i < jeu.size() ; i++)
     {
@@ -927,7 +935,7 @@ void InterfaceMoche::run()
 	    std::cin>>choix;
 	    if(std::cin) 
 	      {
-		emit formuler_prise(static_cast<Enchere::Prise>(choix - 1));
+		emit formuler_prise(static_cast<Enchere::Prise>(choix));
 	      }
 	    break;
 	  case 4:

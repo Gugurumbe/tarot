@@ -66,6 +66,13 @@
  */
 #define DEBUG_WRITESTACK 0
 
+/**
+   @brief Active le mélange des cartes.
+
+   Lorsqu'on veut tester la possibilité d'écarter des atouts en cas de
+   nécessité, on peut désactiver le mélange pour être sûr que le
+   dernier client n'aura que des atouts.
+ */
 #define MELANGER //Mélange les cartes
 
 #endif

@@ -45,12 +45,34 @@
    @brief Classe d'interface moche.
 
    Les signaux/slots correspondent à ceux de ClientJeu.
+   
+   C'est un QThread, ce qui veut dire qu'il y a un accès concurrent
+   aux attributs. C'est plutôt mal géré (crash régulier du client...),
+   mais ce n'est pas une priorité.
+
+   Les signaux/slots sont à connecter aux slots/signaux d'un ClientJeu
+   respectif. J'ai essayé de faire une interface la plus exhaustive,
+   même si clairement je n'ai pas besoin de traiter le cas jeu_change
+   en plus du cas jeu_est, par exemple.
+
+   Pour la documentation des signaux/slots de cette classe, voir la
+   documentation des slots/signaux de la classe ClientJeu. Je ne peux
+   pas tout réécrire à chaque fois.
  */
 class InterfaceMoche: public QThread
 {
   Q_OBJECT;
 public:
+  /** 
+      @brief Constructeur par défaut. 
+      
+      @param out Le flux où écrire la sortie.
+      @param parent Le parent au sens de Qt.
+  */
   InterfaceMoche(std::ostream & out, QObject * parent = 0);
+  /**
+     @brief Destructeur.
+   */
   virtual ~InterfaceMoche();
 public slots:
   void connecte();
@@ -104,8 +126,18 @@ signals:
   void deconnecter();
   void reconnecter();
 
+  /**
+     @brief Émis lorsque l'on doit quitter.
+
+     Il est émis dans le cas où le thread d'entrée interactive reçoit
+     la commande quitter. NB : ça crashe souvent, vu comme je suis un
+     dieu des mutexes.
+   */
   void doit_quitter();
 protected:
+  /**
+     @brief Lance une entrée bloquante interactive.
+   */
   virtual void run();
 private:
   QString mon_nom;
@@ -120,6 +152,14 @@ private:
   void trier_jeu();
 };
 
+/**
+   @brief Permet d'écrire un QString dans un std::ostream. On le fait
+   en UTF-8. 
+
+   @param[out] out Le flux où il faut écrire.
+   @param str Le QString à écrire.
+   @return un std::ostream valide.
+ */
 std::ostream & operator<<(std::ostream & out, const QString & str);
 
 #endif

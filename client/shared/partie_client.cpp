@@ -153,6 +153,7 @@ void PartieClient::assimiler(const Protocole::Message & m)
 	    }
 	  emit jeu_change(std::vector<Carte>(chien_si_devoile),
 			  std::vector<Carte>());
+	  emit jeu_est(std::vector<Carte>(mes_cartes.cartes()));
 	  std::vector<std::vector<Carte> > ecartables =
 	    cartes_ecartables();
 	  m_doit_ecarter = true;
@@ -179,7 +180,7 @@ void PartieClient::assimiler(const Protocole::Message & m)
       if(mon_numero() == attaquant())
 	{
 	  //L'écart a été accepté.
-	  transaction_jeu_acceptee();
+	  transaction_ecart_acceptee();
 	}
       if(mon_tour())
 	{
@@ -611,6 +612,7 @@ void PartieClient::transaction_ecart_acceptee()
 	  for(unsigned int i = 0 ; i < ecart.size() ; i++)
 	    mes_cartes.enlever(ecart[i]);
 	  emit jeu_change(std::vector<Carte>(), ecart);
+	  emit jeu_est(std::vector<Carte>(mes_cartes.cartes()));
 	  m_doit_ecarter = false;
 	}
       else
@@ -641,6 +643,7 @@ void PartieClient::transaction_jeu_acceptee()
 	  temp.push_back(carte);
 	  mes_cartes.enlever(carte);
 	  emit jeu_change(std::vector<Carte>(), temp);
+	  emit jeu_est(std::vector<Carte>(mes_cartes.cartes()));
 	  m_doit_jouer = false;
 	}
       else

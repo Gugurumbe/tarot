@@ -347,10 +347,11 @@ int PartieServeur::tester(unsigned int joueur,
 	      switch(resultat[i])
 		{
 		case Carte::NON_ECARTABLE :
-		  DEBUG<<"La carte "<<i<<" ne peut pas être écartée."
-			   <<std::endl;
+		  DEBUG<<"La carte "<<i<<" ("
+		       <<ecart[i]
+		       <<") ne peut pas être écartée."
+		       <<std::endl;
 		  ok = 2 ;
-		  i = 3;
 		default:
 		  break;
 		}

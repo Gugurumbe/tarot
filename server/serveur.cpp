@@ -173,7 +173,7 @@ void Serveur::lire()
       QDataStream in(paquet);
       quint8 taille = 0;
       in>>taille;
-      DEBUG<<"Taille attendue : "<<taille<<std::endl;
+      DEBUG<<"Taille attendue : "<<static_cast<int>(taille)<<std::endl;
       if(paquet.size() >= 1 && paquet.size() >= taille)
 	{
 	  DEBUG<<"On peut lire un Message."<<std::endl;

@@ -182,6 +182,9 @@ private:
 
   /**
      @brief Numéros des joueurs.
+
+     ordre[i] est le numéro du joueur qui doit jouer en position
+     i. Par exemple, ordre[0] est le numéro du premier joueur.
    */
   std::vector<unsigned int> ordre;
   

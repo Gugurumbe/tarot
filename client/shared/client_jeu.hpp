@@ -108,7 +108,7 @@ public slots:
 
      @see PartieClient::appeler(const Carte & c)
    */
-  void formuler_appel(Carte);
+  void formuler_appel(Carte c);
 
   /**
      @brief Envoie un message pour formuler un écart.
