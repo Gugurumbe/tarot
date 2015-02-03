@@ -68,10 +68,19 @@
    cd server                     #Répertoire du serveur
    qmake                         #Prépare le Makefile
    make                          #Compile le serveur
-   cd ../client                  #Répertoire du client
+   cd ../client/moche            #Répertoire du client moche
    qmake                         #Prépare le Makefile
    make                          #Compile le client
+   cd ../bete                    #Répertoire de l'IA bête
+   qmake                         
+   make                          #Compilation de l'IA bête
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Pour lancer les différents programmes : le client moche doit
+   recevoir 2 paramètres supplémentaires, l'adresse et le port du
+   serveur. L'IA bête, elle, doit en plus recevoir le nom qu'elle doit
+   emprunter et les noms des 4 autres personnes dont elle acceptera
+   l'invitation. 
 
    @subsection etape4 Étape 4 : Compilez la documentation
    
@@ -85,9 +94,18 @@
 
    Quand ce sera jouable, il n'y aura pas besoin de lancer le
    serveur. 
+
+   En revanche, quelques tests seraient très précieux, notamment en ce
+   qui concerne les cas inattendus voire pathologiques : l'IA est
+   invitée par de mauvaises personnes -vérifier qu'elle se déconnecte,
+   se reconnecte et attend les bonnes invitations-, tester plusieurs
+   tables à la fois -penser à désactiver certaines options de débogage
+   pour éviter de faire exploser la machine-, et surtout, tester le
+   comportement après la fin de la première manche.
 */
 
 /**
    @file shared/config.hpp
-   @brief Définit les options de compilation.
+   @brief Définit les options de compilation et la page d'accueil de
+   la documentation.
 */
