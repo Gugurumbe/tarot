@@ -25,6 +25,7 @@ private:
   bool m_deconnexion_voulue;
   unsigned int test_suivant;
   ClientJeu jeu;
+  std::vector<int> pseudo_valeurs_cartes;
 public slots:
   /**
      @brief Lance la connexion.

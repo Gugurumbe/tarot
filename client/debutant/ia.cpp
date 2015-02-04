@@ -1,5 +1,8 @@
 #include "ia.hpp"
 
+//#define TESTER_REPARTITION
+//#define TESTER_PSEUDOVALEURS
+
 enum Contenu{COEURS = 0, PIQUES, CARREAUX, TREFLES, ATOUTS, 
 	     EXCUSES, BOUTS, ROIS, DAMES, CAVALIERS, VALETS};
 
@@ -40,13 +43,63 @@ std::vector<int> informations_calculees(const std::vector<Carte> & cartes)
   return resultat;
 }
 
+std::vector<int> pseudo_valeurs()
+{
+  std::vector<int> p;
+  p.resize(78);
+  Carte c(1);
+  for(unsigned int i = 0 ; i < 78 ; i++)
+    {
+      c = i;
+      if(!c.atout())
+	{
+	  if(c.valeur() < Carte::VALET)
+	    {
+	      p[i] = 0;
+	    }
+	  else
+	    {
+	      switch(c.valeur())
+		{
+		case Carte::VALET: p[i] = 2; break;
+		case Carte::CAVALIER: p[i] = 3; break;
+		case Carte::DAME: p[i] = 4; break;
+		case Carte::ROI: p[i] = 6; break;
+		default: break;
+		}
+	    }
+	}
+      else
+	{
+	  if(c.valeur () >= 2 && c.valeur() <= 14)
+	    {
+	      p[i] = 2;
+	    }
+	  else if(c.valeur() >= 15 && c.valeur() <= 20)
+	    {
+	      p[i] = 3;
+	    }
+	  else if(c == PETIT || c == EXCUSE)
+	    {
+	      p[i] = 7;
+	    }
+	  else
+	    {
+	      p[i] = 9;
+	    }
+	}
+    }
+  return p;
+}
+
 Ia::Ia(const QString & nom, const QVector<QString> & equipe, QObject * parent):
   QObject(parent),
   nom_souhaite(nom),
   equipe_souhaitee(equipe),
   m_deconnexion_voulue(false),
   test_suivant(0),
-  jeu(this)
+  jeu(this),
+  pseudo_valeurs_cartes(pseudo_valeurs())
 {
 #ifdef TESTER_REPARTITION
   std::vector<Carte> truc;
@@ -57,7 +110,16 @@ Ia::Ia(const QString & nom, const QVector<QString> & equipe, QObject * parent):
       std::cout<<Carte(x)<<std::endl;
       truc.push_back(Carte(x));
     }
-  std::cout<<"Résultat : "<<informations_calculees(truc);
+  std::cout<<"Résultat : "<<informations_calculees(truc)<<std::endl;
+#endif
+
+#ifdef TESTER_PSEUDOVALEURS
+  std::cout<<"Pseudo-valeurs : "<<std::endl;
+  for(unsigned int i = 0; i < pseudo_valeurs_cartes.size() ; i++)
+    {
+      std::cout<<"Pseudo-valeur de "<<Carte(i)<<" : "
+	       <<pseudo_valeurs_cartes[i]<<"."<<std::endl;
+    }
 #endif
 
 #define c(signal) QObject::connect(&jeu, SIGNAL(signal),	\
