@@ -106,7 +106,7 @@ public:
      L'excuse est un atout. C'est la dernière carte d'atout. La fausse
      excuse est également un atout, elle arrive après la vraie.
    */
-  enum Couleur{PIQUE, CARREAU, TREFLE, COEUR, ATOUT};
+  enum Couleur{COEUR, PIQUE, CARREAU, TREFLE, ATOUT};
   
   /**
      @brief Représente la valeur des cartes de couleur non atout.
