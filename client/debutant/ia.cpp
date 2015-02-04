@@ -2,6 +2,7 @@
 
 //#define TESTER_REPARTITION
 //#define TESTER_PSEUDOVALEURS
+#define TESTER_COMPTEUR
 
 enum Contenu{COEURS = 0, PIQUES, CARREAUX, TREFLES, ATOUTS, 
 	     EXCUSES, BOUTS, ROIS, DAMES, CAVALIERS, VALETS};
@@ -41,6 +42,57 @@ std::vector<int> informations_calculees(const std::vector<Carte> & cartes)
 	  }
     }
   return resultat;
+}
+
+int compteur(const std::vector<Carte> & main, const std::vector<int> & pv)
+{
+  //Test
+  int compteur = 0;
+  for(unsigned int i = 0 ; i < main.size() ; i++)
+    {
+      //Ajout des pseudovaleurs de la main au compteur
+      compteur += pv[main[i].numero()];
+    }
+  //Statistiques sur ma main
+  std::vector<int> info = informations_calculees(main);
+  //Bonus en fonction du nombre d'atouts
+  if(info[ATOUTS] >= 5 && info[ATOUTS] < 8) compteur += 25;
+  if(info[ATOUTS] >= 8 && info[ATOUTS] < 10) compteur += 35;
+  if(info[ATOUTS] >= 10 && info[ATOUTS] < 12) compteur += 50;
+  if(info[ATOUTS] >= 12) compteur += 1000;
+  std::vector<int> nombre_longues(9);
+  //Nombre de longues à n cartes
+  for(int n = 4 ; n <= 13 ; n++)
+    {
+      nombre_longues[n - 4] = 0;
+      for(unsigned int i = 0 ; i < 4 ; i++)
+	{
+	  if(info[i] >= n)nombre_longues[n - 4]++;
+	}
+    }
+  //Bonus-malus en fonction des longues.
+  if(nombre_longues[0] >= 2) compteur -= 20; //2 longues de plus de 4
+					     //cartes 
+  compteur += 10 * nombre_longues[1];
+  compteur += 13 * nombre_longues[2];
+  compteur += 16 * nombre_longues[3];
+  compteur += 18 * nombre_longues[4];
+  compteur -= 15 * nombre_longues[7];// Malus (longue encombrante) 
+  compteur -= 15 * nombre_longues[8];
+  compteur -= 1000 * nombre_longues[9];
+  switch(info[BOUTS]) //Bonus en fonction du nombre de bouts 
+    {
+    case 1 : compteur += 5; break;
+    case 2 : compteur += 15; break;
+    case 3 : compteur += 20;
+    default : break;
+    }
+  for(unsigned int i = 0 ; i < 4 ; i++)
+    {
+      if(info[i] == 0)compteur+=10;
+      if(info[i] == 1)compteur+=8;
+    }
+  return compteur;
 }
 
 std::vector<int> pseudo_valeurs()
@@ -119,6 +171,37 @@ Ia::Ia(const QString & nom, const QVector<QString> & equipe, QObject * parent):
     {
       std::cout<<"Pseudo-valeur de "<<Carte(i)<<" : "
 	       <<pseudo_valeurs_cartes[i]<<"."<<std::endl;
+    }
+#endif
+
+#ifdef TESTER_COMPTEUR
+  std::cout<<"Test du compteur : 20 distributions."<<std::endl;
+  for(unsigned int d = 0 ; d < 20 ; d++)
+    {
+      std::cout<<"Distribution "<<d<<" : "<<std::endl;
+      std::vector<Carte> main;
+      for(unsigned int c = 0 ; c < 15 ; c++)
+	{
+	  unsigned int j = 0;
+	  Carte carte(rand() % 78);
+	  while(j < main.size())
+	    {
+	      carte = (rand() % 78);
+	      for(j = 0 ; j < main.size() && main[j] != carte ; j++);
+	    }
+	  main.push_back(carte);
+	}
+      for(unsigned int i = 0 ; i < 78 ; i++)
+	{
+	  unsigned int j = 0;
+	  for(j = 0 ; j < main.size() && main[j] != i ; j++);
+	  if(j < main.size())
+	    {
+	      std::cout<<Carte(i)<<std::endl;
+	    }
+	}
+      std::vector<int> pv = pseudo_valeurs();
+      std::cout<<"Compteur : "<<compteur(main, pv)<<std::endl;
     }
 #endif
 
@@ -204,7 +287,6 @@ void Ia::adversaires(std::vector<std::string> adversaires)
 
 void Ia::doit_priser(Option<Enchere>)
 {
-  //Je passse :)
   emit formuler_prise(Enchere::PASSE);
 }
 
