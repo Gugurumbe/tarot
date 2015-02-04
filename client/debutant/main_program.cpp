@@ -1,4 +1,5 @@
 #include <QCoreApplication>
+#include "ia.hpp"
 
 int main(int argc, char * argv[])
 {
