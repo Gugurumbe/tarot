@@ -16,6 +16,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>. #
 #########################################################################
 
+DEFINES += "NE_RIEN_DEBOGUER"
+
 TEMPLATE = app
 TARGET = client
 CONFIG += console

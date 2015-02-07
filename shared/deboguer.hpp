@@ -25,6 +25,8 @@
    chaîne) du nom de la classe. 
 */
 
+#ifndef NE_RIEN_DEBOGUER
+
 #include "debogueur.hpp"
 
 /**
@@ -57,3 +59,9 @@
    @brief Flux d'erreur.
  */
 #define ERROR Debogueur::error()
+
+#else
+
+#include "ne_pas_deboguer.hpp"
+
+#endif
