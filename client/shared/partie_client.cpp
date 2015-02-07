@@ -285,8 +285,11 @@ void PartieClient::assimiler(const Protocole::Message & m)
       transaction_invitation_acceptee();
       m_vestibule.clear(); //Je ne suis plus tenu au courant de ce qui
 			   //s'y passe. 
+      Partie::reinitialiser(); // Je dois aussi réinitialiser le tour
       mes_cartes = Main();
       chien_si_devoile.clear();
+      // Je réassimile
+      Partie::assimiler(m);
       if(true)
 	{
 	  std::vector<std::string> noms;

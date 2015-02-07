@@ -667,31 +667,33 @@ void InterfaceMoche::jeu_est(std::vector<Carte> cartes)
   lock;
   ENTER("jeu_est(std::vector<Carte> cartes)");
   ADD_ARG("cartes", cartes);
-  QVector<QString> jeu;
   mon_jeu.clear();
   for(unsigned int i = 0 ; i < cartes.size() ; i++)
     {
-      jeu.append(QString::fromUtf8(cartes[i].nom().c_str()));
       mon_jeu.append(QSharedPointer<Carte>(new Carte(cartes[i])));
     }
   DEBUG<<"Tri du jeu..."<<std::endl;
   trier_jeu();
   DEBUG<<"Trié."<<std::endl;
-  o<<"Vous disposez de : ";
-  for(int i = 0 ; i < jeu.size() ; i++)
+  if(mon_jeu.size() == 0)
     {
-      o<<jeu[i];
-      if(i == jeu.size() - 2)
+      o<<"Vous n'avez plus de cartes."<<ENDL;
+    }
+  o<<"Vous disposez de : "<<ENDL;
+  for(int i = 0 ; i < mon_jeu.size() ; i++)
+    {
+      o<<*(mon_jeu[i]);
+      if(i == mon_jeu.size() - 2)
 	{
-	  o<<", et ";
+	  o<<", et "<<ENDL;
 	}
-      else if(i == jeu.size() - 1)
+      else if(i == mon_jeu.size() - 1)
 	{
 	  o<<"."<<ENDL; //Conclusion
 	}
       else
 	{
-	  o<<", ";
+	  o<<", "<<ENDL;
 	}
     }
   unlock;
@@ -763,9 +765,11 @@ void InterfaceMoche::tapis_change(Tapis tapis)
   QVector<QString> assertions;
   for(unsigned int i = 0 ; i < posees.size() ; i++)
     {
-      assertions.append(m_adversaires[poseurs[i]] + " a posé "
-			+ QString::fromUtf8
-			(posees[i].nom().c_str()));
+      QString arg;
+      arg += m_adversaires[poseurs[i]];
+      arg += QString::fromUtf8(" a posé ");
+      arg += QString::fromUtf8(posees[i].nom().c_str());
+      assertions.append(arg);
     }
   if(assertions.size() == 0)
     {
@@ -779,11 +783,11 @@ void InterfaceMoche::tapis_change(Tapis tapis)
 	  o<<assertions[i];
 	  if(i == assertions.size() - 2)
 	    {
-	      o<<", et "<<ENDL;
+	      o<<", et ";
 	    }
 	  else if(i == assertions.size() - 1)
 	    {
-	      o<<".";
+	      o<<"."<<ENDL;
 	    }
 	  else
 	    {
