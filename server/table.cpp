@@ -186,10 +186,10 @@ void Table::doit_recommencer()
   //Réinitialisation de la partie :
   partie.reinitialiser();
   //Permutations
-  std::vector<unsigned int> nouvel_ordre;
+  std::vector<unsigned int> nouvel_ordre(5);
   for(unsigned int i = 0 ; i < joueurs.size() ; i++)
     {
-      nouvel_ordre.push_back(ordre[(i + 1) % ordre.size()]);
+      nouvel_ordre[i] = ordre[(i + 1) % ordre.size()];
     }
   ordre = nouvel_ordre;
   DEBUG<<"Ordre : "<<ordre<<std::endl;

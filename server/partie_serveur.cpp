@@ -118,6 +118,7 @@ void PartieServeur::assimiler(Protocole::Message const & message)
 		  fin.m.resultat.resultats[i] = 0;
 		}
 	      EMETTRE_A_TOUS(fin);
+	      emit termine();
 	    }
 	}
     case Protocole::APPEL:
@@ -253,7 +254,7 @@ void PartieServeur::assimiler(Protocole::Message const & message)
 	}
       break;
     case Protocole::CARTE:
-      if(true)
+      if(tour_precedent() < 5) // À la fin de chaque manche, ça plante sinon.
 	{
 	  DEBUG<<"Jeu de la carte "<<message.m.carte.carte
 	       <<" par "<<tour_precedent()<<std::endl;
