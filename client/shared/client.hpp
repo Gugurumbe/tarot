@@ -30,8 +30,9 @@
 #define CLIENT_DEFINI
 
 #include <QObject>
-#include <QHostAddress>
 #include <QTcpSocket>
+#include <QHostAddress>
+#include <QString>
 #include "protocole.hpp"
 #include <queue>
 
@@ -82,12 +83,19 @@ public:
 public slots:
 
   /**
+     @brief Enregistre l'adresse de connexion.
+
+     Émet connecte().
+   */
+  void connexion_reussie();
+
+  /**
      @brief Tente de se reconnecter.
      
      Utilise les informations de la précédente connexion.
      
      @note La connexion échouera si on n'a pas établi une première
-     connexion avec Client::connecter(QHostAddress, unsigned int).
+     connexion avec Client::connecter(QString, unsigned int).
    */
   void reconnecter();
 
@@ -97,16 +105,14 @@ public slots:
      Tente d'établir une connexion à une certaine adresse sur un
      certain port. 
 
-     @param hote : l'adresse IP (selon Qt) de l'hôte. La façon la plus
-     simple de construire une QHostAddress valide est : 
-     QHostAddress("123.45.67.89"); si votre adresse IP est
-     123.45.67.89. Dans tous les cas, l'adresse de votre machine
-     depuis cette même machine est 127.0.0.1, ou "localhost".
+     @param hote : l'adresse IP (selon Qt) de l'hôte. Sous forme de
+     QString, une recherche de nom de domaine sera effectuée :
+     "localhost" fonctionne, par exemple.
 
      @param port : le port de listage. Celui retourné par la méthode
      Serveur::ouvrir_global() ou Serveur::ouvrir_local().
    */
-  void connecter(QHostAddress hote, unsigned int port);
+  void connecter(QString hote, unsigned int port);
 
   /**
      @brief Quitte la connexion.

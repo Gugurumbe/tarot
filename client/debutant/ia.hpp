@@ -18,7 +18,7 @@ class Ia: public QObject
 public:
   Ia(const QString & nom, const QVector<QString> & equipe, 
      QObject * parent = 0);
-  void connecter(QHostAddress hote, quint16 port);
+  void connecter(QString hote, quint16 port);
 private:
   const QString nom_souhaite;
   const QVector<QString> equipe_souhaitee;

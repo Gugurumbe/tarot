@@ -225,7 +225,7 @@ Ia::Ia(const QString & nom, const QVector<QString> & equipe, QObject * parent):
   r(reconnecter());
 }
 
-void Ia::connecter(QHostAddress hote, quint16 port)
+void Ia::connecter(QString hote, quint16 port)
 {
   jeu.connecter(hote, port);
 }

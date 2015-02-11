@@ -34,7 +34,7 @@ Client::Client(QObject * parent): QObject(parent),
   ENTER("Client(QObject * parent)");
   ADD_ARG("parent", parent);
   QObject::connect(&sock, SIGNAL(connected()), 
-		   this, SIGNAL(connecte()));
+		   this, SLOT(connexion_reussie()));
   QObject::connect(&sock, SIGNAL(disconnected()),
 		   this, SIGNAL(deconnecte()));
   QObject::connect(&sock, SIGNAL(readyRead()),
@@ -45,15 +45,21 @@ Client::Client(QObject * parent): QObject(parent),
   //disconnected(), et pour vérifier la présence d'un message.
 }
 
-void Client::connecter(QHostAddress addr, unsigned int port)
+void Client::connexion_reussie()
 {
-  ENTER("connecter(QHostAddress addr, unsigned int port)");
-  ADD_ARG("addr.toString().toStdString()", 
-	  addr.toString().toStdString());
+  ENTER("connexion_reussie()");
+  hote = sock.peerAddress();
+  emit connecte();
+}
+
+void Client::connecter(QString addr, unsigned int port)
+{
+  ENTER("connecter(QString addr, unsigned int port)");
+  ADD_ARG("addr.toStdString()", 
+	  addr.toStdString());
   ADD_ARG("port", port);
   sock.connectToHost(addr, port);
   //Connexion
-  hote = addr;
   Client::port = port;
   //Préparation de la reconnexion
 }

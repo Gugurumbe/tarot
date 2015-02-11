@@ -74,7 +74,7 @@ int main(int argc, char * argv[])
     }
   else
     {
-      QHostAddress hote(arguments[1]);
+      QString hote(arguments[1]);
       quint16 port(arguments[2].toInt());
 #define C(signal) QObject::connect(&jeu, SIGNAL(signal),	\
 				   &interface, SLOT(signal))

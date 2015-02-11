@@ -19,7 +19,6 @@
 
 #include <QCoreApplication>
 #include <QStringList>
-#include <QHostAddress>
 #include "ia.hpp"
 #include "client_jeu.hpp"
 
@@ -63,7 +62,7 @@ int main(int argc, char * argv[])
     }
   else
     {
-      QHostAddress hote(arguments[1]);
+      QString hote(arguments[1]);
       quint16 port(arguments[2].toInt());
       QString nom(arguments[3]);
       QVector<QString> equipe = 
